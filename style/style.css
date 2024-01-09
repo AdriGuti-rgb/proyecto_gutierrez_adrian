@@ -1,0 +1,161 @@
+:root {
+    --primero: #0C7B85;
+    --segundo: #0FA3B1;
+    --tercero: #62C3D6;
+    --cuarto: #B5E2FA;
+    --quinto: #F9F7F3;
+    --sexto: #F3EBCC;
+    --septimo: #F2BF8B;
+    --octavo: #F7A072;
+    --negro: black;
+}
+
+body {
+    margin: 0;
+    font-family: 'Inknut Antiqua', serif;
+}
+
+header {
+    width: 100%;
+    height: 110px;
+    background-color: var(--segundo);
+    position: relative;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    z-index: 1;
+    /* background-image: url(../img/Logotipo-removebg-preview.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: 150px; */
+}
+
+header h1 {
+    position: absolute;
+    top: -4px;
+    left: 300px;
+}
+
+header img {
+    position: absolute;
+    width: 110px;
+    left: 150px;
+}
+
+i {
+    font-size: 20px;
+}
+
+#links {
+    position: absolute;
+    top: 40px;
+    right: 200px;
+    display: flex;
+    align-items: flex-start;
+    gap: 49px;
+}
+
+#linea {
+    position: relative;
+    left: 10%;
+    width: 79%;
+    height: 2px;
+    background-color: var(--negro);
+}
+
+footer {
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    height: 80px;
+    background-color: var(--tercero);
+}
+
+footer h2{
+    position: absolute;
+    top: -10px;
+    left: 500px;
+}
+
+#icons {
+    position: absolute;
+    top: 30px;
+    right: 200px;
+    display: flex;
+    align-items: flex-start;
+    gap: 30px;
+}
+
+main {
+    position: relative;
+    top: 5px;    
+}
+
+#photos {
+    position: relative;
+    top: 25px;
+    left: 300px;
+    width: 1400px;
+}
+
+#photos img {
+    width: 1240px;
+    height: 690px;
+}
+
+main i {
+    font-size: 50px;
+    position: relative;
+    bottom: 350px;
+}
+
+main h2{
+    text-decoration: underline;
+}
+
+#info {
+    position: absolute;
+    top: 900px;
+    left: 15%;
+    padding-bottom: 190px;
+    width: 70%;
+}
+
+h3 {
+    text-align: center;
+}
+
+li p {
+    margin-left: 30px;
+    text-align: justify;
+    margin-right: 50px;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+#boton {
+    position: absolute;
+    top: 2100px;
+    left: 1500px;
+    width: 205px;
+    height: 68px;
+    background: var(--septimo);
+    border: 2px solid var(--octavo);
+    border-radius: 20px;
+    box-shadow: 3px 3px 4px 0px #9C9898;
+}
+
+#boton span {
+    position: relative;
+    top: 15px;
+    left: 34%;
+}
+
+#algo {
+    border-radius: 10px;
+background: url(<path-to-image>), lightgray 50% / cover no-repeat;
+
+/* Sombra Fotos */
+box-shadow: 10px 10px 10px 0px rgba(0, 0, 0, 0.25);
+}
