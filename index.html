@@ -8,7 +8,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inknut+Antiqua:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <title>RaceMapp</title>
+    <link rel="shortcut icon" href="./img/Logotipo.jpeg" type="image/x-icon">
+    <title>RaceMap</title>
 </head>
 <body>
     
@@ -22,8 +23,8 @@
             <div>
                 <p><a href="#funcionalidades">Funcionalidades</a></p>
             </div>
-            <div>
-                <a href="#inicioSesion"><p>Iniciar sesión &nbsp; <i class="fa-solid fa-right-from-bracket"></i></p></a>
+            <div id="abrirModal">
+                <p>Iniciar sesión &nbsp; <i class="fa-solid fa-right-to-bracket"></i></p>
             </div>
             <div>
                 <a href="./registro.html"><p>Registrarse &nbsp; <i class="fa-regular fa-user"></i></p></a>
@@ -33,10 +34,45 @@
 
     <main>
         <div id="photos">
-            <i class="fa-solid fa-angle-left"></i>
-            <img src="./img/primeraFoto.jpg" alt="Foto ejemplo" title="Fotos de ejemplo de carreras">
-            <i class="fa-solid fa-angle-right"></i>
+            <i class="fa-solid fa-angle-left" id="anterior"></i>
+            <img alt="Foto ejemplo" title="Fotos de ejemplo de carreras" id="fotosLandingRandom">
+            <i class="fa-solid fa-angle-right" id="posterior"></i>
         </div>
+
+        <!-- <div id="inicioSesion">
+            <div id="cerrar">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+
+            <div id="formulario"> 
+                <form action="./index.html" method="get">
+                    <h2>Inicio sesión</h2>
+                    <div id="divisoriaSuperior"></div>
+                    <div class="campos">
+                        <label for="usuario">Nombre de usuario:</label>
+                        <input type="text" name="nombre" id="nombre" placeholder="Introduzca el usuario">
+                    </div>
+
+                    <div class="campos">
+                        <label for="contrasena">Contraseña:</label>
+                        <input type="password" name="contrasena" id="contrasena" placeholder="Introduzca una contraseña">
+                    </div>
+
+                    <span>Entrar como invitado</span>
+
+                    <input type="submit" id="botonInicio" value="Iniciar Sesión"/>
+                </form>
+            </div>
+
+            <div id="oAuth">
+                <img src="./img/iconoGoogle.jpg" width="23" height="23">
+                <span>Continúa con Google</span>
+            </div>
+            
+            <div id="divisoriaInferior"></div>            
+            
+            <div id="noCuenta"><span>¿Aún no tienes cuenta? <a href="./registro.html">Resgistrate</a></span></div>
+        </div> -->
 
         <div id="info">
             <ul>
@@ -83,7 +119,8 @@
         
         <a href="./index.html">
             <div id="boton">
-                <span>Volver</span>
+                <span>Volver </span>
+                <!-- <i class="fa-solid fa-arrow-turn-up"></i> -->
             </div>
         </a>
         
@@ -94,10 +131,10 @@
         <div id="icons">
             <i class="fa-brands fa-x-twitter"></i>
             <i class="fa-brands fa-instagram"></i>
-            <i class="fa-brands fa-linkedin"></i>
+            <i class="fa-brands fa-tiktok"></i>
         </div>
     </footer>
 
-
+    <script src="./js/inicioSesion.js"></script>
 </body>
 </html>

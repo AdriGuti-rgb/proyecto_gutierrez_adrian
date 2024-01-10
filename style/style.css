@@ -8,6 +8,7 @@
     --septimo: #F2BF8B;
     --octavo: #F7A072;
     --negro: black;
+    --blanco: white;
 }
 
 body {
@@ -22,10 +23,6 @@ header {
     position: relative;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     z-index: 1;
-    /* background-image: url(../img/Logotipo-removebg-preview.png);
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: 150px; */
 }
 
 header h1 {
@@ -40,9 +37,157 @@ header img {
     left: 150px;
 }
 
+#abrirModal {
+    cursor: pointer;
+}
+
 i {
     font-size: 20px;
 }
+
+
+/* 
+    Inicio de sesion 
+*/
+
+#inicioSesion {
+    width: 487px;
+    height: 550px;
+    border-radius: 39px;
+    background: rgba(0, 0, 0, 0.70);
+    position: absolute;
+    top: 90px;
+    right: 400px;
+    color: var(--blanco);
+}
+
+#cerrar {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top: 27px;
+    left: 413px;
+    background-color: var(--septimo);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#cerrar i {
+    font-size: 35px;
+    position: absolute;
+    top: -2.5px;
+    left: 2px;
+    color: black;
+}
+
+#formulario {
+    position: absolute;
+    top: 60px;
+    left: 70px;
+}
+
+#botonInicio {
+    border: 1px solid #000000;
+    border-radius: 10px;
+    width: 231px;
+    height: 50px;
+    position: absolute;
+    top: 280px;
+    left: 60px;
+    background-color: rgba(98, 195, 214, 0.70);
+    color: var(--negro);
+    font-family: Inknut Antiqua;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+}
+
+#inicioSesion h2 {
+    margin: 0;
+    text-decoration: none;
+    margin-left: 20px; 
+    margin-top: -5px;
+    text-align: center;
+}
+
+#oAuth {
+    width: 276px;
+    height: 32px;
+    top: 445px;
+    left: 106px;
+    border-radius: 10px;
+    position: absolute;
+    background-color: var(--blanco);
+    border-radius: 10px;
+}
+
+#oAuth img {
+    position: absolute;
+    left: 20px;
+    top: 5px;
+}
+
+#oAuth span {
+    position: absolute;
+    top: -5px;
+    left: 70px;
+    color: var(--negro);
+}
+
+#divisoriaSuperior {
+    position: absolute;
+    left: -25px;
+    width:400px;
+    height: 1px;
+    background-color: var(--blanco);
+}
+
+#divisoriaInferior {
+    position: absolute;
+    top: 495px;
+    left: 45px;
+    width: 400px;
+    height: 1px;
+    background-color: var(--blanco);
+}
+
+#noCuenta {
+    position: absolute;
+    top: 500px;
+    left: 130px;
+    font-size: 12px;
+}
+
+#noCuenta a {
+    color: var(--blanco);
+    text-decoration: none;
+}
+
+input[type="text"], 
+input[type="password"] {
+    width: 178px;
+    height: 42px;
+    border-radius: 10px;
+    border: 1px solid #000;
+    font-family: Inknut Antiqua;
+    font-size: 12px;
+}
+
+input[type="password"] {
+    margin-left: 67px
+}
+
+.campos {
+    margin-top: 15px;
+}
+
+#formulario span {
+    position: relative;
+    font-size: 12px;
+    left: 100px;
+}
+
+
 
 #links {
     position: absolute;
@@ -99,6 +244,7 @@ main {
 #photos img {
     width: 1240px;
     height: 690px;
+    box-shadow: 10px 10px 10px 0px rgba(0, 0, 0, 0.25);
 }
 
 main i {
