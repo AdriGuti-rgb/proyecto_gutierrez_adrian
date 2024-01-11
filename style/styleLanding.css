@@ -1,0 +1,213 @@
+
+/* 
+    Inicio de sesion 
+*/
+
+#inicioSesion {
+    width: 487px;
+    height: 550px;
+    border-radius: 39px;
+    background: rgba(0, 0, 0, 0.70);
+    position: absolute;
+    top: 90px;
+    right: 400px;
+    color: var(--blanco);
+}
+
+#cerrar {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top: 27px;
+    left: 413px;
+    background-color: var(--septimo);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#cerrar i {
+    font-size: 35px;
+    position: absolute;
+    top: -2.5px;
+    left: 2px;
+    color: black;
+}
+
+#formulario {
+    position: absolute;
+    top: 60px;
+    left: 70px;
+}
+
+#botonInicio {
+    border: 1px solid #000000;
+    border-radius: 10px;
+    width: 231px;
+    height: 50px;
+    position: absolute;
+    top: 280px;
+    left: 60px;
+    background-color: rgba(98, 195, 214, 0.70);
+    color: var(--negro);
+    font-family: Inknut Antiqua;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+}
+
+#inicioSesion h2 {
+    margin: 0;
+    text-decoration: none;
+    margin-left: 20px; 
+    margin-top: -5px;
+    text-align: center;
+}
+
+#oAuth {
+    width: 276px;
+    height: 32px;
+    top: 445px;
+    left: 106px;
+    border-radius: 10px;
+    position: absolute;
+    background-color: var(--blanco);
+    border-radius: 10px;
+}
+
+#oAuth img {
+    position: absolute;
+    left: 20px;
+    top: 5px;
+}
+
+#oAuth span {
+    position: absolute;
+    top: -5px;
+    left: 70px;
+    color: var(--negro);
+}
+
+#divisoriaSuperior {
+    position: absolute;
+    left: -25px;
+    width:400px;
+    height: 1px;
+    background-color: var(--blanco);
+}
+
+#divisoriaInferior {
+    position: absolute;
+    top: 495px;
+    left: 45px;
+    width: 400px;
+    height: 1px;
+    background-color: var(--blanco);
+}
+
+#noCuenta {
+    position: absolute;
+    top: 500px;
+    left: 130px;
+    font-size: 12px;
+}
+
+#noCuenta a {
+    color: var(--blanco);
+    text-decoration: none;
+}
+
+input[type="text"], 
+input[type="password"] {
+    width: 178px;
+    height: 42px;
+    border-radius: 10px;
+    border: 1px solid #000;
+    font-family: Inknut Antiqua;
+    font-size: 12px;
+}
+
+input[type="password"] {
+    margin-left: 67px
+}
+
+.campos {
+    margin-top: 15px;
+}
+
+#formulario span {
+    position: relative;
+    font-size: 12px;
+    left: 100px;
+}
+
+
+#photos {
+    position: relative;
+    top: 25px;
+    left: 300px;
+    width: 1400px;
+}
+
+#photos img {
+    width: 1240px;
+    height: 690px;
+    box-shadow: 10px 10px 10px 0px rgba(0, 0, 0, 0.25);
+}
+
+main i {
+    font-size: 50px;
+    position: relative;
+    bottom: 350px;
+}
+
+main h2{
+    text-decoration: underline;
+}
+
+#info {
+    position: absolute;
+    top: 900px;
+    left: 15%;
+    padding-bottom: 190px;
+    width: 70%;
+}
+
+h3 {
+    text-align: center;
+}
+
+li p {
+    margin-left: 30px;
+    text-align: justify;
+    margin-right: 50px;
+}
+
+#boton {
+    position: absolute;
+    top: 2100px;
+    left: 1500px;
+    width: 205px;
+    height: 68px;
+    background: var(--septimo);
+    border: 2px solid var(--octavo);
+    border-radius: 20px;
+    box-shadow: 3px 3px 4px 0px #9C9898;
+}
+
+#boton span {
+    position: relative;
+    top: 15px;
+    left: 34%;
+}
+
+#abrirModal {
+    cursor: pointer;
+}
+
+#linea {
+    position: relative;
+    left: 10%;
+    width: 79%;
+    height: 2px;
+    background-color: var(--negro);
+}

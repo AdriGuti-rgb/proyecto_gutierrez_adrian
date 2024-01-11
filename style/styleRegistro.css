@@ -1,0 +1,201 @@
+#contenedorRegistro {
+    width: 1184px;
+    height: 652px;
+    border-radius: 25px;
+    background-color: var(--negro);
+    box-shadow: 10px 10px 10px 0px rgba(0, 0, 0, 0.25);
+    position: relative;
+    top: 40px;
+    left: 380px;
+    color: var(--blanco);
+}
+
+#tipoUsuarioNormal {
+    display: flex;
+    flex-direction: column;
+    gap: 65px;
+    position: absolute;
+    top: 80px;
+    left: 120px;
+}
+
+#tipoUsuarioOrganizador {
+    display: flex;
+    flex-direction: column;
+    gap: 65px;
+    position: absolute;
+    top: 80px;
+    right: 160px;
+}
+
+#checkNormal {
+    cursor: pointer;
+}
+
+#checkOrganizador {
+    cursor: pointer;
+}
+
+.usuarios {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.checkBox {
+    width: 25px;
+    height: 25px;
+    background: var(--blanco);
+    border-radius: 5px;
+}
+
+.marcado {
+    background-color: var(--septimo);
+}
+
+.usuarios span {
+    position: relative;
+    top: -8px;
+}
+
+#divisoriaCentralNormal {
+    position: absolute;
+    top: 65px;
+    left: 400px;
+    width: 2px;
+    height: 520px;
+    background-color: var(--blanco);
+}
+
+#divisoriaCentralOrganizador {
+    position: absolute;
+    top: 65px;
+    right: 500px;
+    width: 2px;
+    height: 520px;
+    background-color: var(--blanco);
+}
+
+#formularioNormal {
+    position: absolute;
+    top: 20px;
+    right: 300px;
+}
+
+#formularioOrganizador {
+    position: absolute; 
+    right: 300px;
+}
+
+#formularioNormal span {
+    text-shadow: 2px 2px 3px #9C9898;
+    text-decoration-line: underline;
+    position: relative;
+    left: 370px;
+
+    text-shadow: 3px 3px 4px #9C9898;
+    font-size: 25px;
+    font-weight: 700;
+    text-decoration-line: underline;
+}
+
+#formularioOrganizador span {
+    text-shadow: 2px 2px 3px #9C9898;
+    text-decoration-line: underline;
+    position: relative;
+    right: 100px;
+    text-shadow: 3px 3px 4px #9C9898;
+    font-size: 25px;
+    font-weight: 700;
+    text-decoration-line: underline;
+}
+
+#camposNormal {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 36px;
+    position: relative;
+    left: 150px;
+}
+
+#camposOrganizador {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    position: relative;
+    right: 280px;
+}
+
+input,select {
+    width: 271px;
+    height: 32px;
+    border-radius: 5px;
+    background: var(--blanco);
+    box-shadow: 3px 3px 4px 0px #9C9898;
+    font-family: 'Inknut Antiqua', serif;
+}
+
+#nombre {
+    position: relative;
+    left: 60px; 
+}
+
+#nombreMostrado {
+    position: relative;
+    left: 12px; 
+}
+
+#correo {
+    position: relative;
+    left: 62px; 
+}
+
+#contrasena {
+    position: relative;
+    left: 127px; 
+}
+
+#fotoPerfil {
+    position: relative;
+    left: 83px; 
+}
+
+#localidad {
+    position: relative;
+    left: 140px; 
+}
+
+#telefono {
+    position: relative;
+    left: 50px;
+}
+
+#entidad {
+    position: relative;
+    left: 43px;
+}
+
+#formularioNormal input[type="submit"] {
+    width: 172¡4px;
+    height: 40px;
+    background-color: var(--primero);
+    box-shadow: none;
+    border-color: var(--negro);
+    position: absolute;
+    top: 560px;
+    left: 300px;
+}
+
+#formularioOrganizador input[type="submit"] {
+    width: 172¡4px;
+    height: 40px;
+    background-color: var(--primero);
+    box-shadow: none;
+    border-color: var(--negro);
+    position: absolute;
+    top: 590px;
+    right: 400px;
+}

@@ -4,35 +4,90 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style/style.css">
+    <link rel="stylesheet" href="./style/styleRegistro.css">
     <script src="https://kit.fontawesome.com/a1e1584c46.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inknut+Antiqua:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <title>RaceMap</title>
+    <title>RaceMapp</title>
 </head>
 <body>
     
     <header>
         <a href="./index.html"><img src="./img/Logotipo-removebg-preview.png" alt="Logotipo" title="Logotipo de la aplicación"></a>
-        <h1>RaceMap</h1>
+        <h1>RaceMapp</h1>
         <div id="links">
             <a href="./index.html"><p>Iniciar sesión &nbsp; <i class="fa-solid fa-right-to-bracket"></i></p></a>
         </div>
     </header>
 
     <main>        
-        
-    </main>
+        <div id="contenedorRegistro">
+            <div id="tipoUsuarioNormal">
+                <h2>Tipo usuario:</h2>
+                <div class="usuarios" >
+                    <div class="checkBox marcado" id="checkNormal"></div>
+                    <span>Normal</span>
+                </div>
 
+                <div class="usuarios">
+                    <div class="checkBox" id="checkOrganizador"></div>
+                    <span>Organizador</span>
+                </div>
+            </div>
+            
+            <div id="divisoriaCentralNormal"></div>
+
+            <div id="formularioNormal">
+                <span>Normal</span>
+                
+                    <form action="./registro.html" method="get">
+                        <ul>
+                            <div id="camposNormal">
+                            <li>
+                                <label for="nombre">Nombre de usuario:</label>
+                                <input type="text" name="nombre" id="nombre">
+                            </li>
+                            <li>
+                                <label for="nombreMostrado">Nombre que se mostrará:</label>
+                                <input type="text" name="nombreMostrado" id="nombreMostrado">
+                            </li>
+                            <li>
+                                <label for="correo">Correo electrónico:</label>
+                                <input type="text" name="correo" id="correo">
+                            </li>
+                            <li>
+                                <label for="contrasena">Contraseña:</label>
+                                <input type="password" name="contrasena" id="contrasena">
+                            </li>
+                            <li>
+                                <label for="fotoPerfil">Imagen de perfil:</label>
+                                <input type="file" name="fotoPerfil" id="fotoPerfil">
+                            </li>
+                            <li>
+                                <label for="localidad">Localidad:</label>
+                                <select name="localidad" id="localidad">
+                                    <option value="leon">León</option>
+                                </select>
+                            </li>
+                        </div>
+                        </ul>
+                        <input type="submit" value="Enviar">
+                    </form>
+            </div>
+        </div>
+    </main>
+        
     <footer>
-        <h2>RaceMap</h2>
+        <h2>RaceMapp</h2>
         <div id="icons">
-            <i class="fa-brands fa-x-twitter"></i>
-            <i class="fa-brands fa-instagram"></i>
-            <i class="fa-brands fa-tiktok"></i>
+            <a href="https://twitter.com/racemapp23"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="https://www.instagram.com/racemapp23/"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://www.tiktok.com/@racemapp23"><i class="fa-brands fa-tiktok"></i></a>
         </div>
     </footer>
 
+    <script src="./js/registro.js"></script>
 
 </body>
 </html>
