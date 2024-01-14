@@ -183,8 +183,8 @@ li p {
 }
 
 #boton {
-    position: absolute;
-    top: 2100px;
+    position: relative;
+    bottom: -1350px;
     left: 1500px;
     width: 205px;
     height: 68px;
@@ -210,4 +210,8 @@ li p {
     width: 79%;
     height: 2px;
     background-color: var(--negro);
+}
+
+#anterior, #posterior {
+    cursor: pointer;
 }

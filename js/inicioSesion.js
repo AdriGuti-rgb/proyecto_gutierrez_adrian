@@ -71,5 +71,4 @@ function updateTime () {
     if (nivel == 0) nivel = 1;
 
     img.src = `./img/fotosLandingRandom/${nivel}Foto.jpg`;
-
 }

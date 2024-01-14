@@ -31,7 +31,7 @@ header h1 {
     left: 300px;
 }
 
-header img {
+#fotoHeader {
     position: absolute;
     width: 110px;
     left: 150px;

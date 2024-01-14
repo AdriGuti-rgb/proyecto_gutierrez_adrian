@@ -36,6 +36,10 @@
     cursor: pointer;
 }
 
+ul {
+    width: 600px;
+}
+
 .usuarios {
     display: flex;
     align-items: flex-start;
@@ -86,6 +90,7 @@
 #formularioOrganizador {
     position: relative; 
     left: 80px;
+    width: 600px;
 }
 
 #formularioNormal span {
@@ -93,7 +98,6 @@
     text-decoration-line: underline;
     position: relative;
     left: 370px;
-
     text-shadow: 3px 3px 4px #9C9898;
     font-size: 25px;
     font-weight: 700;
@@ -104,7 +108,7 @@
     text-shadow: 2px 2px 3px #9C9898;
     text-decoration-line: underline;
     position: relative;
-    right: 100px;
+    left: 180px;
     text-shadow: 3px 3px 4px #9C9898;
     font-size: 25px;
     font-weight: 700;
@@ -125,6 +129,7 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 20px;
+    width: 600px;
 }
 
 input,select {
@@ -161,7 +166,8 @@ input,select {
     left: 83px; 
 }
 
-#localidad {
+#localidadNormal,
+#localidadOrganizador {
     position: relative;
     left: 140px; 
 }
@@ -195,10 +201,9 @@ input,select {
     border-color: var(--negro);
     position: absolute;
     top: 590px;
-    right: 400px;
+    right: 200px;
 }
 
-/* form {
-    position: relative;
-    right: 280px;
-} */
+form {
+    width: 600px;
+}

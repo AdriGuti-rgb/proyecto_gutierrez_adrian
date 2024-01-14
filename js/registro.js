@@ -1,8 +1,10 @@
+let selectLocalidadNormal = document.getElementById("localidadNormal");
+let selectLocalidadOrganizador = "";
+
 if (document.getElementById("checkNormal") != null) document.getElementById("checkNormal").addEventListener("click", handleMarc);
 if (document.getElementById("checkOrganizador") != null) document.getElementById("checkOrganizador").addEventListener("click", handleMarc);
 
 function handleMarc (e) {
-    console.log(e);
     let contenedor = document.createElement("div");
     let main = document.getElementsByTagName("main")
     contenedor.id = "contenedorRegistro";
@@ -54,8 +56,8 @@ function handleMarc (e) {
                                 </li>
                                 <li>
                                     <label for="localidad">Localidad:</label>
-                                    <select name="localidad" id="localidad">
-                                        <option value="leon">León</option>
+                                    <select name="localidad" id="localidadOrganizador">
+                                        <option value="">Seleccione una localidad</option>
                                     </select>
                                 </li>
                                 <li>
@@ -72,14 +74,12 @@ function handleMarc (e) {
                         </form>
                 </div>
             `;
-
-        main[0].append(contenedor);
     }
 
     if (!(e.target.classList.contains("marcado")) && e.target.id == "checkNormal") {
         document.getElementById("contenedorRegistro").remove();
         contenedor.innerHTML = `
-        <div id="contenedorRegistro">
+        
             <div id="tipoUsuarioNormal">
                 <h2>Tipo usuario:</h2>
                 <div class="usuarios" >
@@ -123,8 +123,8 @@ function handleMarc (e) {
                             </li>
                             <li>
                                 <label for="localidad">Localidad:</label>
-                                <select name="localidad" id="localidad">
-                                    <option value="leon">León</option>
+                                <select name="localidad" id="localidadNormal">
+                                    <option value="">Seleccione una localidad</option>
                                 </select>
                             </li>
                         </div>
@@ -133,12 +133,36 @@ function handleMarc (e) {
                     </form>
                 
             </div>
-        </div>
+        
             `;
-
-        main[0].append(contenedor);
     }
     
+    main[0].append(contenedor);
+
     document.getElementById("checkNormal").addEventListener("click", handleMarc);
     document.getElementById("checkOrganizador").addEventListener("click", handleMarc);
+    selectLocalidadOrganizador = document.getElementById("localidadOrganizador");
+    if (document.getElementById("localidadOrganizador") != null) document.getElementById("localidadOrganizador").addEventListener("click", anadirLocalidades);
+    if (document.getElementById("localidadNormal") != null) document.getElementById("localidadNormal").addEventListener("click", anadirLocalidades);
+}
+
+selectLocalidadNormal.addEventListener("click", anadirLocalidades)
+
+function anadirLocalidades (e) {
+    let localidades = [];
+
+    if (localidades.length == 0) data.forEach( item => item.provinces.forEach( itemProvinces => localidades.push(itemProvinces.label)));
+    
+    localidades
+        .sort( (a, b) => a > b)
+        .forEach( (item, index) => {
+            let selected = false;
+
+            if (index == 0) selected = true;
+            
+            let option = new Option(item, item, false, selected);
+            e.target.append(option)
+        });
+
+    e.target.removeEventListener("click", anadirLocalidades)
 }

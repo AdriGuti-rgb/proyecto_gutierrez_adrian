@@ -9,12 +9,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inknut+Antiqua:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <title>RaceMapp</title>
+    <title>RaceMapp | Registro</title>
 </head>
 <body>
     
     <header>
-        <a href="./index.html"><img src="./img/Logotipo-removebg-preview.png" alt="Logotipo" title="Logotipo de la aplicación"></a>
+        <a href="./index.html"><img src="./img/Logotipo-removebg-preview.png" alt="Logotipo" title="Logotipo de la aplicación" id="fotoHeader"></a>
         <h1>RaceMapp</h1>
         <div id="links">
             <a href="./index.html"><p>Iniciar sesión &nbsp; <i class="fa-solid fa-right-to-bracket"></i></p></a>
@@ -66,8 +66,8 @@
                             </li>
                             <li>
                                 <label for="localidad">Localidad:</label>
-                                <select name="localidad" id="localidad">
-                                    <option value="leon">León</option>
+                                <select name="localidad" id="localidadNormal">
+                                    <option value="">Seleccione una localidad</option>
                                 </select>
                             </li>
                         </div>
@@ -88,6 +88,7 @@
     </footer>
 
     <script src="./js/registro.js"></script>
+    <script src="./js/localidades.js"></script>
 
 </body>
 </html>

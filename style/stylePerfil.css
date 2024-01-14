@@ -1,0 +1,183 @@
+#contenedorPerfil {
+    width: 1225px;
+    height: 703px;
+    border-radius: 30px;
+    background-color: var(--negro);
+    box-shadow: 10px 10px 10px 0px rgba(0, 0, 0, 0.25);
+    color: var(--blanco);
+    margin-top: 10px;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+}
+
+#perfil {
+    display: flex;
+    gap: 5px;
+    position: relative;
+    top: 15px;
+}
+
+#imgPerfilSuperior {
+    width: 40px;
+    height: 40px;
+}
+
+#perfil i {
+    position: relative;
+    top: 10px;
+}
+
+#fotoPerfilGrande {
+    width: 119px;
+    height: 99px;
+}
+
+#miPerfil {
+    font-size: 25px;
+    font-weight: 700;
+    position: absolute;
+    top: 30px;
+    left: 380px;
+}
+
+#fotoGrande {
+    display: flex;
+    justify-content: flex-start;
+    position: absolute;
+    top: 10px;
+    right: 400px;
+}
+
+#formulario {
+    display: flex;
+    position: relative;
+    top: 120px;
+    left: 45px;
+    gap: 120px;
+}
+
+#primeraParte {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    left: 0px;
+    top: 30px;
+}
+
+#segundaParte {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    left:-60px;
+    top: 30px;
+}
+
+#divisoriaSuperior {
+    position: absolute;
+    top: 120px;
+    left: 390px;
+    width: 1140px;
+    height: 2px;
+    background-color: var(--blanco);
+}
+
+#divisoriaInferior {
+    position: absolute;
+    bottom: 120px;
+    left: 450px;
+    width: 1020px;
+    height: 2px;
+    background-color: var(--blanco);
+}
+
+#divisoriaCentral {
+    position: absolute;
+    top:30px;
+    left: 550px;
+    width: 2px;
+    height: 400px;
+    background-color: var(--blanco);
+}
+
+input,select {
+    width: 271px;
+    height: 32px;
+    border-radius: 5px;
+    background: var(--blanco);
+    box-shadow: 3px 3px 4px 0px #9C9898;
+    font-family: 'Inknut Antiqua', serif;
+}
+
+input[type="submit"] {
+    width: 172¡4px;
+    height: 40px;
+    background-color: var(--primero);
+    box-shadow: none;
+    border-color: var(--negro);
+    position: absolute;
+    top: 620px;
+    right: 500px;
+}
+
+li {
+    padding: 30px;
+    list-style: none;
+}
+
+li:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+}
+
+#nombreUsuario {
+    position: relative;
+    left: 20px; 
+}
+
+#nombreMostrado {
+    position: relative;
+    left: 55px; 
+}
+
+#correo {
+    position: relative;
+    left: 20px; 
+}
+
+#contrasena {
+    position: relative;
+    left: 112px; 
+}
+
+#fotoPerfil {
+    position: relative;
+    left: 43px; 
+}
+
+#localidad {
+    position: relative;
+    left: 128px; 
+}
+
+#telefono {
+    position: relative;
+    left: 108px;
+}
+
+#entidad {
+    position: relative;
+    left: 23px;
+}
+
+#darseBaja {
+    position: relative;
+    top: 200px;
+    left: 250px;
+}
+
+#baja {
+    width: 50px;
+}
