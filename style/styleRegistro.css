@@ -207,3 +207,29 @@ input,select {
 form {
     width: 600px;
 }
+
+/* #tipoUsuarioNormal,
+#divisoriaCentralNormal,
+#formularioNormal {
+    transition: transform 0.3s ease-in-out;
+}
+
+
+#tipoUsuarioNormal {
+    transform: translateX(-50px); 
+}
+
+#divisoriaCentralNormal {
+    transform: scaleX(0); 
+}
+
+#formularioNormal {
+    transform: translateY(-30px);
+}
+
+#tipoUsuarioNormal:hover,
+#divisoriaCentralNormal:hover,
+#formularioNormal:hover {
+    transform: translateX(0) scaleY(1) translateY(0);
+} */
+
