@@ -21,7 +21,7 @@
             <p>Adrian Gutiérrez</p>
             <div id="perfil">
                 <img src="./img/fotoPerfil.png" alt="Foto Perfil" id="imgPerfilSuperior">
-                <i class="fa-solid fa-caret-down"></i>
+                <i class="fa-solid fa-caret-down" id="datosPerfil"></i>
             </div>
         </div>
     </header>
@@ -34,11 +34,19 @@
                     <span>Foto perfil: </span>
                     <img src="./img/fotoPerfil.png" alt="Foto perfil" id="fotoPerfilGrande">
                 </div>
+                <div id="opcionesPerfil">
+                    <div id="accesoPerfil">
+                        <span>Perfil</span>
+                    </div>
+                    <div id="cerrarSesion">
+                        <span>Cerrar sesión</span>
+                    </div>
+                </div>
             </div>
 
             <form action="./perfil.html" method="get">
                 <div id="formulario">
-                    <div id="primeraParte">
+                    <ul id="primeraParte">
                             <li>
                                 <label for="nombreUsuario">Nombre de usuario:</label>
                                 <input type="text" name="nombreUsuario" id="nombreUsuario" placeholder="adrianGuti">
@@ -58,11 +66,11 @@
                                 <label for="telefono">Teléfono:</label>
                                 <input type="tel" name="telefono" id="telefono" placeholder="987 662 872">
                             </li>
-                    </div>
+                    </ul>
                     
                     <div id="divisoriaCentral"></div>
 
-                    <div id="segundaParte">
+                    <ul id="segundaParte">
                         <li>
                             <label for="nombreMostrado">Nombre mostrado:</label>
                             <input type="text" name="nombreMostrado" id="nombreMostrado" placeholder="AdriGuti">
@@ -84,7 +92,7 @@
                             <label for="entidad">Entidad organizadora:</label>
                             <input type="text" name="entidad" id="entidad" placeholder="Ninguna">
                         </li>
-                    </div>
+                    </ul>
                 </div>
                 
                 <div id="darseBaja">

@@ -18,6 +18,7 @@ main {
     gap: 5px;
     position: relative;
     top: 15px;
+    cursor: pointer;
 }
 
 #imgPerfilSuperior {
@@ -54,7 +55,7 @@ main {
 #formulario {
     display: flex;
     position: relative;
-    top: 120px;
+    top: 90px;
     left: 45px;
     gap: 120px;
 }
@@ -95,7 +96,7 @@ main {
 
 #divisoriaCentral {
     position: absolute;
-    top:30px;
+    top: 50px;
     left: 550px;
     width: 2px;
     height: 400px;
@@ -180,4 +181,42 @@ li:hover {
 
 #baja {
     width: 50px;
+}
+
+#opcionesPerfil {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: -20px;
+    right: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    z-index: 1;
+    opacity: 0; /* Inicialmente invisible */
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out; 
+    transform: translateY(-20px); /* Mover hacia arriba */
+}
+
+#opcionesPerfil.mostrar {
+    opacity: 1; /* Hacer visible cuando tiene la clase "mostrar" */
+    transform: translateY(0); /* Mover a la posición original */
+}
+
+#accesoPerfil, #cerrarSesion {
+    width: 200px;
+    height: 32px;
+    filter: drop-shadow(3px 3px 4px #9C9898);
+    background-color: var(--blanco);
+    stroke-width: 1px;
+    stroke: #000;
+    color: var(--negro);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    border: solid 0.5px var(--negro);
+}
+
+ul {
+    padding: 0;
 }
