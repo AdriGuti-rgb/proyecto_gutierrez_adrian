@@ -12,6 +12,7 @@ function handleMarc (e) {
 
     if (!(e.target.classList.contains("marcado")) && e.target.id == "checkOrganizador") {
         document.getElementById("contenedorRegistro").remove();
+        // document.getElementById("main").innerHTML = "";
         contenedor.innerHTML = `
             <div id="tipoUsuarioOrganizador">
                     <h2>Tipo usuario:</h2>
@@ -43,13 +44,14 @@ function handleMarc (e) {
                                     <input type="text" name="nombreMostrado" id="nombreMostrado">
                                 </li>
                                 <li>
-                                    <label for="correo">Correo electrónico:</label>
-                                    <input type="text" name="correo" id="correo">
-                                </li>
-                                <li>
-                                    <label for="contrasena">Contraseña:</label>
-                                    <input type="password" name="contrasena" id="contrasena">
-                                </li>
+                                <label for="correo">Correo electrónico:</label>
+                                <input type="text" name="correo" id="correo" pattern="[a-zA-Z0-9\.]+@[a-zA-Z0-9\.]+\.[a-zA-Z]+" required>
+                            </li>
+                            <li>
+                                <label for="contrasena">Contraseña:</label>
+                                <input type="password" name="contrasena" id="contrasena" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
+                                <i class="fa-solid fa-eye" id="vista"></i>
+                            </li>
                                 <li>
                                     <label for="fotoPerfil">Imagen de perfil:</label>
                                     <input type="file" name="fotoPerfil" id="fotoPerfil">
@@ -74,6 +76,8 @@ function handleMarc (e) {
                         </form>
                 </div>
             `;
+            main[0].append(contenedor);
+            document.getElementById("vista").addEventListener("click", mostrarContrasena);
     }
 
     if (!(e.target.classList.contains("marcado")) && e.target.id == "checkNormal") {
@@ -116,6 +120,7 @@ function handleMarc (e) {
                             <li>
                                 <label for="contrasena">Contraseña:</label>
                                 <input type="password" name="contrasena" id="contrasena">
+                                <i class="fa-solid fa-eye" id="vista"></i>
                             </li>
                             <li>
                                 <label for="fotoPerfil">Imagen de perfil:</label>
@@ -135,9 +140,11 @@ function handleMarc (e) {
             </div>
         
             `;
+            main[0].append(contenedor);
+            document.getElementById("vista").addEventListener("click", mostrarContrasena);
     }
     
-    main[0].append(contenedor);
+    
 
     document.getElementById("checkNormal").addEventListener("click", handleMarc);
     document.getElementById("checkOrganizador").addEventListener("click", handleMarc);
@@ -165,4 +172,22 @@ function anadirLocalidades (e) {
         });
 
     e.target.removeEventListener("click", anadirLocalidades)
+}
+
+
+document.getElementById("vista").addEventListener("click", mostrarContrasena);
+
+function mostrarContrasena (e) {
+    let contrasenaInput = document.getElementById("contrasena");
+
+    if (contrasenaInput.type === "password") {
+        contrasenaInput.type = "text";
+        e.target.classList.remove("fa-eye");
+        e.target.classList.add("fa-eye-slash");
+    } else {
+        contrasenaInput.type = "password";
+        e.target.classList.add("fa-eye");
+        e.target.classList.remove("fa-eye-slash");
+    }
+        
 }

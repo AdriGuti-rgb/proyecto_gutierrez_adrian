@@ -208,6 +208,14 @@ form {
     width: 600px;
 }
 
+#vista {
+    color: var(--negro);
+    position: relative;
+    top: 2px;
+    left: 90px;
+    cursor: pointer;
+}
+
 /* #tipoUsuarioNormal,
 #divisoriaCentralNormal,
 #formularioNormal {

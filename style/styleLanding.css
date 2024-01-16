@@ -3,6 +3,12 @@
     Inicio de sesion 
 */
 
+main {
+    display: flex;
+    flex-direction: row;
+}
+
+
 #inicioSesion {
     width: 487px;
     height: 550px;
@@ -126,7 +132,8 @@ input[type="password"] {
     font-size: 12px;
 }
 
-input[type="password"] {
+input[type="password"],
+#contrasena {
     margin-left: 67px
 }
 
@@ -139,7 +146,6 @@ input[type="password"] {
     font-size: 12px;
     left: 100px;
 }
-
 
 #photos {
     position: relative;
@@ -183,21 +189,17 @@ li p {
 }
 
 #boton {
-    position: relative;
-    bottom: -1350px;
-    left: 1500px;
+    position: absolute;
+    right: 0px;
     width: 205px;
     height: 68px;
     background: var(--septimo);
     border: 2px solid var(--octavo);
     border-radius: 20px;
     box-shadow: 3px 3px 4px 0px #9C9898;
-}
-
-#boton span {
-    position: relative;
-    top: 15px;
-    left: 34%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #abrirModal {
@@ -214,4 +216,13 @@ li p {
 
 #anterior, #posterior {
     cursor: pointer;
+}
+
+#vista {
+    color: var(--negro);
+    position: absolute;
+    top: 144px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 25px;
 }

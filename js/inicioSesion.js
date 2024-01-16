@@ -25,7 +25,8 @@ function openModal (e) {
     
                 <div class="campos">
                     <label for="contrasena">Contraseña:</label>
-                    <input type="password" name="contrasena" id="contrasena" placeholder="Introduzca una contraseña">
+                    <input type="password" name="contrasena" id="contrasena" placeholder="Introduzca una contraseña"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
+                    <i class="fa-solid fa-eye" id="vista"></i>
                 </div>
     
                 <span>Entrar como invitado</span>
@@ -44,6 +45,7 @@ function openModal (e) {
         <div id="noCuenta"><span>¿Aún no tienes cuenta? <a href="./registro.html">Resgistrate</a></span></div>
     `;
     photos.parentNode.append(inicioSesion);
+    document.getElementById("vista").addEventListener("click", mostrarContrasena);
 
     if (document.getElementById("cerrar") != null) document.getElementById("cerrar").addEventListener("click", () => inicioSesion.remove());
 
@@ -71,4 +73,24 @@ function updateTime () {
     if (nivel == 0) nivel = 1;
 
     img.src = `./img/fotosLandingRandom/${nivel}Foto.jpg`;
+}
+
+
+
+/* Vista de la contraseña */
+
+
+function mostrarContrasena (e) {
+    let contrasenaInput = document.getElementById("contrasena");
+
+    if (contrasenaInput.type === "password") {
+        contrasenaInput.type = "text";
+        e.target.classList.remove("fa-eye");
+        e.target.classList.add("fa-eye-slash");
+    } else {
+        contrasenaInput.type = "password";
+        e.target.classList.add("fa-eye");
+        e.target.classList.remove("fa-eye-slash");
+    }
+        
 }
