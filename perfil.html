@@ -12,115 +12,119 @@
     <title>RaceMapp | Perfil</title>
 </head>
 <body>
-    
-    <header>
-        <a href="./index.html"><img src="./img/Logotipo-removebg-preview.png" alt="Logotipo" title="Logotipo de la aplicación"  id="fotoHeader"></a>
-        <h1>RaceMapp</h1>
-        <div id="links">
-            <a href="./registroEdicionCarrera.html"><p>Crear carrera</p></a>
-            <p>Adrian Gutiérrez</p>
-            <div id="perfil">
-                <img src="./img/fotoPerfil.png" alt="Foto Perfil" id="imgPerfilSuperior">
-                <i class="fa-solid fa-caret-down" id="datosPerfil"></i>
-            </div>
-        </div>
-    </header>
-    
-    <main>
-        <div id="contenedorPerfil">
-            <div>
-                <span id="miPerfil">Mi perfil</span>
-                <div id="fotoGrande">
-                    <span>Foto perfil: </span>
-                    <img src="./img/fotoPerfil.png" alt="Foto perfil" id="fotoPerfilGrande">
-                </div>
-                <div id="opcionesPerfil">
-                    <div id="accesoPerfil">
-                        <span>Perfil</span>
-                    </div>
-                    <div id="cerrarSesion">
-                        <span>Cerrar sesión</span>
-                    </div>
+    <div id="todo">
+        <header>
+            <a href="./index.html"><img src="./img/Logotipo-removebg-preview.png" alt="Logotipo" title="Logotipo de la aplicación"  id="fotoHeader"></a>
+            <h1>RaceMapp</h1>
+            <div id="links">
+                <a href="./registroEdicionCarrera.html"><p>Crear carrera</p></a>
+                <p>Adrian Gutiérrez</p>
+                <div id="perfil">
+                    <img src="./img/fotoPerfil.png" alt="Foto Perfil" id="imgPerfilSuperior">
+                    <i class="fa-solid fa-caret-down" id="datosPerfil"></i>
                 </div>
             </div>
+            
+        </header>
 
-            <form action="./perfil.html" method="get">
-                <div id="formulario">
-                    <ul id="primeraParte">
+        <main>
+            <div id="contenedorPerfil">
+                <div>
+                    <span id="miPerfil">Mi perfil</span>
+                    <div id="fotoGrande">
+                        <span>Foto perfil: </span>
+                        <img src="./img/fotoPerfil.png" alt="Foto perfil" id="fotoPerfilGrande">
+                    </div>
+                    <div id="opcionesPerfil">
+                        <div id="accesoPerfil">
+                            <span>Perfil</span>
+                        </div>
+                        <div id="cerrarSesion">
+                            <span>Cerrar sesión</span>
+                        </div>
+                    </div>
+                </div>
+
+                <form action="./perfil.html" method="get">
+                    <div id="formulario">
+                        <ul id="primeraParte">
+                                <li>
+                                    <label for="nombreUsuario">Nombre de usuario:</label>
+                                    <input type="text" name="nombreUsuario" id="nombreUsuario" placeholder="adrianGuti">
+                                </li>
+
+                                <li>
+                                    <label for="correo">Correo electrónico:</label>
+                                    <input type="text" name="correo" id="correo" placeholder="adrian.gutuso@educa.jcyl.es"  pattern="[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z]" required>
+                                </li>
+
+                                <li>
+                                    <label for="fotoPerfil">Imagen de perfil:</label>
+                                    <input type="file" name="fotoPerfil" id="fotoPerfil">
+                                </li>
+
+                                <li>
+                                    <label for="telefono">Teléfono:</label>
+                                    <input type="tel" name="telefono" id="telefono" placeholder="987 662 872">
+                                </li>
+                        </ul>
+                        
+                        <div id="divisoriaCentral"></div>
+
+                        <ul id="segundaParte">
                             <li>
-                                <label for="nombreUsuario">Nombre de usuario:</label>
-                                <input type="text" name="nombreUsuario" id="nombreUsuario" placeholder="adrianGuti">
+                                <label for="nombreMostrado">Nombre mostrado:</label>
+                                <input type="text" name="nombreMostrado" id="nombreMostrado" placeholder="AdriGuti">
                             </li>
 
                             <li>
-                                <label for="correo">Correo electrónico:</label>
-                                <input type="text" name="correo" id="correo" placeholder="adrian.gutuso@educa.jcyl.es"  pattern="[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z]" required>
+                                <label for="contrasena">Contraseña:</label>
+                                <input type="password" name="contrasena" id="contrasena" placeholder="*********"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
+                                <i class="fa-solid fa-eye" id="vista"></i>
                             </li>
 
                             <li>
-                                <label for="fotoPerfil">Imagen de perfil:</label>
-                                <input type="file" name="fotoPerfil" id="fotoPerfil">
+                                <label for="localidad">Localidad:</label>
+                                <select name="localidad" id="localidad">
+                                    <option value="">León</option>
+                                </select>
                             </li>
 
                             <li>
-                                <label for="telefono">Teléfono:</label>
-                                <input type="tel" name="telefono" id="telefono" placeholder="987 662 872">
+                                <label for="entidad">Entidad organizadora:</label>
+                                <input type="text" name="entidad" id="entidad" placeholder="Ninguna">
                             </li>
-                    </ul>
+                        </ul>
+                    </div>
                     
-                    <div id="divisoriaCentral"></div>
+                    <div id="darseBaja">
+                        <input type="checkbox" name="baja" id="baja">
+                        <label for="baja">Darse de baja</label>
+                    </div>
 
-                    <ul id="segundaParte">
-                        <li>
-                            <label for="nombreMostrado">Nombre mostrado:</label>
-                            <input type="text" name="nombreMostrado" id="nombreMostrado" placeholder="AdriGuti">
-                        </li>
+                    <input type="submit" value="Enviar">
+                </form>
 
-                        <li>
-                            <label for="contrasena">Contraseña:</label>
-                            <input type="password" name="contrasena" id="contrasena" placeholder="*********"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
-                            <i class="fa-solid fa-eye" id="vista"></i>
-                        </li>
+                <div id="divisoriaSuperior"></div>
+                <div id="divisoriaInferior"></div>
 
-                        <li>
-                            <label for="localidad">Localidad:</label>
-                            <select name="localidad" id="localidad">
-                                <option value="">León</option>
-                            </select>
-                        </li>
+            </div>
+        </main>
 
-                        <li>
-                            <label for="entidad">Entidad organizadora:</label>
-                            <input type="text" name="entidad" id="entidad" placeholder="Ninguna">
-                        </li>
-                    </ul>
-                </div>
-                
-                <div id="darseBaja">
-                    <input type="checkbox" name="baja" id="baja">
-                    <label for="baja">Darse de baja</label>
-                </div>
+        <footer>
+            <h2>RaceMapp</h2>
+            <div id="icons">
+                <a href="https://twitter.com/racemapp23"><i class="fa-brands fa-x-twitter"></i></a>
+                <a href="https://www.instagram.com/racemapp23/"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://www.tiktok.com/@racemapp23"><i class="fa-brands fa-tiktok"></i></a>
+            </div>
+        </footer>
 
-                <input type="submit" value="Enviar">
-            </form>
-
-            <div id="divisoriaSuperior"></div>
-            <div id="divisoriaInferior"></div>
-
-        </div>
-    </main>
-
-    <footer>
-        <h2>RaceMapp</h2>
-        <div id="icons">
-            <a href="https://twitter.com/racemapp23"><i class="fa-brands fa-x-twitter"></i></a>
-            <a href="https://www.instagram.com/racemapp23/"><i class="fa-brands fa-instagram"></i></a>
-            <a href="https://www.tiktok.com/@racemapp23"><i class="fa-brands fa-tiktok"></i></a>
-        </div>
-    </footer>
+    </div>
 
     <script src="./js/perfil.js"></script>
     <script src="./js/localidades.js"></script>
+
 
 </body>
 </html>

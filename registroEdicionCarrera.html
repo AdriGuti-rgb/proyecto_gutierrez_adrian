@@ -3,44 +3,129 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style/style.css">
-    <link rel="stylesheet" href="./style/stylePerfil.css">
+    <!-- <link rel="stylesheet" href="./style/style.css"> -->
+    <link rel="stylesheet" href="./style/styleCarrera.css">
     <script src="https://kit.fontawesome.com/a1e1584c46.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inknut+Antiqua:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <title>RaceMapp | Perfil</title>
+    <title>RaceMapp | Registro carrera</title>
 </head>
 <body>
     
-    <header>
-        <a href="./index.html"><img src="./img/Logotipo-removebg-preview.png" alt="Logotipo" title="Logotipo de la aplicación"  id="fotoHeader"></a>
-        <h1>RaceMapp</h1>
-        <div id="links">
-            <p>Adrian Gutiérrez</p>
-            <div id="perfil">
-                <img src="./img/fotoPerfil.png" alt="Foto Perfil" id="imgPerfilSuperior">
-                <i class="fa-solid fa-caret-down"></i>
+    <div id="todo">
+        <header>
+            <div id="logoTitulo">
+                <a href="./index.html"><img src="./img/Logotipo-removebg-preview.png" alt="Logotipo" title="Logotipo de la aplicación"  id="fotoHeader"></a>
+                <h1>RaceMapp</h1>
             </div>
-        </div>
-    </header>
-    
-    <main>
-        <div id="contenedorPerfil">
-        </div>
-    </main>
+            <div id="links">
+                <span>Adrian Gutiérrez</span>
+                <div id="perfil">
+                    <img src="./img/fotoPerfil.png" alt="Foto Perfil" id="imgPerfilSuperior">
+                    <i class="fa-solid fa-caret-down"></i>
+                </div>
+            </div>
+        </header>
+        
+        <main>
+            <form action="" method="get">
+                <div id="contenedorCarrera">
+                        <div id="datos">
+                            <ul id="primeraParte">
+                                <li>
+                                    <label for="nombreCarrera">Nombre carrera:</label>
+                                    <input type="text" name="nombreCarrera" id="nombreCarrera" placeholder="adrianGuti">
+                                </li>
 
-    <footer>
-        <h2>RaceMapp</h2>
-        <div id="icons">
-            <a href="https://twitter.com/racemapp23"><i class="fa-brands fa-x-twitter"></i></a>
-            <a href="https://www.instagram.com/racemapp23/"><i class="fa-brands fa-instagram"></i></a>
-            <a href="https://www.tiktok.com/@racemapp23"><i class="fa-brands fa-tiktok"></i></a>
-        </div>
-    </footer>
+                                <li>
+                                    <label for="categorias">Categorias:</label>
+                                    <input type="text" name="categorias" id="categorias" placeholder="adrian.gutuso@educa.jcyl.es"  pattern="[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z]" required>
+                                </li>
 
-    <script src="./js/registro.js"></script>
-    <script src="./js/localidades.js"></script>
+                                <li>
+                                    <label for="desnivel">Desnivel:</label>
+                                    <input type="tel" name="desnivel" id="desnivel" placeholder="987 662 872">
+                                </li>
+
+                                <li>
+                                    <label for="desnivelPos">Desnivel positivo:</label>
+                                    <input type="tel" name="desnivelPos" id="desnivelPos" placeholder="987 662 872">
+                                </li>
+
+                                <li>
+                                    <label for="poblacion">Poblacion:</label>
+                                    <input type="text" name="poblacion" id="poblacion" placeholder="987 662 872">
+                                </li>
+                                
+                                <li>
+                                    <label for="fotoPrincipal">Foto principal:</label>
+                                    <input type="file" name="fotoPrincipal" id="fotoPrincipal">
+                                </li>
+
+                        </ul>
+                        
+                        <div id="divisoriaCentral"></div>
+
+                        <ul id="segundaParte">
+                            <li>
+                                <label for="fechaRealizacion">Fecha realizacion:</label>
+                                <input type="date" name="fechaRealizacion" id="fechaRealizacion" placeholder="AdriGuti">
+                            </li>
+
+                            <li>
+                                <label for="distancia">Distancia:</label>
+                                <input type="number" name="distancia" id="distancia" placeholder="*********">
+                            </li>
+
+                            <li>
+                                <label for="desnivelNeg">Desnivel negativo:</label>
+                                <input type="number" name="desnivelNeg" id="desnivelNeg" placeholder="*********">
+                            </li>
+
+                            <li>
+                                <label for="servicios">Servicios:</label>
+                                <input type="text" name="servicios" id="servicios" placeholder="*********">
+                            </li>
+
+                            <li>
+                                <label for="modalidad">Modalidad:</label>
+                                <select name="modalidad" id="modalidad">
+                                    <option value="trail">Trail</option>
+                                    <option value="maraton">Maraton</option>
+                                    <option value="ultra">Ultra</option>
+                                </select>
+                            </li>
+
+                            <li>
+                                <label for="fotosAnteriores">Fotos Anteriores:</label>
+                                <input type="file" name="fotosAnteriores" id="fotosAnteriores" placeholder="*********">
+                            </li>
+
+                        </ul>
+                        </div>
+
+                        <div id="divisoriaInferior"></div>
+
+                        <div id="envio">
+                            <input type="submit" value="Enviar">
+                        </div>
+                    
+                </div>
+            </form>
+        </main>
+
+        <footer>
+            <h2>RaceMapp</h2>
+            <div id="icons">
+                <a href="https://twitter.com/racemapp23"><i class="fa-brands fa-x-twitter"></i></a>
+                <a href="https://www.instagram.com/racemapp23/"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://www.tiktok.com/@racemapp23"><i class="fa-brands fa-tiktok"></i></a>
+            </div>
+        </footer>
+    </div>
+
+    <script src="./js/carrera.js"></script>
 
 </body>
 </html>

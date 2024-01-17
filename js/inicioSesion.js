@@ -92,25 +92,25 @@ function mostrarContrasena (e) {
 }
 
 
-fetch("http://localhost:3000/api/user/all", )
-    .then( response => {
-        console.log(response);
-        if (response.status === 200) return response.json()
-            else if (response.status === 404) console.log(response.text); 
-            else console.log("Todo mal");
-    })
-    .then( data => {
-        console.log(data);
-    })
+// fetch("http://localhost:3000/api/user/all", )
+//     .then( response => {
+//         console.log(response);
+//         if (response.status === 200) return response.json()
+//             else if (response.status === 404) console.log(response.text); 
+//             else console.log("Todo mal");
+//     })
+//     .then( data => {
+//         console.log(data);
+//     })
 
 // let user = {
-//     "name": "Juan Dominguez Prada",
-//     "username": "juanDompra",
-//     "mail": "juanin.asnd@educa.jcyl.com",
+//     "name": "Adrian Gutierrez Usoz",
+//     "username": "adrianAVeces",
+//     "mail": "adrian@hotmal.com",
 //     "pass": "pasaste",
-//     "city": "León",
+//     "city": "España",
 //     "phone": "982345200",
-//     "club": "CM Teleno",
+//     "club": "CM Teide",
 //     "rol": "organizer"
 // };
 
