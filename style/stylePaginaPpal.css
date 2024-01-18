@@ -1,0 +1,150 @@
+:root {
+    --primero: #0C7B85;
+    --segundo: #0FA3B1;
+    --tercero: #62C3D6;
+    --cuarto: #B5E2FA;
+    --quinto: #F9F7F3;
+    --sexto: #F3EBCC;
+    --septimo: #F2BF8B;
+    --octavo: #F7A072;
+    --negro: black;
+    --blanco: white;
+}
+
+#todo {
+    display: flex;
+    flex-direction: column;
+}
+
+body {
+    margin: 0;
+    font-family: 'Inknut Antiqua', serif;
+}
+
+#fotoHeader {
+    width: 110px;
+    position: relative;
+    top: 8px;
+}
+
+header {
+    background-color: var(--segundo);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    z-index: 1;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 36%;
+    height: 110px;
+}
+
+
+#icons {
+    position: relative;
+    top: 7px;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+#logoTitulo h1 {
+    position: relative;
+    top: 3px;
+}
+#links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    position: relative;
+    top: 20px;
+}
+
+footer h2{
+    position: relative;
+    left: 11.5%;
+}
+
+footer {
+    height: 80px;
+    background-color: var(--tercero);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 25%;
+    position: relative;
+    bottom: -16px;
+}
+
+#logoTitulo {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    justify-content: center;
+}
+
+i {
+    font-size: 20px;
+}
+
+#imgPerfilSuperior {
+    width: 40px;
+    height: 40px;
+}
+
+#perfil {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#contenedorCarrera {
+    width: 110%;
+    height: 703px;
+    border-radius: 30px;
+    background-color: var(--negro);
+    box-shadow: 10px 10px 10px 0px rgba(0, 0, 0, 0.25);
+    color: var(--blanco);
+    margin-top: 10px;
+}
+
+#opcionesPerfil {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0px;
+    left: 125px;
+    border-radius: 10px;
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out; 
+}
+
+.mostrar {
+    transform: translateY(40px);
+}
+
+#accesoPerfil, #cerrarSesion {
+    width: 200px;
+    height: 32px;
+    filter: drop-shadow(3px 3px 4px #9C9898);
+    background-color: var(--blanco);
+    stroke-width: 1px;
+    stroke: #000;
+    color: var(--negro);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    border: solid 0.5px var(--negro);
+}

@@ -29,7 +29,7 @@ function openModal (e) {
                     <i class="fa-solid fa-eye" id="vista"></i>
                 </div>
     
-                <span>Entrar como invitado</span>
+                <span>Entrar como <a href="./paginaPpal.html">invitado</a></span>
     
                 <input type="submit" id="botonInicio" value="Iniciar Sesión"/>
             </form>

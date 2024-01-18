@@ -235,7 +235,11 @@ li p {
     font-size: 25px;
 }
 
-/* .subrayado::before {
+#formulario a {
+    color: var(--blanco);
+}
+
+a::before {
     content: '';
     position: absolute;
     width: 100%;
@@ -248,7 +252,7 @@ li p {
     transition: all 0.3s ease-in-out;
 }
 
-.subrayado:hover::before {
+a:hover::before {
     visibility: visible;
     transform: scaleX(1);
-} */
+}
