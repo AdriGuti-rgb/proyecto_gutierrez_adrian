@@ -3,6 +3,14 @@
     Inicio de sesion 
 */
 
+html, body {
+    overflow: hidden;
+}
+
+main {
+    overflow-y: scroll;
+    
+}
 main {
     display: flex;
     flex-direction: row;

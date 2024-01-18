@@ -191,3 +191,35 @@ function mostrarContrasena (e) {
     }
         
 }
+
+
+
+document.getElementById("botonEnvio").addEventListener("click", getParams);
+
+function getParams() {
+
+    let user = {
+        "name": `${document.getElementById("nombre").value}`,
+        "username": `${document.getElementById("nombreMostrado").value}`,
+        "mail": `${document.getElementById("correo").value}`,
+        "pass": `${document.getElementById("contrasena").value}`
+    };
+
+    fetch("http://localhost:3000/api/user/register", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json;charset=utf-8"
+            },
+            body: JSON.stringify(user)
+        }).then( response => {
+            console.log(response);
+            if (response.status === 200) return response.json()
+                else if (response.status === 404) console.log(response.text); 
+                else console.log("Todo mal");
+        }).then( data => {
+            console.log(data);
+        }).catch ( error => {
+            console.log(error);
+        })
+
+}
