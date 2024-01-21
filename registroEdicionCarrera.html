@@ -42,7 +42,14 @@
 
                                 <li>
                                     <label for="categorias">Categorias:</label>
-                                    <input type="text" name="categorias" id="categorias" placeholder="adrian.gutuso@educa.jcyl.es"  pattern="[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z]" required>
+                                    <select name="categorias" id="categorias">
+                                        <option value="Cadete">Cadete 15-17 años</option>
+                                        <option value="Junior">Junior 18-20 años</option>
+                                        <option value="Sénior">Sénior 21 años</option>
+                                        <option value="Promesa">Promesa 22-39 años</option>
+                                        <option value="VeteranaA">Veterana A 40-50 años</option>
+                                        <option value="VeteranaB">Veterana B +51 años</option>
+                                    </select>
                                 </li>
 
                                 <li>
@@ -93,9 +100,10 @@
                             <li>
                                 <label for="modalidad">Modalidad:</label>
                                 <select name="modalidad" id="modalidad">
-                                    <option value="trail">Trail</option>
-                                    <option value="maraton">Maraton</option>
-                                    <option value="ultra">Ultra</option>
+                                    <option value="Trail">Trail</option>
+                                    <option value="Maratón">Maratón</option>
+                                    <option value="Media Maratón">Media Maratón</option>
+                                    <option value="Ultra">Ultra</option>
                                 </select>
                             </li>
 

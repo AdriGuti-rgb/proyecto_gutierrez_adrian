@@ -213,7 +213,10 @@ function getParams() {
             body: JSON.stringify(user)
         }).then( response => {
             console.log(response);
-            if (response.status === 200) return response.json()
+            if (response.status === 200) {
+                location.href ="http://127.0.0.1:5500/index.html";
+                return response.json()
+            }
                 else if (response.status === 404) console.log(response.text); 
                 else console.log("Todo mal");
         }).then( data => {
