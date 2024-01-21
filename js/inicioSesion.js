@@ -163,36 +163,73 @@ function mostrarContrasena (e) {
 //         })
 // }
 
+// document.getElementById("photos").addEventListener("click", getParams);
+
+// function getParams() {
+
+//     let user = {
+//         "username": `${document.getElementById("nombre").value}`,
+//         "pass": `${document.getElementById("contrasena").value}`
+//     };
+
+
+//     fetch("http://localhost/php/proyecto/api/users/getUser.php", {
+//             method: "POST",
+//             headers: {
+//                 "Content-Type": "application/json;charset=utf-8"
+//             },
+//             mode: "cors",
+//             body: JSON.stringify(user)
+//         }).then( response => {
+//             // console.log(response);
+//             if (response.status === 200) return response.json()
+//                 else if (response.status === 404) alert(response.text); 
+//                 else alert("Todo mal");
+//         }).then( data => {
+//             console.log(data);
+//             localStorage.setItem('token', data.token);
+//             localStorage.setItem('token', data.username);
+//         }).catch ( error => {
+//             console.log(error);
+//         })
+// }
+
 document.getElementById("photos").addEventListener("click", getParams);
 
 function getParams() {
-
     let user = {
-        "username": `${document.getElementById("nombre").value}`,
-        "pass": `${document.getElementById("contrasena").value}`
+        "username": document.getElementById("nombre").value,
+        "pass": document.getElementById("contrasena").value
     };
 
 
+    // console.log(user);
+
     fetch("http://localhost/php/proyecto/api/users/getUser.php", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json;charset=utf-8"
-            },
-            mode: "cors",
-            body: JSON.stringify(user)
-        }).then( response => {
-            // console.log(response);
-            if (response.status === 200) return response.json()
-                else if (response.status === 404) alert(response.text); 
-                else alert("Todo mal");
-        }).then( data => {
-            console.log(data);
-            localStorage.setItem('token', data.token);
-            localStorage.setItem('token', data.username);
-        }).catch ( error => {
-            console.log(error);
-        })
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json;charset=utf-8"
+        },
+        mode: "cors",
+        body: JSON.stringify(user)
+    }).then( response => {
+        if (response.status === 200) {
+            console.log(response);
+            return response.json()
+            // return JSON.parse(response);
+        }
+            else if (response.status === 404) alert(response.statusText)
+            else throw new Error("Hubo un problema con la solicitud")
+    }).then(data => {
+        console.log(data);
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('username', data.username);
+        localStorage.setItem("rol", data.rol);
+    }).catch(error => {
+        console.error(error);
+    });
 }
+
         
 // document.getElementById("photos").addEventListener("click", getParams);
 

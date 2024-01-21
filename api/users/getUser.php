@@ -4,6 +4,7 @@
     $con = new Conexion();
     $idAlfanumerico;
     $username;
+    $rol;
 
     if ($_SERVER["REQUEST_METHOD"] === "OPTIONS") {
         header("Access-Control-Allow-Origin: *");
@@ -17,6 +18,7 @@
     header("Access-Control-Allow-Origin: *");
     header("Access-Control-Allow-Methods: POST, OPTIONS");
     header("Access-Control-Allow-Headers: Content-Type");
+    header('Content-Type: application/json');
 
 
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -24,44 +26,51 @@
             $sql = "SELECT * FROM users";
             $resultado = $con->query($sql);
             $users = $resultado->fetch_all(MYSQLI_ASSOC);
+            $exists = false;
             
             header("HTTP/1.1 200 OK");
 
-            // echo $_POST["username"];
-            // echo $_POST["pass"];
+            echo $_SERVER["username"];
+            echo $_SERVER["pass"];
 
-            foreach ($users as $key => $value) {
-                foreach ($value as $clave => $valor) {
-                    // echo $value["username"];
-                    if ($value["username"] == $_POST["username"]
-                        && $value["pass"] == $_POST["pass"]) {
-                            // echo "$valor <br>";
-                            $idAlfanumerico = $value["id"];
-                            $username = $value["username"];
-                    }
+            // foreach ($users as $key => $value) {
+            //     foreach ($value as $clave => $valor) {
+            //         if ($value["username"] == $_POST["username"]
+            //             && $value["pass"] == $_POST["pass"]) {
+            //                 $idAlfanumerico = $value["id"];
+            //                 $username = $value["username"];
+            //                 $rol = $value["rol"];
 
-                    // echo "Clave $clave: $valor <br>";
-                    // echo "Valor $valor <br>";
-                }
-            }
+            //                 $exists = true;
 
-            $key = "tu_clave_secreta";
-            $payload = array(
-                "user_id" => $idAlfanumerico,
-                "username" => $username,
-                "exp" => time() + 3600
-            );
+            //                 $key = uniqid();
+            //                 $payload = array(
+            //                     "user_id" => $idAlfanumerico,
+            //                     "username" => $username,
+            //                     "exp" => time() + 3600
+            //                 );
+                            
+            //                 $jwt = generateJWT($payload, $key);
+                            
+            //                 $tokenFinal = array(
+            //                     'username' => "$username",
+            //                     'token' => "$jwt",
+            //                     'rol' => "$rol"
+            //                 );
+                            
+            //                 // print_r ($tokenFinal);
+            //                 echo json_encode($tokenFinal);
+            //                 // echo json_encode($users);
+            //         }
+            //         break;
+            //     }
+            // }
+
+            // if (!$exists) echo json_encode(array("error" => "Credenciales inválidas."));
             
-            $jwt = generateJWT($payload, $key);
-            
-            $tokenFinal = array(
-                "username" => $username,
-                "token" => $jwt
-            );
-            
-            echo json_encode($tokenFinal);
-
+            // echo json_encode (["id" => $idAlfanumerico, "username" => $username, "rol" => $rol]);
             // echo json_encode($users);
+
             
         } catch (mysqli_sql_exception $e) {
             header("HTTP/1.1 404 Not Found");
@@ -88,8 +97,5 @@
 
         return $token;
     }
-
-
-    
     
 ?>
