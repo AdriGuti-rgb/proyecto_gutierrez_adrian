@@ -14,7 +14,7 @@ CREATE TABLE users (
     phone FLOAT(9) DEFAULT NULL,
     club VARCHAR(100) DEFAULT NULL,
     photo VARCHAR(100),
-    rol ENUM("Anonimous", "User", "Organizer")
+    rol ENUM("User", "Organizer")
 );
 
 CREATE TABLE races (

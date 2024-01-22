@@ -28,7 +28,9 @@
             $users = $resultado->fetch_all(MYSQLI_ASSOC);
             $exists = false;
             
-            header("HTTP/1.1 200 OK");
+            header("HTTP/1.1 200 OK");  
+
+            echo $_SERVER["user"];
 
             echo $_SERVER["username"];
             echo $_SERVER["pass"];

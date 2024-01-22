@@ -1,11 +1,13 @@
-/* Modal inicio de sesión */
+let form;
+let send; 
 
+/* Modal inicio de sesión */
 document.getElementById("abrirModal").addEventListener("click", openModal);
 
 function openModal (e) {
     let photos = document.getElementById("photos");
     
-    if (document.getElementById("inicioSesion") != null) inicioSesion.remove();
+    if (document.getElementById("inicioSesion") != null) document.getElementById("inicioSesion").remove();
 
     let inicioSesion = document.createElement("div");
     inicioSesion.id = "inicioSesion";
@@ -15,7 +17,7 @@ function openModal (e) {
         </div>
     
         <div id="formulario"> 
-            <form action="./index.html" method="get">
+            <form action="" method="post" name="login">
                 <h2>Inicio sesión</h2>
                 <div id="divisoriaSuperior"></div>
                 <div class="campos">
@@ -29,9 +31,9 @@ function openModal (e) {
                     <i class="fa-solid fa-eye" id="vista"></i>
                 </div>
     
-                <span>Entrar como <a href="./paginaPpal.html">invitado</a></span>
+                <span>Entrar como <a href="./paginaPpal.html" id="anonimo">invitado</a></span>
     
-                <input type="submit" id="botonInicio" value="Iniciar Sesión"/>
+                <input type="submit" id="botonInicio" value="Iniciar Sesión" name="send"/>
             </form>
         </div>
     
@@ -45,12 +47,16 @@ function openModal (e) {
         <div id="noCuenta"><span>¿Aún no tienes cuenta? <a href="./registro.html">Resgistrate</a></span></div>
     `;
     photos.parentNode.append(inicioSesion);
+    form = document.forms.login;
+    send = form.elements.send;
+    send.addEventListener("click", getParams);
     document.getElementById("vista").addEventListener("click", mostrarContrasena);
+    document.getElementById("anonimo").addEventListener("click", () => {
+        localStorage.setItem("rol", "Anonimous");
+    });
 
     if (document.getElementById("cerrar") != null) document.getElementById("cerrar").addEventListener("click", () => inicioSesion.remove());
-
 }
-
 
 /*  Botones pasar foto */  
 let anterior = document.querySelector("#anterior");
@@ -88,179 +94,56 @@ function mostrarContrasena (e) {
         e.target.classList.add("fa-eye");
         e.target.classList.remove("fa-eye-slash");
     }
-        
 }
 
+localStorage.clear();
 
-// fetch("http://localhost:3000/api/user/all", )
-//     .then( response => {
-//         console.log(response);
-//         if (response.status === 200) return response.json()
-//             else if (response.status === 404) console.log(response.text); 
-//             else console.log("Todo mal");
-//     })
-//     .then( data => {
-//         console.log(data);
-//     })
+function getParams(e) {
+    e.preventDefault();
 
-// let user = {
-//     "name": "Adrian Gutierrez Usoz",
-//     "username": "adrianAVeces",
-//     "mail": "adrian@hotmal.com",
-//     "pass": "pasaste",
-//     "city": "España",
-//     "phone": "982345200",
-//     "club": "CM Teide",
-//     "rol": "organizer"
-// };
-
-// fetch("http://localhost:3000/api/user/register", {
-//         method: "POST",
-//         headers: {
-//             "Content-Type": "application/json;charset=utf-8"
-//         },
-//         body: JSON.stringify(user)
-//     }).then( response => {
-//         console.log(response);
-//         if (response.status === 200) return response.json()
-//             else if (response.status === 404) console.log(response.text); 
-//             else console.log("Todo mal");
-//     }).then( data => {
-//         console.log(data);
-//     }).catch ( error => {
-//         console.log(error);
-//     })
-
-// let token;
-// document.getElementById("photos").addEventListener("click", getParams);
-
-// function getParams() {
-
-//     let user = {
-//         "username": `${document.getElementById("nombre").value}`,
-//         "pass": `${document.getElementById("contrasena").value}`
-//     };
-
-
-//     fetch("http://localhost:3000/api/auth/login", {
-//             method: "POST",
-//             headers: {
-//                 "Content-Type": "application/json;charset=utf-8"
-//             },
-//             body: JSON.stringify(user)
-//         }).then( response => {
-//             // console.log(response);
-//             if (response.status === 200) return response.json()
-//                 else if (response.status === 404) alert(response.text); 
-//                 else alert("Todo mal");
-//         }).then( data => {
-//             token = data.token;
-//             console.log(data);
-//             localStorage.setItem('token', token);
-//             console.log(localStorage.getItem('token'));
-//         }).catch ( error => {
-//             console.log(error);
-//         })
-// }
-
-// document.getElementById("photos").addEventListener("click", getParams);
-
-// function getParams() {
-
-//     let user = {
-//         "username": `${document.getElementById("nombre").value}`,
-//         "pass": `${document.getElementById("contrasena").value}`
-//     };
-
-
-//     fetch("http://localhost/php/proyecto/api/users/getUser.php", {
-//             method: "POST",
-//             headers: {
-//                 "Content-Type": "application/json;charset=utf-8"
-//             },
-//             mode: "cors",
-//             body: JSON.stringify(user)
-//         }).then( response => {
-//             // console.log(response);
-//             if (response.status === 200) return response.json()
-//                 else if (response.status === 404) alert(response.text); 
-//                 else alert("Todo mal");
-//         }).then( data => {
-//             console.log(data);
-//             localStorage.setItem('token', data.token);
-//             localStorage.setItem('token', data.username);
-//         }).catch ( error => {
-//             console.log(error);
-//         })
-// }
-
-document.getElementById("photos").addEventListener("click", getParams);
-
-function getParams() {
+    // let username = form.elements.nombre;
+    // let pass = form.elements.contrasena;
+    
+    let username = document.getElementById("nombre").value;
+    let pass = document.getElementById("contrasena").value;
     let user = {
-        "username": document.getElementById("nombre").value,
-        "pass": document.getElementById("contrasena").value
+        "username": username,
+        "pass": pass
     };
 
-
-    // console.log(user);
-
-    fetch("http://localhost/php/proyecto/api/users/getUser.php", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json;charset=utf-8"
-        },
-        mode: "cors",
-        body: JSON.stringify(user)
-    }).then( response => {
-        if (response.status === 200) {
-            console.log(response);
-            return response.json()
-            // return JSON.parse(response);
+    if (username == "" || pass == "") putErrors("Rellene todos los campos")
+        else {
+            fetch("http://localhost/php/proyecto/api/users/login/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json;charset=utf-8"
+                },
+                mode: "cors",
+                body: JSON.stringify(user)
+            }).then( response => {
+                if (response.status === 200) return response.json()
+                    else if (response.status === 404) alert(response.statusText)
+                    else throw new Error("Hubo un problema con la solicitud")
+            }).then(data => {
+                console.log(data);
+                let arrayDevuelto = Object.keys(data);
+        
+                if (arrayDevuelto.length == 1) putErrors(data.error)
+                    else {
+                        localStorage.setItem('token', data.token);
+                        localStorage.setItem('username', data.username);
+                        localStorage.setItem("rol", data.rol);
+                        location.href ="http://localhost/php/proyecto/paginaPpal.html";
+                }
+            }).catch(error => console.error(error));
         }
-            else if (response.status === 404) alert(response.statusText)
-            else throw new Error("Hubo un problema con la solicitud")
-    }).then(data => {
-        console.log(data);
-        localStorage.setItem('token', data.token);
-        localStorage.setItem('username', data.username);
-        localStorage.setItem("rol", data.rol);
-    }).catch(error => {
-        console.error(error);
-    });
 }
 
-        
-// document.getElementById("photos").addEventListener("click", getParams);
-
-// function getParams() {
-
-//     fetch("http://localhost/php/proyecto/api/users/getUser.php", )
-//         .then( response => {
-//             console.log(response);
-//             if (response.status === 200) return response.json()
-//                 else if (response.status === 404) alert(response.statusText)
-//                 else console.log("Todo mal");
-//         })
-//         .then( data => {
-//             let exists = false;
-//             data.forEach(item => {
-//                 if (item.username == document.getElementById("nombre").value
-//                     && item.pass == document.getElementById("contrasena").value) {
-//                         localStorage.setItem("token", item.username);
-//                         localStorage.setItem("rol", item.rol);
-//                         location.href ="http://localhost/php/proyecto/paginaPpal.html";
-//                         exists = true;
-//                 } 
-//             });
-
-//             if (!exists) {
-//                 // let div = document.createElement("div");
-//                 // div.id = "error";
-//                 // let main = document.getElementsByTagName("main");
-//                 // div.innerHTML = "No se ha encontrado ningun usuario, revise los datos";
-//                 // main[0].append(div);
-//                 alert("No se ha encontrado ningun usuario, revise los datos");
-//             }
-//         })
-// }
+function putErrors (error) {
+    if (document.getElementById("error") != null) document.getElementById("error").remove();
+    let div = document.createElement("div");
+    div.id = "error";
+    let main = document.getElementsByTagName("main");
+    div.innerHTML = `${error}`;
+    main[0].append(div);
+}

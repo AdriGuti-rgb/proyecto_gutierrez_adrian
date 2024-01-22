@@ -9,7 +9,7 @@ function toggleMenu() {
         div.classList.add("mostrar")
         div.innerHTML = `
             <div id="accesoPerfil">
-                <span>Perfil</span>
+                <span><a href="./perfil.html">Perfil</a></span>
             </div>
             <div id="cerrarSesion">
                 <span>Cerrar sesión</span>
