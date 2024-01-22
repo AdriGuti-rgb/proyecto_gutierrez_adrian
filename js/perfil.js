@@ -1,37 +1,23 @@
-document.getElementById("localidad").addEventListener("click", anadirLocalidades);
+if (localStorage.getItem("rol") == "Anonimous") /* location.href = "./paginaPpal.html"; */ console.log(hola);
 
 function anadirLocalidades (e) {
-let localidades = [];
+    let localidades = [];
 
-if (localidades.length == 0) data.forEach( item => item.provinces.forEach( itemProvinces => localidades.push(itemProvinces.label)));
+    if (localidades.length == 0) data.forEach( item => item.provinces.forEach( itemProvinces => localidades.push(itemProvinces.label)));
 
-localidades
-    .sort( (a, b) => a > b)
-    .forEach( (item, index) => {
-        let selected = false;
+    localidades
+        .sort( (a, b) => a > b)
+        .forEach( (item, index) => {
+            let selected = false;
 
-        if (index == 0) selected = true;
-        
-        let option = new Option(item, item, false, selected);
-        e.target.append(option)
-    });
+            if (index == 0) selected = true;
+            
+            let option = new Option(item, item, false, selected);
+            e.target.append(option)
+        });
 
-e.target.removeEventListener("click", anadirLocalidades)
+    e.target.removeEventListener("click", anadirLocalidades)
 }
-
-// Obtener el elemento
-var opcionesPerfil = document.getElementById('opcionesPerfil');
-
-// Función para mostrar u ocultar el menú
-function toggleMenu() {
-    opcionesPerfil.classList.toggle('mostrar');
-}
-
-var botonMostrarOpciones = document.getElementById('perfil');
-botonMostrarOpciones.addEventListener('click', toggleMenu);
-
-
-document.getElementById("vista").addEventListener("click", mostrarContrasena);
 
 function mostrarContrasena (e) {
     let contrasenaInput = document.getElementById("contrasena");
@@ -47,3 +33,8 @@ function mostrarContrasena (e) {
     }
         
 }
+
+/* Listeners */
+
+document.getElementById("vista").addEventListener("click", mostrarContrasena);
+document.getElementById("localidad").addEventListener("click", anadirLocalidades);

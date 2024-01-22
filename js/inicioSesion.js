@@ -55,7 +55,10 @@ function openModal (e) {
         localStorage.setItem("rol", "Anonimous");
     });
 
-    if (document.getElementById("cerrar") != null) document.getElementById("cerrar").addEventListener("click", () => inicioSesion.remove());
+    if (document.getElementById("cerrar") != null) document.getElementById("cerrar").addEventListener("click", () => {
+            inicioSesion.remove()
+            document.getElementById("error").remove();
+        });
 }
 
 /*  Botones pasar foto */  
@@ -126,12 +129,14 @@ function getParams(e) {
                     else throw new Error("Hubo un problema con la solicitud")
             }).then(data => {
                 console.log(data);
+                
                 let arrayDevuelto = Object.keys(data);
         
                 if (arrayDevuelto.length == 1) putErrors(data.error)
                     else {
                         localStorage.setItem('token', data.token);
                         localStorage.setItem('username', data.username);
+                        localStorage.setItem('name', data.name);
                         localStorage.setItem("rol", data.rol);
                         location.href ="http://localhost/php/proyecto/paginaPpal.html";
                 }

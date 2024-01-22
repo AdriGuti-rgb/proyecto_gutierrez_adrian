@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inknut+Antiqua:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="./img/Logotipo.jpeg" type="image/x-icon">
     <title>RaceMapp | Perfil</title>
 </head>
 <body>
@@ -17,8 +18,8 @@
             <a href="./paginaPpal.html"><img src="./img/Logotipo-removebg-preview.png" alt="Logotipo" title="Logotipo de la aplicación"  id="fotoHeader"></a>
             <h1>RaceMapp</h1>
             <div id="links">
-                <a href="./registroEdicionCarrera.html"><p>Crear carrera</p></a>
-                <p>Adrian Gutiérrez</p>
+                <a href="./registroEdicionCarrera.html" id="crearCarrera"><p>Crear carrera</p></a>
+                <p id="nombreLocal"></p>
                 <div id="perfil">
                     <img src="./img/fotoPerfil.png" alt="Foto Perfil" id="imgPerfilSuperior">
                     <i class="fa-solid fa-caret-down" id="datosPerfil"></i>
@@ -34,14 +35,6 @@
                     <div id="fotoGrande">
                         <span>Foto perfil: </span>
                         <img src="./img/fotoPerfil.png" alt="Foto perfil" id="fotoPerfilGrande">
-                    </div>
-                    <div id="opcionesPerfil">
-                        <div id="accesoPerfil">
-                            <span>Perfil</span>
-                        </div>
-                        <div id="cerrarSesion">
-                            <span>Cerrar sesión</span>
-                        </div>
                     </div>
                 </div>
 
@@ -124,7 +117,7 @@
 
     <script src="./js/perfil.js"></script>
     <script src="./js/localidades.js"></script>
-
+    <script src="./js/opcionesPerfil.js"></script>
 
 </body>
 </html>

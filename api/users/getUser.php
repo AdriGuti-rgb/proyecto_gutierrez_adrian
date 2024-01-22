@@ -70,8 +70,6 @@
 
             // if (!$exists) echo json_encode(array("error" => "Credenciales inválidas."));
             
-            // echo json_encode (["id" => $idAlfanumerico, "username" => $username, "rol" => $rol]);
-            // echo json_encode($users);
 
             
         } catch (mysqli_sql_exception $e) {

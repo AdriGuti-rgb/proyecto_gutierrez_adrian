@@ -125,7 +125,7 @@ main {
     flex-direction: column;
     position: absolute;
     top: 0px;
-    left: 125px;
+    left: 255px;
     border-radius: 10px;
     transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out; 
 }

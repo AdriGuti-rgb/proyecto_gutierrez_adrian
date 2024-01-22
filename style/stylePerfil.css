@@ -193,19 +193,14 @@ li:hover {
     display: flex;
     flex-direction: column;
     position: absolute;
-    top: -20px;
-    right: 10px;
-    padding: 10px;
+    top: 20px;
+    left: 290px;
     border-radius: 10px;
-    z-index: 1;
-    opacity: 0; /* Inicialmente invisible */
     transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out; 
-    transform: translateY(-20px); /* Mover hacia arriba */
 }
 
-#opcionesPerfil.mostrar {
-    opacity: 1; /* Hacer visible cuando tiene la clase "mostrar" */
-    transform: translateY(0); /* Mover a la posición original */
+.mostrar {
+    transform: translateY(40px);
 }
 
 #accesoPerfil, #cerrarSesion {

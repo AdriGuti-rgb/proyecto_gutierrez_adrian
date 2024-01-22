@@ -41,16 +41,16 @@
             <div id="formularioNormal">
                 <span>Normal</span>
                 
-                    <form action="./php/post/insertUser.php" method="post">
+                    <form action="" method="post" name="login">
                         <ul>
                             <div id="camposNormal">
                             <li>
                                 <label for="nombre">Nombre de usuario:</label>
-                                <input type="text" name="nombre" id="nombre">
+                                <input type="text" name="nombre" id="nombre" required>
                             </li>
                             <li>
                                 <label for="nombreMostrado">Nombre que se mostrará:</label>
-                                <input type="text" name="nombreMostrado" id="nombreMostrado">
+                                <input type="text" name="nombreMostrado" id="nombreMostrado" required>
                             </li>
                             <li>
                                 <label for="correo">Correo electrónico:</label>
@@ -63,22 +63,20 @@
                             </li>
                             <li>
                                 <label for="fotoPerfil">Imagen de perfil:</label>
-                                <input type="file" name="fotoPerfil" id="fotoPerfil">
+                                <input type="file" name="fotoPerfil" id="fotoPerfil" required>
                             </li>
                             <li>
                                 <label for="localidad">Localidad:</label>
-                                <select name="localidad" id="localidadNormal">
+                                <select name="localidad" id="localidadNormal" required>
                                     <option value="">Seleccione una localidad</option>
                                 </select>
                             </li>
                         </div>
                         </ul>
-                        <input type="submit" value="Enviar">
+                        <input type="submit" value="Enviar" name="send">
                     </form>
             </div>
         </div>
-
-        <div id="botonEnvio" style="width: 200px; height: 100px; background-color:red"></div>
     </main>
         
     <footer>

@@ -4,7 +4,6 @@
     $con = new Conexion();
     $idAlfanumerico;
     $username;
-    $rol;
 
     if ($_SERVER["REQUEST_METHOD"] === "OPTIONS") {
         header("Access-Control-Allow-Origin: *");
@@ -46,7 +45,16 @@
                         && $value["pass"] == $datos["pass"]) {
                             $idAlfanumerico = $value["id"];
                             $username = $value["username"];
-                            $rol = $value["rol"];
+                            $name = $value["name"];
+
+                            $queryOrganizer = "SELECT *
+                                                FROM organizers
+                                                LEFT JOIN users ON users.id = organizers.id_user
+                                                WHERE users.id = '$idAlfanumerico'";
+                            $resultOrganizer = $con->query($queryOrganizer);
+
+                            $numRows = $resultOrganizer->num_rows;
+                            $rol = ($numRows > 0) ? "Organizer" : "User";
 
                             $exists = true;
 
@@ -62,14 +70,15 @@
                             $tokenFinal = array(
                                 'username' => "$username",
                                 'token' => "$jwt",
-                                'rol' => "$rol"
+                                'rol' => $rol,
+                                'name' => $name
                             );
                             
                             echo json_encode($tokenFinal);
                 }
             }
             
-            if (!$exists) echo json_encode(array("error" => "Credenciales inválidas."));
+            if (!$exists) echo json_encode(array("error" => "Credenciales inválidas"));
    
         } catch (mysqli_sql_exception $e) {
             header("HTTP/1.1 404 Not Found");

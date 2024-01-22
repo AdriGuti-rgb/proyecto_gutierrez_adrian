@@ -267,7 +267,7 @@ a:hover::before {
     height: fit-content;
     position: relative;
     top: 98px;
-    right: 150px;
+    right: 165px;
     display: flex;
     align-items: center;
     justify-content: center;

@@ -218,3 +218,32 @@ li:hover {
     background-color: rgba(255, 255, 255, 0.15);
     border-radius: 20px;
 }
+
+#opcionesPerfil {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0px;
+    left: 210px;
+    border-radius: 10px;
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out; 
+}
+
+.mostrar {
+    transform: translateY(40px);
+}
+
+#accesoPerfil, #cerrarSesion {
+    width: 200px;
+    height: 32px;
+    filter: drop-shadow(3px 3px 4px #9C9898);
+    background-color: var(--blanco);
+    stroke-width: 1px;
+    stroke: #000;
+    color: var(--negro);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    border: solid 0.5px var(--negro);
+}
