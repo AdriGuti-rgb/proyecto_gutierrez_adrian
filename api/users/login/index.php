@@ -1,9 +1,12 @@
 <?php
 
+    use Firebase\JWT\JWT;
+    require '../../jwt/vendor/autoload.php';
     require_once "../../conexion.php";
     $con = new Conexion();
     $idAlfanumerico;
     $username;
+    session_start();
 
     if ($_SERVER["REQUEST_METHOD"] === "OPTIONS") {
         header("Access-Control-Allow-Origin: *");
@@ -59,13 +62,17 @@
                             $exists = true;
 
                             $key = uniqid();
+                            
                             $payload = array(
                                 "user_id" => $idAlfanumerico,
                                 "username" => $username,
                                 "exp" => time() + 3600
                             );
-                            // $_GET["key"] = $key;
-                            $jwt = generateJWT($payload, $key);
+                            
+                            $_SESSION['key'] = $key;
+                            $jwt = JWT::encode($payload, $key, 'HS256');                             
+
+                            // $jwt = generateJWT($payload, $key);
                             
                             $tokenFinal = array(
                                 'username' => "$username",

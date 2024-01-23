@@ -118,7 +118,7 @@ input,select {
     font-family: 'Inknut Antiqua', serif;
 }
 
-input[type="submit"] {
+#contenedorPerfil input[type="submit"] {
     width: 172px;
     height: 40px;
     background-color: var(--primero);
@@ -229,4 +229,33 @@ ul {
     right: 10px;
     cursor: pointer;
     font-size: 25px;
+}
+
+#confirmacion {
+    display: flex;
+    background-color: lightslategray;
+    border-radius: 20px;
+    align-items: flex-start;
+    justify-content: center;
+    position: absolute;
+    width: 40%;
+    height: 40%;
+    top: 35%;
+    font-size: 1.5em;
+    flex-direction: column;
+}
+
+#confirmacion span {
+     text-align: center;
+}
+
+
+#confirmacion input[type="submit"] {
+    width: 172px;
+    height: 40px;
+    background-color: var(--primero);
+    box-shadow: none;
+    border-color: var(--negro);
+    position: relative;
+    left: 35%;
 }

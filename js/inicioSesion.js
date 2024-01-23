@@ -127,9 +127,7 @@ function getParams(e) {
                 if (response.status === 200) return response.json()
                     else if (response.status === 404) alert(response.statusText)
                     else throw new Error("Hubo un problema con la solicitud")
-            }).then(data => {
-                console.log(data);
-                
+            }).then(data => {                
                 let arrayDevuelto = Object.keys(data);
         
                 if (arrayDevuelto.length == 1) putErrors(data.error)

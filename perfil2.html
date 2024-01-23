@@ -4,29 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style/style.css">
-    <link rel="stylesheet" href="./style/stylePerfil.css">
+    <link rel="stylesheet" href="./style/stylePerfil2.css">
     <script src="https://kit.fontawesome.com/a1e1584c46.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inknut+Antiqua:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="./img/Logotipo.jpeg" type="image/x-icon">
-    <title>RaceMapp | Perfil</title>
+    <title>RaceMapp | Perfil2</title>
 </head>
 <body>
+
     <div id="todo">
-        <header>
-            <a href="./paginaPpal.html"><img src="./img/Logotipo-removebg-preview.png" alt="Logotipo" title="Logotipo de la aplicación"  id="fotoHeader"></a>
-            <h1>RaceMapp</h1>
-            <div id="links">
-                <a href="./registroEdicionCarrera.html" id="crearCarrera"><p>Crear carrera</p></a>
-                <p id="nombreLocal"></p>
-                <div id="perfil">
-                    <img src="./img/fotoPerfil.png" alt="Foto Perfil" id="imgPerfilSuperior">
-                    <i class="fa-solid fa-caret-down" id="datosPerfil"></i>
+            <header>
+                <div id="logoTitulo">
+                    <a href="./paginaPpal.html"><img src="./img/Logotipo-removebg-preview.png" alt="Logotipo" title="Logotipo de la aplicación"  id="fotoHeader"></a>
+                    <h1>RaceMapp</h1>
                 </div>
-            </div>
-            
-        </header>
+                <div id="links">
+                    <span><a href="./registroEdicionCarrera.html" id="crearCarrera">Crear Carrera</a></span>
+                    <span id="nombreLocal"></span>
+                    <div id="perfil">
+                        <img src="./img/fotoPerfil.png" alt="Foto Perfil" id="imgPerfilSuperior">
+                        <i class="fa-solid fa-caret-down"></i>
+                    </div>
+                </div>
+            </header>
 
         <main>
             <div id="contenedorPerfil">
@@ -38,17 +40,17 @@
                     </div>
                 </div>
 
-                <form action="" method="post" name="login" autocomplete="off">
+                <form action="./perfil.html" method="get">
                     <div id="formulario">
                         <ul id="primeraParte">
                                 <li>
                                     <label for="nombreUsuario">Nombre de usuario:</label>
-                                    <input type="text" name="nombreUsuario" id="nombreUsuario">
+                                    <input type="text" name="nombreUsuario" id="nombreUsuario" placeholder="adrianGuti">
                                 </li>
 
                                 <li>
                                     <label for="correo">Correo electrónico:</label>
-                                    <input type="text" name="correo" id="correo" pattern="[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z]" required>
+                                    <input type="text" name="correo" id="correo" placeholder="adrian.gutuso@educa.jcyl.es"  pattern="[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z]" required>
                                 </li>
 
                                 <li>
@@ -58,7 +60,7 @@
 
                                 <li id="entidadTelefono">
                                     <label for="telefono">Teléfono:</label>
-                                    <input type="tel" name="telefono" id="telefono">
+                                    <input type="tel" name="telefono" id="telefono" placeholder="987 662 872">
                                 </li>
                         </ul>
                         
@@ -67,7 +69,7 @@
                         <ul id="segundaParte">
                             <li>
                                 <label for="nombreMostrado">Nombre mostrado:</label>
-                                <input type="text" name="nombreMostrado" id="nombreMostrado">
+                                <input type="text" name="nombreMostrado" id="nombreMostrado" placeholder="AdriGuti">
                             </li>
 
                             <li>
@@ -79,13 +81,13 @@
                             <li>
                                 <label for="localidad">Localidad:</label>
                                 <select name="localidad" id="localidad">
-                                    <option value=""></option>
+                                    <option value="">León</option>
                                 </select>
                             </li>
 
                             <li id="telefonoEntidad">
                                 <label for="entidad">Entidad organizadora:</label>
-                                <input type="text" name="entidad" id="entidad">
+                                <input type="text" name="entidad" id="entidad" placeholder="Ninguna">
                             </li>
                         </ul>
                     </div>
@@ -95,7 +97,7 @@
                         <label for="baja">Darse de baja</label>
                     </div>
 
-                    <input type="submit" value="Enviar" name="send">
+                    <input type="submit" value="Enviar">
                 </form>
 
                 <div id="divisoriaSuperior"></div>
@@ -103,7 +105,6 @@
 
             </div>
         </main>
-
         <footer>
             <h2>RaceMapp</h2>
             <div id="icons">
@@ -112,14 +113,11 @@
                 <a href="https://www.tiktok.com/@racemapp23"><i class="fa-brands fa-tiktok"></i></a>
             </div>
         </footer>
-
     </div>
 
     <script src="./js/perfil.js"></script>
     <script src="./js/localidades.js"></script>
     <script src="./js/opcionesPerfil.js"></script>
-
-    
 
 </body>
 </html>

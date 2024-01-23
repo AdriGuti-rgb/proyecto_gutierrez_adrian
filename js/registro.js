@@ -230,8 +230,8 @@ function getParams(e) {
         user = {
             "name": `${name}`,
             "username": `${username}`,
-            "mail": `${pass}`,
-            "pass": `${mail}`,
+            "mail": `${mail}`,
+            "pass": `${pass}`,
             "photo": `${photo}`,
             "city": `${city}`,
             "phone": `${form.elements.telefono.value}`,
