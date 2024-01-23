@@ -64,7 +64,7 @@
                                 "username" => $username,
                                 "exp" => time() + 3600
                             );
-                            
+                            // $_GET["key"] = $key;
                             $jwt = generateJWT($payload, $key);
                             
                             $tokenFinal = array(

@@ -1,4 +1,4 @@
-if (localStorage.getItem("rol") == "Anonimous") /* location.href = "./paginaPpal.html"; */ console.log(hola);
+if (localStorage.getItem("rol") == "Anonimous") location.href = "./paginaPpal.html";
 
 function anadirLocalidades (e) {
     let localidades = [];
@@ -38,3 +38,23 @@ function mostrarContrasena (e) {
 
 document.getElementById("vista").addEventListener("click", mostrarContrasena);
 document.getElementById("localidad").addEventListener("click", anadirLocalidades);
+
+fetch("http://localhost/php/proyecto/api/users/profile/", {
+        headers: {
+            Authorization: `${localStorage.getItem("token")}`
+        }
+    })
+    .then( response => {
+        console.log(response);
+        if (response.status === 200) return response.json()
+            else if (response.status === 404) alert(response.statusText)
+            else console.log("Todo mal");
+    })
+    .then( data => {
+        
+        console.log(data);
+
+        if (!exists) {
+            alert("No se ha encontrado ningun usuario, revise los datos");
+        }
+    })

@@ -18,9 +18,7 @@
     header('Content-Type: application/json');
 
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
-        try {
-            header("HTTP/1.1 200 OK");
-            
+        try {            
             $json_data = file_get_contents("php://input");
             $data = json_decode($json_data, true);
             
@@ -31,17 +29,6 @@
             $photo = $data['photo'];
             $city = $data['city'];
 
-            // $datos = array(
-            //     "name" => $name,
-            //     "username" => $username,
-            //     "mail" => $mail,
-            //     "pass" => $pass,
-            //     "photo" => $photo,
-            //     "city" => $city
-            // );
-
-            // echo json_encode($datos);
-
             $uniqid = uniqid();
             $hash = md5($uniqid);
             $idAlfanumerico = substr($hash, 0, 20); 
@@ -49,6 +36,8 @@
                     INSERT INTO users (id, name, username, mail, pass, city, photo)
                     VALUES ('$idAlfanumerico', '$name', '$username', '$mail', '$pass', '$city', '$photo')
                 ";
+            
+                $con->query($sqlNormal);
                 
             if (isset($data['phone']) && isset($data['club'])) {
                 $phone = $data['phone'];
@@ -60,17 +49,18 @@
                 $con->query($sqlOrganizer);
             }
 
-            $con->query($sqlNormal);
             header("HTTP/1.1 201 Created");
 
-            echo json_encode(array("message" => "Usuario creado exitosamente", "user_id" => $idAlfanumerico));
+            echo json_encode(array("message" => "Usuario creado"));
 
         } catch (mysqli_sql_exception $e) {
-            echo json_encode(array("error" => $e->getMessage()));
+            echo json_encode(array("message" => "Error de los datos"));
             header("HTTP/1.1 404 Not Found");
         }
     } else {
         header("HTTP/1.1 400 Bad request");
     }
+
+    
     
 ?>

@@ -248,19 +248,19 @@ function getParams(e) {
         body: JSON.stringify(user)
     }).then( response => {
         if (response.status === 201) return response.json()
-            else if (response.status === 404) alert(response.statusText)
-            else throw new Error("Hubo un problema con la solicitud")
+            else putErrors("Error en los datos")
     }).then(data => {
-console.log(data);
-        // let arrayDevuelto = Object.keys(data);
+        if (data.message == "Usuario creado") location.href ="http://localhost/php/proyecto/index.html"; 
+            else putErrors(data.message)
 
-        // if (arrayDevuelto.length == 1) putErrors(data.error)
-        //     else {
-        //         localStorage.setItem('token', data.token);
-        //         localStorage.setItem('username', data.username);
-        //         localStorage.setItem('name', data.name);
-        //         localStorage.setItem("rol", data.rol);
-        //         location.href ="http://localhost/php/proyecto/paginaPpal.html";
-        // }
     }).catch(error => console.error(error));
+}
+
+function putErrors (error) {
+    if (document.getElementById("error") != null) document.getElementById("error").remove();
+    let div = document.createElement("div");
+    div.id = "error";
+    let main = document.getElementsByTagName("main");
+    div.innerHTML = `${error}`;
+    main[0].append(div);
 }
