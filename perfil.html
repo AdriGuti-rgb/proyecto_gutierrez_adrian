@@ -38,7 +38,7 @@
                     </div>
                 </div>
 
-                <form action="" method="post" name="login" autocomplete="off">
+                <form action="" method="post" name="login" autocomplete="off" enctype="multipart/form-data">
                     <div id="formulario">
                         <ul id="primeraParte">
                                 <li>
@@ -53,7 +53,7 @@
 
                                 <li>
                                     <label for="fotoPerfil">Imagen de perfil:</label>
-                                    <input type="file" name="fotoPerfil" id="fotoPerfil">
+                                    <input type="file" name="fotoPerfil" id="fotoPerfil" accept="image/png, image/jpeg, image/jpg">
                                 </li>
 
                                 <li id="entidadTelefono">
@@ -73,6 +73,7 @@
                             <li>
                                 <label for="contrasena">Contraseña:</label>
                                 <input type="password" name="contrasena" id="contrasena" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
+                                <i class="fa-solid fa-eye" id="vista"></i>
                             </li>
 
                             <li>

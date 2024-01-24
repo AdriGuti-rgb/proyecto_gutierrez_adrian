@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] === "PUT") {
             $username = $data["nombreMostrado"];
             $mail = $data["correo"];
             $photo = $data["fotoPerfil"];
-            $mail = $data["contrasena"];
+            $mail = $data["correo"];
             $city = $data["localidad"];
             $pass = $data["contrasena"];
     
@@ -66,14 +66,11 @@ if ($_SERVER["REQUEST_METHOD"] === "PUT") {
             }
     
             header("HTTP/1.1 200 OK");
-    
-            echo json_encode(array("message" => "Usuario modificado"));
-        } else {
-            echo json_encode(array("error" => "La clave no está disponible en la sesión."));
         }
     } catch (mysqli_sql_exception $e) {
-        echo json_encode(array("message" => "Error de los datos"));
         header("HTTP/1.1 404 Not Found");
+    } catch (Firebase\JWT\ExpiredException $e) {
+        header("HTTP/1.1 401 Unauthorized");
     }
 } else {
     header("HTTP/1.1 400 Bad request");

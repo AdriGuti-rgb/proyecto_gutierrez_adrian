@@ -1,14 +1,26 @@
 if (localStorage.getItem("rol") == "Anonimous") location.href = "./paginaPpal.html";
 if (localStorage.getItem("rol") == "User") {
-    // document.getElementById("entidadTelefono").style.visibility = "hidden"
-    // document.getElementById("telefonoEntidad").style.visibility = "hidden"
     document.getElementById("telefonoEntidad").remove();
     document.getElementById("entidadTelefono").remove();
 }
+document.getElementById("vista").addEventListener("click", mostrarContrasena);
 let form = document.forms.login;
 
-/* Recojo las localidades para mostrarlas en el select */
+function mostrarContrasena (e) {
+    let contrasenaInput = document.getElementById("contrasena");
 
+    if (contrasenaInput.type === "password") {
+        contrasenaInput.type = "text";
+        e.target.classList.remove("fa-eye");
+        e.target.classList.add("fa-eye-slash");
+    } else {
+        contrasenaInput.type = "password";
+        e.target.classList.add("fa-eye");
+        e.target.classList.remove("fa-eye-slash");
+    }
+}
+
+/* Recojo las localidades para mostrarlas en el select */
 function anadirLocalidades (e) {
     let localidades = [];
 
@@ -48,7 +60,6 @@ function mostrarContrasena (e) {
         
 }
 
-
 /* Recibo los datos para ponerlos en los placeholders */
 
 let pass;
@@ -60,34 +71,32 @@ fetch("http://localhost/php/proyecto/api/users/profile/", {
     })
     .then( response => {
         if (response.status === 200) return response.json()
-        else if (response.status === 404) alert(response.statusText)
-        else if (response.status === 401) {
-            localStorage.clear();
-            location.href = "./index.html";
-        } else console.log("Todo mal");
+            else if (response.status === 404) alert(response.statusText)
+            else if (response.status === 401) expirationToken()
+            else console.log("Todo mal");
     })
     .then( data => {
-        pass = data.pass;
-        let passLength = pass.length;
-        let passPlaceholder = "*";
+        if (data) {
+            pass = data.pass;
+            let passLength = pass.length;
+            let passPlaceholder = "*";
 
-        for (let k = 0; k < passLength - 1; k++) {
-            passPlaceholder += "*";
+            for (let k = 0; k < passLength - 1; k++) {
+                passPlaceholder += "*";
+            }
+
+            form.elements.nombreUsuario.value = data.name;
+            form.elements.nombreMostrado.value = data.username;
+            form.elements.correo.value = data.mail;
+            form.elements.localidad[0].textContent = data.city;
+            form.elements.localidad[0].value = data.city;
+            form.elements.contrasena.value = data.pass;
+
+            if (data.phone != undefined && data.club != undefined) {
+                form.elements.telefono.value = data.phone;
+                form.elements.entidad.value = data.club;
+            } 
         }
-
-        form.elements.nombreUsuario.placeholder = data.name;
-        form.elements.nombreMostrado.placeholder = data.username;
-        form.elements.correo.placeholder = data.mail;
-        form.elements.localidad[0].textContent = data.city;
-        form.elements.localidad[0].value = data.city;
-        form.elements.nombreMostrado.value = "";
-        form.elements.contrasena.value = "";
-        form.elements.contrasena.placeholder = passPlaceholder;
-
-        if (data.phone != undefined && data.club != undefined) {
-            form.elements.telefono.placeholder = data.phone;
-            form.elements.entidad.placeholder = data.club;
-        } 
     })
 
 
@@ -120,15 +129,17 @@ function getParams (e) {
         mode: "cors",
         body: JSON.stringify(user)
     }).then( response => {
-        if (response.status === 200) return response.json()
-            else if (response.status === 404) alert(response.statusText)
-            else console.log("Todo mal");
+        if (response.status === 200) {
+            localStorage.setItem('username', user.nombreMostrado);
+            localStorage.setItem('name', user.nombreUsuario);
+            window.location.reload()
+        } else if (response.status === 401) expirationToken()
+          else if (response.status === 404) alert(response.statusText)
+          else console.log("Todo mal");
     })
     .then( data => {
-        console.log(data);
-    })
+    });
 }
-
 
 /* 
     Controlo que de verdad quiere darse de baja y si es asi,
@@ -179,7 +190,8 @@ function deleteUser (e) {
             body: JSON.stringify(user)
         }).then( response => {
             if (response.status === 200) return response.json()
-            else if (response.status === 404) alert(response.statusText)
+                else if (response.status === 401) expirationToken()
+                else if (response.status === 404) alert(response.statusText)
                 else throw new Error("Hubo un problema con la solicitud")
         }).then(data => {                
             if (data == "Todo bien") {
@@ -194,6 +206,23 @@ function deleteUser (e) {
     }
 }
 
+function expirationToken () {
+    if (document.getElementById("confirmacion") != null) document.getElementById("confirmacion").remove()
+                
+    let div = document.createElement("div");
+    div.id = "confirmacion";
+    div.innerHTML = `
+        <span style="text-align:center">La sesion ha expirado, vuelva a iniciar sesión</span>
+    `;
+    
+    let main = document.getElementsByTagName("main")
+    main[0].append(div);
+
+    setTimeout(() => {
+        localStorage.clear();
+        location.href = "./index.html";
+    }, 5000);
+}
 
 /* Listeners */
 

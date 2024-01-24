@@ -54,6 +54,8 @@
             }
         } catch (mysqli_sql_exception $e) {
             echo json_encode(array("error" => "Error: " . $e->getMessage()));
+        } catch (Firebase\JWT\ExpiredException $e) {
+            header("HTTP/1.1 401 Unauthorized");
         }
         // session_destroy();
     } else {

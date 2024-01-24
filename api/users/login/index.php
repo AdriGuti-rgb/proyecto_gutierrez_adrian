@@ -66,7 +66,7 @@
                             $payload = array(
                                 "user_id" => $idAlfanumerico,
                                 "username" => $username,
-                                "exp" => time() + 3600
+                                "exp" => time() + 60
                             );
                             
                             $_SESSION['key'] = $key;
