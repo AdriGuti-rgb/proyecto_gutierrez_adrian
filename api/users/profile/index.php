@@ -38,8 +38,6 @@
                 $sql = "SELECT * FROM users WHERE id = '$id'";
                 $resultado = $con->query($sql);
                 $user = $resultado->fetch_all(MYSQLI_ASSOC);
-
-                // echo json_encode($user);
                 
                 $queryOrganizer = "SELECT *
                                     FROM organizers
@@ -56,6 +54,7 @@
                     "name" => $user[0]["name"],
                     "mail" => $user[0]["mail"],
                     "city" => $user[0]["city"],
+                    "pass" => $user[0]["pass"]
                 );
                 
                 if ($rol == "Organizer") {
@@ -70,6 +69,8 @@
             }
         } catch (mysqli_sql_exception $e) {
             echo json_encode(array("error" => "Error: " . $e->getMessage()));
+        } catch (Firebase\JWT\ExpiredException $e) {
+            header("HTTP/1.1 401 Unauthorized");
         }
         // session_destroy();
     } else {

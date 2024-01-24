@@ -51,6 +51,8 @@ function mostrarContrasena (e) {
 
 /* Recibo los datos para ponerlos en los placeholders */
 
+let pass;
+
 fetch("http://localhost/php/proyecto/api/users/profile/", {
     headers: {
         Authorization: `${localStorage.getItem("token")}`
@@ -59,15 +61,28 @@ fetch("http://localhost/php/proyecto/api/users/profile/", {
     .then( response => {
         if (response.status === 200) return response.json()
         else if (response.status === 404) alert(response.statusText)
-    else console.log("Todo mal");
+        else if (response.status === 401) {
+            localStorage.clear();
+            location.href = "./index.html";
+        } else console.log("Todo mal");
     })
     .then( data => {
+        pass = data.pass;
+        let passLength = pass.length;
+        let passPlaceholder = "*";
+
+        for (let k = 0; k < passLength - 1; k++) {
+            passPlaceholder += "*";
+        }
+
         form.elements.nombreUsuario.placeholder = data.name;
         form.elements.nombreMostrado.placeholder = data.username;
         form.elements.correo.placeholder = data.mail;
         form.elements.localidad[0].textContent = data.city;
+        form.elements.localidad[0].value = data.city;
         form.elements.nombreMostrado.value = "";
         form.elements.contrasena.value = "";
+        form.elements.contrasena.placeholder = passPlaceholder;
 
         if (data.phone != undefined && data.club != undefined) {
             form.elements.telefono.placeholder = data.phone;
@@ -89,14 +104,18 @@ function getParams (e) {
 
     elementos.forEach( (item, index) => {
         if (index < limit) {
-            user[item.name] = item.value;
-        } 
+            if (item.value.trim() == "") {
+                if (item.name === "contrasena") user[item.name] = pass
+                    else user[item.name] = item.placeholder;
+            }
+                else user[item.name] = item.value;
+        }
     })
 
     fetch("http://localhost/php/proyecto/api/users/update/", {
         method: "PUT",
         headers: {
-            "Content-Type": "application/json;charset=utf-8"
+            Authorization: `${localStorage.getItem("token")}`
         },
         mode: "cors",
         body: JSON.stringify(user)
@@ -134,7 +153,7 @@ function verifyDelete () {
             <input type="radio" name="opciones" id="No" value="false">
             <label for="No">No</label>
             
-            <input type="submit" value="Eliminar" name="deleteSend" id="deleteSend">
+            <input type="submit" value="Confirmar" name="deleteSend" id="deleteSend">
         </form>
         `;
         
@@ -161,24 +180,23 @@ function deleteUser (e) {
         }).then( response => {
             if (response.status === 200) return response.json()
             else if (response.status === 404) alert(response.statusText)
-        else throw new Error("Hubo un problema con la solicitud")
-}).then(data => {                
-    if (data == "Todo bien") {
-        localStorage.clear()
-        location.href = "./index.html"
-    }
-}).catch(error => console.error(error));
+                else throw new Error("Hubo un problema con la solicitud")
+        }).then(data => {                
+            if (data == "Todo bien") {
+                localStorage.clear()
+                location.href = "./index.html"
+            }
+        }).catch(error => console.error(error));
 
-} else {
-    document.getElementById("confirmacion").remove()
-    if (baja.checked) baja.checked = false;
-}
+    } else {
+        document.getElementById("confirmacion").remove()
+        if (baja.checked) baja.checked = false;
+    }
 }
 
 
 /* Listeners */
 
 form.elements.send.addEventListener("click", getParams);
-document.getElementById("vista").addEventListener("click", mostrarContrasena);
 document.getElementById("localidad").addEventListener("click", anadirLocalidades);
 baja.addEventListener('click', verifyDelete);
