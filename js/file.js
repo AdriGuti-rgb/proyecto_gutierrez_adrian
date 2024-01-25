@@ -16,24 +16,6 @@ inputGPX.addEventListener("change", () => {
             
             let altitudMinima = coor.reduce( (acum, [_, __, alt]) => alt < acum ? alt : acum, Infinity);
             let altitudMaxima = coor.reduce( (acum, [_, __, alt]) => alt > acum ? alt : acum, -Infinity);
-
-            
-            // let desnivelPositivo = 0;
-            // let desnivelNegativo = 0;
-            // coor.forEach((item, index) => {
-            //     if (index > 0) {
-            //         let altActual = item[2];
-            //         let altAnterior = coor[index - 1][2];
-                    
-            //         if (altActual < altAnterior) desnivelPositivo += (altAnterior - altActual)
-            //             else desnivelNegativo += (altActual - altAnterior)
-            //     }
-            // });
-            // console.log(`Altitud maxima: ${altitudMaxima}`);
-            // console.log(`Altitud minima: ${altitudMinima}`);
-            // console.log(`Desnivel negativo: ${desnivelNegativo.toFixed(2)}`);
-            // console.log(`Desnivel positivo: ${desnivelPositivo.toFixed(2)}`);
-            // console.log(`Desnivel acumulado: ${(desnivelPositivo + desnivelNegativo).toFixed(2)}`);
         
             let altitudes = coor.map(item => item[2]);
 

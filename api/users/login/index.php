@@ -66,13 +66,13 @@
                             $payload = array(
                                 "user_id" => $idAlfanumerico,
                                 "username" => $username,
-                                "exp" => time() + 60
+                                "name" => $name,
+                                "rol" => $rol,
+                                "exp" => time() + 3600
                             );
                             
                             $_SESSION['key'] = $key;
                             $jwt = JWT::encode($payload, $key, 'HS256');                             
-
-                            // $jwt = generateJWT($payload, $key);
                             
                             $tokenFinal = array(
                                 'username' => "$username",

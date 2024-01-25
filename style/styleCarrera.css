@@ -184,9 +184,18 @@ input[type="submit"] {
     background-color: var(--blanco);
 }
 
-input,select {
+input, select {
     width: 271px;
     height: 32px;
+    border-radius: 5px;
+    background: var(--blanco);
+    box-shadow: 3px 3px 4px 0px #9C9898;
+    font-family: 'Inknut Antiqua', serif;
+}
+
+#modalidad {
+    width: 271px;
+    height: 60px;
     border-radius: 5px;
     background: var(--blanco);
     box-shadow: 3px 3px 4px 0px #9C9898;

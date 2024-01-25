@@ -100,39 +100,16 @@ fetch("http://localhost/php/proyecto/api/users/profile/", {
     })
 
 
-/* Mando el token cuando queden poco tiempo para crear uno nuevo */
-
-setTimeout(() => {
-    let tokenTotal = localStorage.getItem("token").split(".");
-    let payload = tokenTotal[1];
-    let datosToken = atob(payload);
-
-    let tokenJSON = JSON.parse(datosToken);
-
-    let exp = tokenJSON.exp;
-
-    console.log(exp);
-    console.log(Math.trunc(Date.now() / 1000));
-
-    let restante = exp -(Math.trunc(Date.now() / 1000));
-
-    if (restante <= 300) {
-        // fetch("http://localhost/php/proyecto/api/users/token/", {
-        // headers: {
-        //     Authorization: `${localStorage.getItem("token")}`
-        // }
-        // }).then( response => {
-        //     if (response.status === 200) return response.json()
-        //         else if (response.status === 404) alert(response.statusText)
-        //         else if (response.status === 401) expirationToken()
-        //         else console.log("Todo mal");
-        // }).then( data => {
-        
-        // })
-        console.log("entro");
-    }
-}, 2000);
-
+    // function mostrar(){
+    //     var archivo = document.getElementById("file").files[0];
+    //     var reader = new FileReader();
+    //     if (file) {
+    //       reader.readAsDataURL(archivo );
+    //       reader.onloadend = function () {
+    //         document.getElementById("img").src = reader.result;
+    //       }
+    //     }
+    //   }
 
 /* Recojo los datos para mandarlos a la api y hacer el update con put */
 

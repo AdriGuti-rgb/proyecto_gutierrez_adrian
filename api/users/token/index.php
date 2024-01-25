@@ -8,20 +8,6 @@
 
     session_start();
 
-    if ($_SERVER["REQUEST_METHOD"] === "OPTIONS") {
-        header("Access-Control-Allow-Origin: *");
-        header("Access-Control-Allow-Methods: POST, OPTIONS");
-        header("Access-Control-Allow-Headers: Content-Type");
-        header("Content-Length: 0");
-        header("HTTP/1.1 200 OK");
-        exit;
-    }
-
-    header("Access-Control-Allow-Origin: *");
-    header("Access-Control-Allow-Methods: GET, OPTIONS");
-    header("Access-Control-Allow-Headers: Content-Type");
-    header('Content-Type: application/json');
-
     if ($_SERVER["REQUEST_METHOD"] === "GET") {
         try {
             if (isset($_SESSION["key"])) {
@@ -31,29 +17,28 @@
 
                 $decoded = JWT::decode($jwt, new Key ($key, 'HS256'));
 
-                $username = $decoded->username;
-                $id = $decoded->user_id;
 
-                $sql = "SELECT * FROM users WHERE id = '$id'";
-                $resultado = $con->query($sql);
-                $user = $resultado->fetch_all(MYSQLI_ASSOC);
-                                
-                if ($rol == "Organizer") {
-                    $finalUser["phone"] = $organizer[0]["phone"];
-                    $finalUser["club"] = $organizer[0]["club"];
-                }
+                $payload = array(
+                    "user_id" => $decoded->user_id,
+                    "username" => $decoded->username,
+                    "name" => $decoded->name,
+                    "rol" => $decoded->rol,
+                    "exp" => time() + 3600
+                );
+                $jwtFinal = JWT::encode($payload, $key, 'HS256');                             
+
+                $tokenFinal = array(
+                    'username' => "$decoded->username",
+                    'token' => "$jwtFinal",
+                    'rol' => $decoded->rol,
+                    'name' => $decoded->name
+                );
                 
-                echo json_encode($finalUser);
-
-            } else {
-                echo json_encode(array("error" => "La clave no está disponible en la sesión."));
+                echo json_encode($tokenFinal);
             }
-        } catch (mysqli_sql_exception $e) {
-            echo json_encode(array("error" => "Error: " . $e->getMessage()));
         } catch (Firebase\JWT\ExpiredException $e) {
             header("HTTP/1.1 401 Unauthorized");
         }
-        // session_destroy();
     } else {
         header("HTTP/1.1 400 Bad request");
     }
