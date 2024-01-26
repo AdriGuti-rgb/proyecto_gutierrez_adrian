@@ -191,14 +191,11 @@ function deleteUser (e) {
     
     if (secondForm.elements.opciones.value == "true") {
         
-        let user = {"rol": `${localStorage.getItem("rol")}`}
-        
         fetch("http://localhost/php/proyecto/api/users/delete/", {
             method: "DELETE",
             headers: {
                 Authorization: `${localStorage.getItem("token")}`
             },
-            body: JSON.stringify(user)
         }).then( response => {
             if (response.status === 200) return response.json()
                 else if (response.status === 401) expirationToken()

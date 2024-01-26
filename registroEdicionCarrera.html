@@ -31,45 +31,44 @@
         </header>
         
         <main>
-            <form action="" method="get">
+            <form action="" method="post" name="registerRace">
                 <div id="contenedorCarrera">
                         <div id="datos">
                             <ul id="primeraParte">
                                 <li>
                                     <label for="nombreCarrera">Nombre carrera:</label>
-                                    <input type="text" name="nombreCarrera" id="nombreCarrera" placeholder="adrianGuti">
+                                    <input type="text" name="nombreCarrera" id="nombreCarrera">
                                 </li>
 
                                 <li>
                                     <label for="categorias">Categorias:</label>
                                     <select name="categorias" id="categorias">
-                                        <option value="Cadete">Cadete 15-17 años</option>
-                                        <option value="Junior">Junior 18-20 años</option>
-                                        <option value="Sénior">Sénior 21 años</option>
-                                        <option value="Promesa">Promesa 22-39 años</option>
-                                        <option value="VeteranaA">Veterana A 40-50 años</option>
-                                        <option value="VeteranaB">Veterana B +51 años</option>
                                     </select>
                                 </li>
 
                                 <li>
                                     <label for="desnivel">Desnivel:</label>
-                                    <input type="tel" name="desnivel" id="desnivel" placeholder="987 662 872">
+                                    <input type="tel" name="desnivel" id="desnivel">
                                 </li>
 
                                 <li>
                                     <label for="desnivelPos">Desnivel positivo:</label>
-                                    <input type="tel" name="desnivelPos" id="desnivelPos" placeholder="987 662 872">
+                                    <input type="tel" name="desnivelPos" id="desnivelPos">
                                 </li>
 
                                 <li>
                                     <label for="poblacion">Poblacion:</label>
-                                    <input type="text" name="poblacion" id="poblacion" placeholder="987 662 872">
+                                    <input type="text" name="poblacion" id="poblacion">
                                 </li>
                                 
                                 <li>
                                     <label for="fotoPrincipal">Foto principal:</label>
                                     <input type="file" name="fotoPrincipal" id="fotoPrincipal" accept="image/png, image/jpeg, image/jpg">
+                                </li>
+
+                                <li>
+                                    <label for="gpx">Archivo ruta:</label>
+                                    <input type="file" name="gpx" id="gpx" accept=".gpx">
                                 </li>
 
                         </ul>
@@ -79,37 +78,34 @@
                         <ul id="segundaParte">
                             <li>
                                 <label for="fechaRealizacion">Fecha realizacion:</label>
-                                <input type="date" name="fechaRealizacion" id="fechaRealizacion" placeholder="AdriGuti">
+                                <input type="date" name="fechaRealizacion" id="fechaRealizacion">
                             </li>
 
                             <li>
                                 <label for="distancia">Distancia:</label>
-                                <input type="number" name="distancia" id="distancia" placeholder="*********">
+                                <input type="number" name="distancia" id="distancia">
                             </li>
 
                             <li>
                                 <label for="desnivelNeg">Desnivel negativo:</label>
-                                <input type="number" name="desnivelNeg" id="desnivelNeg" placeholder="*********">
+                                <input type="number" name="desnivelNeg" id="desnivelNeg">
                             </li>
 
                             <li>
                                 <label for="servicios">Servicios:</label>
-                                <input type="text" name="servicios" id="servicios" placeholder="*********">
+                                <select name="servicios" id="servicios" multiple>
+                                </select>
                             </li>
 
                             <li>
                                 <label for="modalidad">Modalidad:</label>
-                                <select name="modalidad[]" id="modalidad" multiple>
-                                    <option value="Trail">Trail</option>
-                                    <option value="Maratón">Maratón</option>
-                                    <option value="Media Maratón">Media Maratón</option>
-                                    <option value="Ultra">Ultra</option>
+                                <select name="modalidad" id="modalidad">
                                 </select>
                             </li>
 
                             <li>
                                 <label for="fotosAnteriores">Fotos Anteriores:</label>
-                                <input type="file" name="fotosAnteriores" id="fotosAnteriores" accept="image/png, image/jpeg, image/jpg" multiple>
+                                <input type="file" name="fotosAnteriores[]" id="fotosAnteriores" accept="image/png, image/jpeg, image/jpg" multiple>
                             </li>
 
                         </ul>
@@ -118,7 +114,7 @@
                         <div id="divisoriaInferior"></div>
 
                         <div id="envio">
-                            <input type="submit" value="Enviar">
+                            <input type="submit" value="Enviar" name="send">
                         </div>
                     
                 </div>

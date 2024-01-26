@@ -30,12 +30,8 @@
                 $jwt = $headersJS["Authorization"];
 
                 $decoded = JWT::decode($jwt, new Key ($key, 'HS256'));
-
-                $json_data = file_get_contents("php://input");
-                $data = json_decode($json_data, true);
                 
-                $rol = $data['rol'];
-
+                $rol = $decoded->rol;
                 $id = $decoded->user_id;
 
                 if ($rol == "Organizer") {
@@ -57,7 +53,6 @@
         } catch (Firebase\JWT\ExpiredException $e) {
             header("HTTP/1.1 401 Unauthorized");
         }
-        // session_destroy();
     } else {
         header("HTTP/1.1 400 Bad request");
     }

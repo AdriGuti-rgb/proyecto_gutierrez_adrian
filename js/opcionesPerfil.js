@@ -46,7 +46,7 @@ function renovateToken() {
 
     let restante = exp -(Math.trunc(Date.now() / 1000));
 
-    if (restante <= 300) {
+    if (restante <= 3000) {
         fetch("http://localhost/php/proyecto/api/users/token/", {
         headers: {
             Authorization: `${localStorage.getItem("token")}`

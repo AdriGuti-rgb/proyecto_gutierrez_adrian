@@ -103,9 +103,6 @@ localStorage.clear();
 
 function getParams(e) {
     e.preventDefault();
-
-    // let username = form.elements.nombre;
-    // let pass = form.elements.contrasena;
     
     let username = document.getElementById("nombre").value;
     let pass = document.getElementById("contrasena").value;

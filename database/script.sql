@@ -89,6 +89,18 @@ CREATE TABLE older_photos (
     FOREIGN KEY (id_race) REFERENCES races(id)
 );
 
+insert into modalities () values ('01j5gic48lj6', "Cross Country", 298.0, 163.62, 132.19);
+insert into modalities () values ('43o0aja32wa6', "Trail Running", 291.98, 243.82, 96.03);
+insert into modalities () values ('00p9ajk35ew0', "Maraton", 291.77, 152.0, 142.55);
+insert into modalities () values ('99r4osm75ys5', "Ultra Maraton", 262.42, 166.19, 135.83);
+
+insert into services () values ('64s5stg45yh4', "Avituallamiento solido");
+insert into services () values ('55h1ngq99rc1', "Avituallamiento liquido");
+insert into services () values ('89p0gjq46ll5', "Puestos de socorro");
+insert into services () values ('14n1hrj58qz8', "Zonas ecologicas");
+insert into services () values ('12b6hah53jc9', "Tiempos intermedios");
+insert into services () values ('61c0bcg91ac2', "Parking");
+
 insert into users (id, name, username, mail, pass, city, photo) values ('34u9nrz02jm9', 'Amitie Ivakhin', 'aivakhin0', 'aivakhin0@unesco.org', 'uA8~qbeXEH9c_N', 'Agpangi', 'CubiliaCurae.doc');
 insert into users (id, name, username, mail, pass, city, photo) values ('27c2vmc10aj8', 'Florence Stanning', 'fstanning1', 'fstanning1@toplist.cz', 'iT5*c+(.3c=', 'Yangping', 'SodalesScelerisque.ppt');
 insert into users (id, name, username, mail, pass, city, photo) values ('33c8ozw26lm4', 'Yasmin Ridgway', 'yridgway2', 'yridgway2@earthlink.net', 'mG4{h*XX)bR,g#VL', 'Piru', 'Sem.ppt');
