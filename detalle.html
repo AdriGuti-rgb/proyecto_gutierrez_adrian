@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="./style/style.css"> -->
+    <link rel="stylesheet" href="./style/styleDetalle.css">
+    <script src="https://kit.fontawesome.com/a1e1584c46.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inknut+Antiqua:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="./img/Logotipo.jpeg" type="image/x-icon">
+    <title>RaceMapp | Carreras</title>
+</head>
+<body>
+    <div id="todo">
+        <header>
+            <div id="logoTitulo">
+                <a href=""><img src="./img/Logotipo-removebg-preview.png" alt="Logotipo" title="Logotipo de la aplicación"  id="fotoHeader"></a>
+                <h1>RaceMapp</h1>
+            </div>
+            <div id="links">
+                <span><a href="./registroEdicionCarrera.html" id="crearCarrera">Crear Carrera</a></span>
+                <span><a href="./paginaPpal.html" id="carreras">Carreras</a></span>
+                <span id="nombreLocal">Adrian</span>
+                <div id="perfil">
+                    <img src="./img/fotoPerfil.png" alt="Foto Perfil" id="imgPerfilSuperior">
+                    <i class="fa-solid fa-caret-down"></i>
+                </div>
+            </div>
+        </header>
+    
+    <main>
+
+        <div id="none1"></div>
+        <div id="none2"></div>
+        <div id="none3"></div>
+        <div id="tiposSelector">
+            <div id="tipoDetalle" class="tipos marcado">Detalles</div>
+            <div id="tipoMapa" class="tipos">Mapa</div>
+            <div id="tipoReglamento" class="tipos">Reglamento</div>
+            <div id="tipoWeb" class="tipos">Enlace web</div>
+            <div id="tipoClasificaciones" class="tipos">Clasificaciones</div>
+            <div id="tipoOrganizador" class="tipos">Opciones</div>
+        </div>
+        <div id="general">
+            <div id="contenedorDetalles" class="marcado datosGenerales">
+
+                <div id="datos">
+                    <h3>San Silvestre de León</h3>
+                    <div id="restoDatos">
+                        <div id="fechaRealizacion">
+                            <i class="fa-solid fa-calendar-days"></i>
+                            <span class="underlined">Fecha realización:</span>
+                            <span>30-12-2023</span>
+                        </div>
+                        <div id="poblacion">
+                            <i class="fa-solid fa-map-location-dot"></i>
+                            <span class="underlined">Población:</span>
+                            <span>León</span>
+                        </div>
+                        <div id="distancia">
+                            <i class="fa-solid fa-route"></i>
+                            <span class="underlined">Distancia:</span>
+                            <span>30km</span>
+                        </div>
+                        <div id="desnivel">
+                            <!-- <i class="fa-solid fa-arrow-trend-up"></i>
+                            <i class="fa-solid fa-arrow-trend-down"></i> -->
+                            <i class="fa-solid fa-arrow-right-long"></i>
+                            <span class="underlined">Desnivel:</span>
+                            <span>129m</span>
+                        </div>
+                        <div id="categoria">
+                            <i class="fa-solid fa-route"></i>
+                            <span class="underlined">Categoria:</span>
+                            <span>senior</span>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div id="fotoCarrera">
+                    <img src="./img/fotoPrueba.jpg" width="230px" height="270px" title="Foto principal" alt="Foto de ejemplo de la carrera"></img>
+                </div>
+
+                <div id="fotosVariadas">
+                    <i class="fa-solid fa-angle-left"></i>
+                    <img src="./img/fotosLandingRandom/1Foto.jpg" alt="Fotos otros años" title="Fotos anteriores">
+                    <i class="fa-solid fa-angle-right"></i>
+                </div>
+
+                <div id="favoritos">
+                    <i class="fa-regular fa-heart" style="font-size: 30px; color: rgb(209, 0, 0);" id="iconoFav"></i>
+                </div>
+            </div>
+            <div id="contenedorMapa" class="hidden datosGenerales"></div>
+            <div id="contenedorReglamento" class="hidden datosGenerales"></div>
+            <div id="contenedorWeb" class="hidden datosGenerales"></div>
+            <div id="contenedorClasificaciones" class="hidden datosGenerales"></div>
+            <div id="contenedorOrganizador" class="hidden datosGenerales"></div>
+        </div>
+        
+
+    </main>
+
+    <footer>
+        <h2>RaceMapp</h2>
+        <div id="icons">
+            <a href="https://twitter.com/racemapp23"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="https://www.instagram.com/racemapp23/"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://www.tiktok.com/@racemapp23"><i class="fa-brands fa-tiktok"></i></a>
+        </div>
+    </footer>
+</div>
+
+<script src="./js/detalle.js"></script>
+<script src="./js/opcionesPerfil.js"></script>
+
+</body>
+</html>

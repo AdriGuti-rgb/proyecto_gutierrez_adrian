@@ -247,7 +247,7 @@ function getParams(e) {
         mode: "cors",
         body: JSON.stringify(user)
     }).then( response => {
-        if (response.status === 201) return response.json()
+        if (response.status === 201) location.href = "./index.html"
             else putErrors("Error en los datos")
     }).then(data => {
         if (data.message == "Usuario creado") location.href ="http://localhost/php/proyecto/index.html"; 

@@ -27,6 +27,7 @@
             $total_slope = $data["total_slope"];
             $positive_slope = $data['positive_slope'];
             $negative_slope = $data['negative_slope'];
+            $distance = $data["distance"];
             $poblation = $data['poblation'];
             $main_photo = $data['main_photo'];
             $gpx = $data['gpx'];
@@ -65,29 +66,41 @@
             }
 
             if ($id_category != "" || $id_modality != "") {
+                $con->autocommit(false);  
+
                 $sqlNormal = "
                         INSERT INTO races ()
-                        VALUES ('$idAlfanumerico', '$raceName', '$race_day', '$positive_slope', '$negative_slope', '$total_slope', '$poblation', '$main_photo', '$id_category', '$id_modality')
+                        VALUES ('$idAlfanumerico', '$raceName', '$race_day', '$positive_slope', '$negative_slope', '$total_slope', '$distance', '$poblation', '$main_photo', '$id_category', '$id_modality')
                     ";
                 $con->query($sqlNormal);
+
+                foreach ($totalServices as $value) {
+                    $sqlServicesInsert = "
+                            INSERT INTO races_services ()
+                            VALUES ('$idAlfanumerico', '$value')
+                        ";
+                    $con->query($sqlServicesInsert);
+                }
+
+                foreach ($older_photos as $value) {
+                    $uniqid = uniqid();
+                    $hash = md5($uniqid);
+                    $idPhotos = substr($hash, 0, 20);
+
+                    $sqlPhotosInsert = "
+                            INSERT INTO older_photos () 
+                            VALUES ('$idPhotos', '$value', '$idAlfanumerico')
+                        ";
+                    $con->query($sqlPhotosInsert);
+                }
+
+                $con->commit();
             } else header("HTTP/1.1 404 Not Found");
-
-
-            foreach ($totalServices as $value) {
-                $sqlNormal = "
-                        INSERT INTO races_services ()
-                        VALUES ('$idAlfanumerico', '$value')
-                    ";
-                $con->query($sqlNormal);
-            }
 
             header("HTTP/1.1 201 Created");
 
-            echo json_encode(array("message" => "Carrera creada"));
-
         } catch (mysqli_sql_exception $e) {
             echo json_encode(array("message" => $e->getMessage()));
-            echo json_encode(array("message" => "Error de los datos"));
             header("HTTP/1.1 404 Not Found");
         }
     } else {

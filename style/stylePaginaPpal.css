@@ -12,13 +12,14 @@
 }
 
 #todo {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-rows: 110px 79.3vh 80px;
 }
 
 body {
     margin: 0;
     font-family: 'Inknut Antiqua', serif;
+    width: 100vw;
 }
 
 #fotoHeader {
@@ -30,12 +31,11 @@ body {
 header {
     background-color: var(--segundo);
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-    z-index: 1;
+    /* z-index: 1; */
     display: flex;
     justify-content: space-around;
     align-items: center;
     gap: 36%;
-    height: 110px;
 }
 
 
@@ -71,14 +71,11 @@ footer h2{
 }
 
 footer {
-    height: 80px;
     background-color: var(--tercero);
     display: flex;
     justify-content: space-around;
     align-items: center;
     gap: 25%;
-    position: relative;
-    bottom: -16px;
 }
 
 #logoTitulo {
@@ -104,30 +101,14 @@ i {
     cursor: pointer;
 }
 
-main {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#contenedorCarrera {
-    width: 110%;
-    height: 703px;
-    border-radius: 30px;
-    background-color: var(--negro);
-    box-shadow: 10px 10px 10px 0px rgba(0, 0, 0, 0.25);
-    color: var(--blanco);
-    margin-top: 10px;
-}
-
 #opcionesPerfil {
     display: flex;
     flex-direction: column;
     position: absolute;
     top: 0px;
-    left: 255px;
+    left: 100px;
     border-radius: 10px;
-    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out; 
+    transition: transform 0.5s ease-in-out, opacity 1.5s ease-in-out; 
 }
 
 .mostrar {
@@ -148,3 +129,316 @@ main {
     border-radius: 6px;
     border: solid 0.5px var(--negro);
 }
+
+#carreras {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 45px 157px;
+    overflow-y: scroll;
+    padding-left: 80px;
+    padding-right: 80px;
+    grid-area: carreras;
+    scrollbar-width: thin; 
+    scrollbar-color: var(--tercero) var(--blanco);
+}
+
+/* Estilo personalizado para la barra de desplazamiento del navegador WebKit (Chrome, Safari) */
+/* body::-webkit-scrollbar, body::-moz-scrollbar {
+    display: none;
+} */
+
+#carreras:hover, #favoritas:hover {
+    scrollbar-color: var(--segundo) var(--blanco);
+}
+
+#ordenacion {
+    grid-area: orden;
+}
+
+.cards {
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.25);
+    transition: all 0.7s;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.75);
+}
+
+.cards:hover {
+    transform: scale(1.01);
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.75);
+}
+
+#contenedorCarreras {
+    display: grid;
+    grid-template-columns: 1fr 4fr 0.5fr;
+    grid-template-rows: 100px auto 50px;
+    grid-template-areas: "none1 orden none2"
+                        "sidebar carreras none3"
+                        "none4 paginacion none5";
+    height: 558px;
+}
+
+.fotoCarrera img {
+    width: 305px;
+    height: 200px;
+}
+
+#sideBar {
+    padding-left: 10px;
+    border-right: 1px solid rgba(0, 0, 0, 0.15);
+    grid-area: sidebar;
+}
+
+#primerLi {
+    display: grid;
+    grid-template-columns: 30% 70%;
+    
+    grid-template-areas: "spanBusqueda opcionesBusqueda1"
+                        "relleno2 opcionesBusqueda2";
+    gap: 5px;
+    padding-bottom: 10px;
+}
+
+.busqueda {
+    width: 200px;
+    height: 32px;
+    border-radius: 5px;
+    background: var(--blanco);
+    box-shadow: 3px 3px 4px 0px #9C9898;
+    font-family: 'Inknut Antiqua', serif;
+    padding-left: 5px;
+}
+
+.icono {
+    position: relative;
+    top: 3px;
+    right: 35px;
+    z-index: 1;
+    cursor: pointer;
+}
+
+#segundoLi {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: grid;
+    grid-template-columns: 18% 82%;
+    border-top : 1px solid rgba(0, 0, 0, 0.15);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.subCampos {
+    display: flex;
+    gap: 10px 20px;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+#filtro {
+    margin-top: 5px;
+}
+
+.check {
+    width: 30px;
+    height: 30px;
+    border-radius: 3px;
+    background: var(--blanco);
+    box-shadow: 1px 1px 2px 0px #9C9898;
+}
+
+.valor {
+    width: 200px;
+    height: 33px;
+    border-radius: 5px;
+    background: var(--blanco);
+    box-shadow: 1px 1px 2px 0px #9C9898;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    font-family: 'Inknut Antiqua', serif;
+}
+
+.marcado {
+    background-color: #F2BF8B;
+    border: 2px solid var(--octavo);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#spanBusqueda {
+    grid-area: spanBusqueda;
+}
+
+#opcionesBusqueda1 {
+    grid-area: opcionesBusqueda1;
+}
+
+#opcionesBusqueda2 {
+    grid-area: opcionesBusqueda2;
+}
+
+#relleno {
+    grid-area: relleno;
+}
+
+.detalles {
+    cursor: pointer;
+    width: 100px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    border: 1px solid #000;
+    background: var(--Tercero, #62C3D6);
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+    margin-right: 10px;
+    margin-top: -1px;
+}
+
+.info {
+    display: flex;
+    justify-content: space-between;
+}
+
+.info > span {
+    margin-left: 14px;
+    margin-top: -7px;
+}
+
+#paginacion {
+    display: flex;
+    gap: 50px;
+    justify-content: center;
+    grid-area: paginacion;
+}
+
+#paginaXdeX {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+#paginaXdeX i, #primera, #ultima{
+    cursor: pointer;
+}
+
+#primera, #ultima {
+    height: fit-content;
+    transition: all 1s;
+}
+
+#primera:hover, #ultima:hover {
+    transform: scale(1.05);
+}
+
+#none1 {
+    grid-area: none1;
+}
+
+#none2 {
+    grid-area: none2;
+}
+#none3 {
+    grid-area: none3;
+}
+#none4 {
+    grid-area: none4;
+}
+#none5 {
+    grid-area: none5;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+#tercerLi {
+    padding-top: 10px;
+    display: block;
+    text-align: center;
+    cursor: pointer;
+}
+
+#ordenacion {
+    border-left: 1px solid rgba(0, 0, 0, 0.15);
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding-left: 10px;
+}
+
+select {
+    width: 190px;
+    height: 39px;
+    border-radius: 5px;
+    background: var(--septimo);
+    border: 0px;
+    box-shadow: 1px 1px 2px 0px #9C9898;
+    font-family: 'Inknut Antiqua', serif;
+    text-align: center;
+}
+
+#ordenar {
+    border: 2px solid var(--octavo);
+}
+
+.noMarcado {
+    background-color:var(--blanco);
+    border: 0px;
+}
+
+#favoritas {
+    background-color: var(--blanco);
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.55);
+    border-radius: 10px;
+    width: 500px;
+    height: 730px;
+    position: absolute;
+    top: 55px;
+    overflow-y: scroll;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    scrollbar-width: thin; 
+    gap: 10px;
+    scrollbar-color: var(--tercero) var(--blanco);
+    z-index: 4;
+}
+
+#favoritas .cards {
+    width: 305px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+#tapar {
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.75);
+    position: absolute;
+    z-index: 1;
+}
+
+#iconoFav {
+    cursor: pointer;
+    z-index: 4;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* #sideBar {
+    width: 30%;
+    height: 100%;
+    background-color: var(--negro);
+    box-shadow: 3px 0px 5px rgb(0, 0, 0, 0.5);
+    color: var(--blanco);
+    transition: width 1.5s;
+}
+
+#sideBar:hover {
+    width: 95%;
+} */

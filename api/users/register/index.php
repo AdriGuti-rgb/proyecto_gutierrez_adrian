@@ -51,10 +51,7 @@
 
             header("HTTP/1.1 201 Created");
 
-            echo json_encode(array("message" => "Usuario creado"));
-
         } catch (mysqli_sql_exception $e) {
-            echo json_encode(array("message" => "Error de los datos"));
             header("HTTP/1.1 404 Not Found");
         }
     } else {

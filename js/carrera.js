@@ -99,44 +99,35 @@ fetch("http://localhost/php/proyecto/api/races/categories/", )
 let form = document.forms.registerRace;
 let send = form.elements.send;
 
-send.addEventListener("click", e => {
+send.addEventListener("click", registerRace);
+
+function registerRace (e) {
     e.preventDefault();
     
-    let raceName = form.elements.nombreCarrera.value;
-    let categories = form.elements.categorias.value;
-    let total_slope = form.elements.desnivel.value;
-    let positive_slope = form.elements.desnivelPos.value;
-    let poblation = form.elements.poblacion.value;
-    let main_photo = form.elements.fotoPrincipal.value;
-    let gpx = form.elements.gpx.value;
-    let race_day = form.elements.fechaRealizacion.value;
-    let negative_slope = form.elements.desnivelNeg.value;
-    let services = Array.from(form.elements.servicios.selectedOptions);
-    let modality = form.elements.modalidad.value;
-    let older_photos = form.elements.fotosAnteriores.value;
-    
-    
+    let arrayOldPhotos = [];
     let arrayServices = [];
+    
+    Array.from(form.elements.fotosAnteriores.files)
+        .forEach( item => arrayOldPhotos.push(item.name));
+    
     Array.from(form.elements.servicios.selectedOptions)
-    .forEach( item => arrayServices.push(item.value))
+        .forEach( item => arrayServices.push(item.value))
     
     let race = {
-        "raceName": raceName,
-        "categories": categories,
-        "total_slope": total_slope,
-        "positive_slope": positive_slope,
-        "negative_slope": negative_slope,
-        "poblation": poblation,
-        "main_photo": main_photo,
-        "gpx": gpx,
-        "race_day": race_day,
+        "raceName": form.elements.nombreCarrera.value,
+        "categories": form.elements.categorias.value,
+        "total_slope": form.elements.desnivel.value,
+        "positive_slope": form.elements.desnivelPos.value,
+        "negative_slope": form.elements.desnivelNeg.value,
+        "distance": form.elements.distancia.value,
+        "poblation": form.elements.poblacion.value,
+        "main_photo": form.elements.fotoPrincipal.value,
+        "gpx": form.elements.gpx.value,
+        "race_day": form.elements.fechaRealizacion.value,
         "services": arrayServices,
-        "modality": modality,
-        "older_photos": older_photos
+        "modality": form.elements.modalidad.value,
+        "older_photos": arrayOldPhotos
     };
-    console.log(race);
-    // console.log(Array.from(form.elements.servicios.selectedOptions));
-    // console.log(race);
 
     fetch("http://localhost/php/proyecto/api/races/register/", {
         method: "POST",
@@ -146,10 +137,42 @@ send.addEventListener("click", e => {
         mode: "cors",
         body: JSON.stringify(race)
     }).then( response => {
-        if (response.status === 201) return response.json()
+        if (response.status === 201) location.href = "./paginaPpal.html"
             else if (response.status === 404) alert(response.statusText)
             else throw new Error("Hubo un problema con la solicitud")
     }).then(data => {                
-        console.log(data);
+        if (data) console.log(data);
     }).catch(error => console.error(error));
-})
+}
+
+let inputGPX = document.getElementById("gpx");
+
+inputGPX.addEventListener("change", calcultateSlope);
+
+function calcultateSlope (){
+    const file = inputGPX.files[0];
+    
+    if (file) {
+        const fileReader = new FileReader();
+        const r = fileReader.readAsText(file);
+        fileReader.onload = event => {
+            const textContent = event.target.result;
+            const parser = new DOMParser();
+            const xmlDoc = parser.parseFromString(textContent, "application/xml");
+            const json = toGeoJSON.gpx(xmlDoc);
+            const coor = json.features[0].geometry.coordinates;
+            
+            let altitudes = coor.map(item => item[2]);
+
+            let values = altitudes.reduce( ({pos, neg, prev}, item) => {
+                            if (item < prev) pos += (prev - item)
+                                else neg += (item - prev)
+                            return {pos: pos, neg: neg, prev:item}
+                    }, {pos:0, neg:0, prev: altitudes[0]});
+
+            form.elements.desnivelNeg.value = values.neg.toFixed(2);
+            form.elements.desnivelPos.value = values.pos.toFixed(2);
+            form.elements.desnivel.value = (values.pos + values.neg).toFixed(2);
+        }
+    }
+}

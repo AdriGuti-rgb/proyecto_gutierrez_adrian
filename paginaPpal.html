@@ -13,7 +13,7 @@
     <title>RaceMapp | Carreras</title>
 </head>
 <body>
-    
+    <div id="tapar" class="hidden"></div>
     <div id="todo">
         <header>
             <div id="logoTitulo">
@@ -27,11 +27,149 @@
                     <img src="./img/fotoPerfil.png" alt="Foto Perfil" id="imgPerfilSuperior">
                     <i class="fa-solid fa-caret-down"></i>
                 </div>
+                <i class="fa-regular fa-heart" style="font-size: 30px; color: rgb(209, 0, 0);" id="iconoFav"></i>
+                <div id="favoritas" class="hidden">
+                </div>
             </div>
         </header>
         
         <main>
-            
+            <div id="contenedorCarreras">
+                <div id="none1"></div>
+                <div id="none2"></div>
+                <div id="none3"></div>
+                <div id="none4"></div>
+                <div id="none5"></div>
+                <div id="ordenacion">
+                    <div>
+                        <span>Ordenar: </span>
+                        <select name="ordenar" id="ordenar">
+                            <option value="nombre" class="noMarcado">Nombre</option><hr>
+                            <option value="distancia" class="noMarcado">Distancia</option><hr>
+                            <option value="desnivelTot" class="noMarcado">Desnivel total</option><hr>
+                            <option value="desnivelPos" class="noMarcado">Desnivel positivo</option><hr>
+                            <option value="desnivelNeg" class="noMarcado">Desnivel negativo</option><hr>
+                            <option value="poblacion" class="noMarcado">Poblacion</option><hr>
+                            <option value="fecha" class="noMarcado">Fecha realización</option>
+                        </select>
+                    </div>
+                </div>
+                <ul id="sideBar">
+                    <li id="primerLi">
+                        <div id="relleno"></div>
+                        <span id="spanBusqueda">Búsqueda:</span>
+                        <div id="opcionesBusqueda1">
+                            <!-- <label for="nombreCarrera" class="colocado">Nombre carrera</label> -->
+                            <input type="text" name="nombreCarrera" id="nombreCarrera" class="busqueda" placeholder="Nombre de la carrera">
+                            <i class="fa-solid fa-magnifying-glass icono" id="busquedaNombre" title="Busqueda de la carrera"></i>
+                        </div>
+                        <div id="opcionesBusqueda2">
+                            <!-- <label for="provincia" class="colocado">Provincia</label> -->
+                            <input type="text" name="provincia" id="provincia" class="busqueda" placeholder="Nombre de la provincia">
+                            <i class="fa-solid fa-magnifying-glass icono" id="busquedaProvincia" title="Busqueda de la provincia"></i>
+                        </div>
+                    </li>
+
+                    <li id="segundoLi">
+                        <span id="filtro">Filtro:</span>   
+                        <div class="campos">
+                            <div class="subCampos">
+                                <div class="check marcado" id="primeraOpcion">
+                                    <i class="fa-solid fa-xmark"></i>
+                                </div>
+                                <div>
+                                    <select name="distancia" id="primerValor" class="valor marcado">
+                                        <option value="" disabled selected>Distancia</option><hr>
+                                        <option value="5" class="noMarcado">> 5</option><hr>
+                                        <option value="15" class="noMarcado">> 15</option><hr>
+                                        <option value="25" class="noMarcado">> 25</option><hr>
+                                        <option value="35" class="noMarcado">> 35</option><hr>
+                                        <option value="45" class="noMarcado">> 45</option><hr>
+                                        <option value="55" class="noMarcado">> 55</option><hr>
+                                        <option value="65" class="noMarcado">> 65</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="subCampos">
+                                <div class="check" id="segundoCheck"></div>
+                                <div>
+                                    <select name="desnivel" id="segundoValor" class="valor">
+                                        <option value="" disabled selected>Desnivel</option><hr>
+                                        <option value="500" class="noMarcado">> 5</option><hr>
+                                        <option value="1000" class="noMarcado">> 15</option><hr>
+                                        <option value="1500" class="noMarcado">> 25</option><hr>
+                                        <option value="2000" class="noMarcado">> 35</option><hr>
+                                        <option value="2500" class="noMarcado">> 45</option><hr>
+                                        <option value="3500" class="noMarcado">> 55</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="subCampos">
+                                <div class="check"></div>
+                                <div>
+                                    <select name="tipo" id="tercerValor" class="valor">
+                                        <option value="" disabled selected>Tipo</option><hr>
+                                        <option value="500" class="noMarcado">> 5</option><hr>
+                                        <option value="1000" class="noMarcado">> 15</option><hr>
+                                        <option value="1500" class="noMarcado">> 25</option><hr>
+                                        <option value="2000" class="noMarcado">> 35</option><hr>
+                                        <option value="2500" class="noMarcado">> 45</option><hr>
+                                        <option value="3500" class="noMarcado">> 55</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="subCampos">
+                                <div class="check"></div>
+                                <div class="valor">
+                                    <span>Comida</span>
+                                </div>
+                            </div>
+
+                            <div class="subCampos">
+                                <div class="check"></div>
+                                <div class="valor">
+                                    <span>Bebida</span>
+                                </div>
+                            </div>
+
+                            <div class="subCampos">
+                                <div class="check"></div>
+                                <div class="valor">
+                                    <select name="poblacion" id="cuartoValor" class="valor">
+                                        <option value="" disabled selected>Poblacion</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="subCampos">
+                                <div class="check"></div>
+                                <div class="valor">
+                                    <span>Otros servicios</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </li>
+                    <li id="tercerLi">
+                        <i class="fa-solid fa-filter"></i>
+                        <span>Restablecer filtros</span>
+                    </li>
+                </ul>
+                <div id="carreras">
+                </div>
+                <div id="paginacion">
+                    <div id="primera"><span>Primera</span></div>
+                    <div id="paginaXdeX">
+                        <i class="fa-solid fa-chevron-left" id="anterior"></i>
+                        <span id="numerosPagina">Pagina x de x</span>
+                        <i class="fa-solid fa-chevron-right" id="siguiente"></i>
+                    </div>
+                    <div id="ultima"><span>Última</span></div>
+                </div>
+            </div>
         </main>
 
         <footer>

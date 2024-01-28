@@ -29,10 +29,10 @@ main {
     opacity: 0 !important;
 }
 
-#auxiliar {
+/* #auxiliar {
     opacity: 1 !important;
     transition: opacity 4.3;
-}
+} */
 
 #tipoUsuarioNormal {
     display: flex;
