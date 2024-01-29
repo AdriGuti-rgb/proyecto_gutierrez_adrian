@@ -412,6 +412,7 @@ select {
     width: 305px;
     margin-top: 30px;
     margin-bottom: 30px;
+    height: 250px;
 }
 
 #tapar {
@@ -431,7 +432,7 @@ select {
     display: none !important;
 }
 
-#sideBar {
+/* #sideBar {
     width: 10%;
     height: 100%;
     background-color: var(--negro);
@@ -443,4 +444,4 @@ select {
 #sideBar:hover {
     width: 95%;
 }
-
+ */

@@ -12,6 +12,7 @@ fetch("http://localhost/php/proyecto/api/races/totalRaces/", )
     .then( data => {
         if (data) {
             dataGlobal = data;
+            document.getElementById("cantidad").textContent = `Mostrando ${itemsPerPage < data.length ? itemsPerPage : data.length} de ${data.length}`
             renderRaces(dataGlobal);
         }
     })
@@ -72,7 +73,6 @@ function handleNextClick () {
 
 function handleNameSearchClick () {
     let value = document.getElementById("nombreCarrera").value;
-    // document.getElementById("nombreCarrera").value = ""
     let dataTemporal = dataGlobal.filter( ({name}) => name.toLowerCase().includes(value.toLowerCase()))
     
     renderRaces(dataTemporal)
@@ -80,7 +80,6 @@ function handleNameSearchClick () {
 
 function handleProvinceSearchClick () {
     let value = document.getElementById("provincia").value;
-    // document.getElementById("provincia").value = ""
     let dataTemporal = dataGlobal.filter( ({poblation}) => poblation.toLowerCase().includes(value.toLowerCase()))
     
     renderRaces(dataTemporal)
@@ -154,20 +153,21 @@ function handleIconFav (e) {
                 document.getElementById("favoritas").innerHTML = `
                     <span style='font-size: 28px;'>Tus carreras favoritas:</span>
                 `;
-                data.forEach( ({name}) => {
-                    document.getElementById("favoritas").innerHTML += `
-                        <div class="cards">
-                        <div class="fotoCarrera">
-                            <img src="./img/fotosLandingRandom/1Foto.jpg" alt="Foto 1">
-                        </div>
-                        <div class="info">
-                            <span>${name}</span>
-                            <div class="detalles" id="botonDetalle">
-                                <span>Detalles</span>
+                data.sort( (a, b) => a.race_day > b.race_day)
+                    .forEach( ({name}) => {
+                        document.getElementById("favoritas").innerHTML += `
+                            <div class="cards">
+                            <div class="fotoCarrera">
+                                <img src="./img/fotosLandingRandom/1Foto.jpg" alt="Foto 1">
                             </div>
-                        </div>
-                    </div> 
-                    `;
+                            <div class="info">
+                                <span>${name}</span>
+                                <div class="detalles" id="botonDetalle">
+                                    <span>Detalles</span>
+                                </div>
+                            </div>
+                        </div> 
+                        `;
                 })
                 Array.from(document.getElementsByClassName("detalles")).forEach(item => item.addEventListener("click", getName));
             }
@@ -177,7 +177,6 @@ function handleIconFav (e) {
 }
 
 function getName (e) {
-    // console.log(e.target.parentElement.parentElement.children[0].textContent);
     localStorage.setItem('raceName', e.currentTarget.parentElement.children[0].textContent);
     location.href = "./detalle.html";
 }

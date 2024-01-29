@@ -10,10 +10,8 @@
             $modalities = $resultado->fetch_all(MYSQLI_ASSOC);
 
             echo json_encode($modalities);
-            
 
             header("HTTP/1.1 200 OK");
-            // echo json_encode($users);
             
         } catch (mysqli_sql_exception $e) {
             header("HTTP/1.1 404 Not found");

@@ -163,6 +163,7 @@ main {
     border-bottom: 1px solid var(--sexto);
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 
 .datosGenerales {
@@ -172,11 +173,9 @@ main {
 
 .marcado {
     background: var(--septimo);
+    border-bottom: 1px solid var(--septimo);
 }
 
-.hidden {
-    display: none;
-}
 
 #tiposSelector {
     grid-area: tiposSelector;
@@ -197,8 +196,8 @@ main {
     grid-template-columns: 25% 75%;
     grid-template-rows: 50% 45% 5%;
     grid-template-areas: "fotoCarrera datos"
-                        "fotosVariadas fotosVariadas"
-                        "favoritos favoritos";
+    "fotosVariadas fotosVariadas"
+    "favoritos favoritos";
 }
 
 #fotoCarrera {
@@ -240,12 +239,96 @@ main {
 }
 
 #restoDatos {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 6fr 1fr;
+    /* gap: 10px; */
+}
+
+#primerosDatos {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 5px;
+}
+
+#segundosDatos {
+    display: grid;
+    grid-template-rows: 60px 60px 60px;
+    grid-template-areas: "servicios"
+    "modalidad"
+    "desnivelPos";
+}
+
+#tercerosDatos {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas: "premios"
+    "desnivelNeg";
+}
+
+#modalidad {
+    grid-area: modalidad;
+    align-self: center;
+    justify-self: center;
+}
+
+#servicios {
+    grid-area: servicios;
+    align-self: center;
+    justify-self: center;
+}
+
+#desnivelPos {
+    grid-area: desnivelPos;
+    align-self: center;
+    justify-self: center;
+    margin-top: 20px;
+}
+
+#desnivelNeg {
+    grid-area: desnivelNeg;
+    align-self: center;
+    justify-self: center;
+    margin-bottom: 17px;
+}
+
+#premios {
+    grid-area: premios;
+    align-self: center;
+    justify-self: center;
 }
 
 .underlined {
     text-decoration: underline;
 }
 
+#iconoFav {
+    cursor: pointer;
+}
+
+#contenedorMapa {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    align-items: center;
+}
+
+#serviciosVarios {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    padding-right: 40px;
+    border-right: 1px solid rgba(0, 0, 0, 0.25);
+}
+
+.services {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.hidden {
+    display: none !important;
+}
