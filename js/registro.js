@@ -215,12 +215,30 @@ function getParams(e) {
     let photo = form.elements.fotoPerfil.value;
     let city = form.elements.localidad.value;
 
+    console.log(form.elements.fotoPerfil.files[0].name);
+    console.log(form.elements.fotoPerfil);
+    console.log(photo);
+    let file = form.elements.fotoPerfil.files[0];
+    let formData = new FormData();
+    formData.append("image", file);
+    console.log(formData);
+
+    // https://es.stackoverflow.com/questions/41373/c%C3%B3mo-obtener-el-nombre-del-archivo-seleccionado-en-un-input-type-file
+    // https://es.stackoverflow.com/questions/395526/como-guardar-imagenes-en-una-carpeta-usando-php
+    // http://www.luislorenzo.es/programacion/parse-com-subir-archivos-a-traves-de-javascript-y-rest-api/
+    // https://www.espai.es/blog/2022/08/manipular-archivos-en-javascript-file-system-access-api/
+    // https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwiw45CN0YKEAxUBiP0HHZD_BMc4ChC3AnoECAcQAg&url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D982UdgJVsdk&usg=AOvVaw0ZWV-bDKU3EK8UBKo0tTWw&opi=89978449
+
+    // console.log(form.elements.fotoPerfil.files[0].size);
+    // console.log(form.elements.fotoPerfil.files[0].type);
+
+    
     let user = {
         "name": `${name}`,
         "username": `${username}`,
         "mail": `${mail}`,
         "pass": `${pass}`,
-        "photo": `${photo}`,
+        "photo": `${formData}`,
         "city": `${city}`
     };
 
@@ -247,11 +265,13 @@ function getParams(e) {
         mode: "cors",
         body: JSON.stringify(user)
     }).then( response => {
-        if (response.status === 201) location.href = "./index.html"
+        if (response.status === 201) return response.json()
             else putErrors("Error en los datos")
     }).then(data => {
-        if (data.message == "Usuario creado") location.href ="http://localhost/php/proyecto/index.html"; 
-            else putErrors(data.message)
+        // if (data.message == "Usuario creado") location.href ="http://localhost/php/proyecto/index.html"; 
+        //     else putErrors(data.message)
+
+        console.log(data);
 
     }).catch(error => console.error(error));
 }

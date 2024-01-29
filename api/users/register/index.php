@@ -21,13 +21,25 @@
         try {            
             $json_data = file_get_contents("php://input");
             $data = json_decode($json_data, true);
-            
+            echo $_FILES["photo"];
             $name = $data["name"];
             $username = $data['username'];
             $mail = $data["mail"];
             $pass = $data['pass'];
             $photo = $data['photo'];
             $city = $data['city'];
+
+        echo ($photo);
+
+            // $nombreImagen = $data['photo']['name'];
+            // $rutaTemporal = $data['photo']['tmp_name'];
+    
+            echo $photo[0]["name"];
+            // Puedes realizar otras validaciones y procesamientos aquí
+    
+            // Mover la imagen a una carpeta de destino
+            // $rutaDestino = '../../img/userPhotos/' . $$name;
+            // move_uploaded_file($rutaTemporal, $rutaDestino);
 
             $uniqid = uniqid();
             $hash = md5($uniqid);
@@ -37,7 +49,7 @@
                     VALUES ('$idAlfanumerico', '$name', '$username', '$mail', '$pass', '$city', '$photo')
                 ";
             
-                $con->query($sqlNormal);
+                // $con->query($sqlNormal);
                 
             if (isset($data['phone']) && isset($data['club'])) {
                 $phone = $data['phone'];
@@ -46,7 +58,7 @@
                 $sqlOrganizer = "
                     INSERT INTO organizers (id_user, phone, club) VALUES ('$idAlfanumerico', '$phone', '$club')
                 ";
-                $con->query($sqlOrganizer);
+                // $con->query($sqlOrganizer);
             }
 
             header("HTTP/1.1 201 Created");

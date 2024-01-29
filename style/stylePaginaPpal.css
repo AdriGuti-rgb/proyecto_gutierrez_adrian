@@ -338,6 +338,7 @@ i {
 
 #none2 {
     grid-area: none2;
+    align-self: center;
 }
 #none3 {
     grid-area: none3;
@@ -430,8 +431,8 @@ select {
     display: none !important;
 }
 
-/* #sideBar {
-    width: 30%;
+#sideBar {
+    width: 10%;
     height: 100%;
     background-color: var(--negro);
     box-shadow: 3px 0px 5px rgb(0, 0, 0, 0.5);
@@ -441,4 +442,5 @@ select {
 
 #sideBar:hover {
     width: 95%;
-} */
+}
+
