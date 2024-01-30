@@ -32,7 +32,7 @@ document.getElementById('perfil').addEventListener('click', toggleMenu);
 
 
 /* Mando el token cuando queden poco tiempo para crear uno nuevo */
-let time = 1800000;
+let time = 3300;
 setTimeout(renovateToken, time);
 
 function renovateToken() {
@@ -46,7 +46,7 @@ function renovateToken() {
 
     let restante = exp -(Math.trunc(Date.now() / 1000));
 
-    if (restante <= 3000) {
+    if (restante <= 305) {
         fetch("http://localhost/php/proyecto/api/users/token/", {
         headers: {
             Authorization: `${localStorage.getItem("token")}`

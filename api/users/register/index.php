@@ -19,51 +19,42 @@
 
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
         try {            
-            $json_data = file_get_contents("php://input");
-            $data = json_decode($json_data, true);
-            
-            $name = $data["name"];
-            $username = $data['username'];
-            $mail = $data["mail"];
-            $pass = $data['pass'];
-            $photo = $data['photo'];
-            $city = $data['city'];
+            $name = $_POST["name"];
+            $username = $_POST['username'];
+            $mail = $_POST["mail"];
+            $pass = $_POST['pass'];
+            $city = $_POST['city'];
 
-        echo ($photo);
-
-            // $nombreImagen = $data['photo']['name'];
-            // $rutaTemporal = $data['photo']['tmp_name'];
-    
-            echo $photo[0]["name"];
-            // Puedes realizar otras validaciones y procesamientos aquí
-    
-            // Mover la imagen a una carpeta de destino
-            // $rutaDestino = '../../img/userPhotos/' . $$name;
-            // move_uploaded_file($rutaTemporal, $rutaDestino);
+            $rutaDestino = '../../../img/userPhotos/';
+            if (!file_exists($rutaDestino)) {
+                mkdir($rutaDestino, 0777, true);
+            }
+            move_uploaded_file($_FILES['file']['tmp_name'], '../../../img/userPhotos/'.strtolower($name).".png");
 
             $uniqid = uniqid();
             $hash = md5($uniqid);
             $idAlfanumerico = substr($hash, 0, 20); 
             $sqlNormal = "
                     INSERT INTO users (id, name, username, mail, pass, city, photo)
-                    VALUES ('$idAlfanumerico', '$name', '$username', '$mail', '$pass', '$city', '$photo')
+                    VALUES ('$idAlfanumerico', '$name', '$username', '$mail', '$pass', '$city', '$name.png')
                 ";
             
-                // $con->query($sqlNormal);
+                $con->query($sqlNormal);
                 
-            if (isset($data['phone']) && isset($data['club'])) {
-                $phone = $data['phone'];
-                $club = $data['club'];
+            if (isset($_POST['phone']) && isset($_POST['club'])) {
+                $phone = $_POST['phone'];
+                $club = $_POST['club'];
                     
                 $sqlOrganizer = "
                     INSERT INTO organizers (id_user, phone, club) VALUES ('$idAlfanumerico', '$phone', '$club')
                 ";
-                // $con->query($sqlOrganizer);
+                $con->query($sqlOrganizer);
             }
 
             header("HTTP/1.1 201 Created");
 
         } catch (mysqli_sql_exception $e) {
+            echo json_encode($e->getMessage());
             header("HTTP/1.1 404 Not Found");
         }
     } else {

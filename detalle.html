@@ -22,7 +22,7 @@
             <div id="links">
                 <span><a href="./registroEdicionCarrera.html" id="crearCarrera">Crear Carrera</a></span>
                 <span><a href="./paginaPpal.html" id="carreras">Carreras</a></span>
-                <span id="nombreLocal">Adrian</span>
+                <span id="nombreLocal"></span>
                 <div id="perfil">
                     <img src="./img/fotoPerfil.png" alt="Foto Perfil" id="imgPerfilSuperior">
                     <i class="fa-solid fa-caret-down"></i>
@@ -36,44 +36,44 @@
         <div id="none2"></div>
         <div id="none3"></div>
         <div id="tiposSelector">
-            <div id="tipoDetalle" class="tipos">Detalles</div>
+            <div id="tipoDetalle" class="marcado tipos">Detalles</div>
             <div id="tipoMapa" class="tipos">Mapa</div>
             <div id="tipoReglamento" class="tipos">Reglamento</div>
             <div id="tipoWeb" class="tipos">Enlace web</div>
             <div id="tipoClasificaciones" class="tipos">Clasificaciones</div>
-            <div id="tipoOrganizador" class="tipos marcado">Opciones</div>
+            <div id="tipoOrganizador" class="tipos">Opciones</div>
         </div>
         <div id="general">
-            <div id="contenedorDetalles" class="hidden datosGenerales">
+            <div id="contenedorDetalles" class="marcado datosGenerales">
 
                 <div id="datos">
-                    <h3>San Silvestre de León</h3>
+                    <h3 id="nombreRaceInfo"></h3>
                     <div id="restoDatos">
                         <div id="primerosDatos">
                             <div id="fechaRealizacion">
                                 <i class="fa-solid fa-calendar-days"></i>
                                 <span class="underlined">Fecha realización:</span>
-                                <span>30-12-2023</span>
+                                <span id="diaRealizacionInfo">30-12-2023</span>
                             </div>
                             <div id="poblacion">
                                 <i class="fa-solid fa-map-location-dot"></i>
                                 <span class="underlined">Población:</span>
-                                <span>León</span>
+                                <span id="poblacionInfo">León</span>
                             </div>
                             <div id="distancia">
                                 <i class="fa-solid fa-route"></i>
                                 <span class="underlined">Distancia:</span>
-                                <span>30km</span>
+                                <span id="distanciaInfo">30km</span>
                             </div>
                             <div id="desnivel">
                                 <i class="fa-solid fa-arrow-right-long"></i>
                                 <span class="underlined">Desnivel:</span>
-                                <span>129m</span>
+                                <span id="desnivelInfo">129m</span>
                             </div>
                             <div id="categoria">
                                 <i class="fa-solid fa-shapes"></i>
                                 <span class="underlined">Categoria:</span>
-                                <span>senior</span>
+                                <span id="categoriaInfo">senior</span>
                             </div>
                         </div>
                         
@@ -83,35 +83,30 @@
                             <div id="modalidad">
                                 <i class="fa-solid fa-shapes"></i>
                                 <span class="underlined">Modalidad:</span>
-                                <span>trail</span>
+                                <span id="modalidadInfo">trail</span>
                             </div>
                             <div id="desnivelPos">
                                 <i class="fa-solid fa-arrow-trend-up"></i>
                                 <span class="underlined">Desnivel positivo:</span>
-                                <span>129m</span>
+                                <span id="desnivelPositivoInfo">129m</span>
                             </div>
                             
                             <div id="servicios">
                                 <i class="fa-solid fa-shapes"></i>
                                 <span class="underlined">Servicios:</span>
-                                <span>
+                                <span id="serviciosInfo">
                                     
                                 </span>
                             </div>
                         </div>
                         <div id="tercerosDatos">
                             <div id="premios">
-                                <i class="fa-solid fa-trophy"></i>
-                                <span class="underlined">Premios:</span>
-                                <span>1</span>
-                                <span>2</span>
-                                <span>3</span>
                             </div>
                             
                             <div id="desnivelNeg">
                                 <i class="fa-solid fa-arrow-trend-down"></i>
                                 <span class="underlined">Desnivel negativo:</span>
-                                <span>129m</span>
+                                <span id="desnivelNegativoInfo">129m</span>
                             </div>
                         </div>
 
@@ -177,7 +172,7 @@
                 </div>
             </div>
             <div id="contenedorReglamento" class="hidden datosGenerales">
-                <div id="contendidoReglamento">
+                <div id="contenidoReglamento">
                     Tener un reglamento para una carrera de montaña es fundamental para garantizar la seguridad, el orden y la equidad durante el evento. 
                     Estas sn algunas razones por las cuales es beneficioso contar con un reglamento bien estructurado:
                     <ul>
@@ -196,15 +191,110 @@
                     cabo la carrera. Estas normas pueden abordar cuestiones como la prohibición de dejar basura, restricciones en determinadas áreas 
                     sensibles o medidas para minimizar el impacto ambiental de la competición.
                         </li>
+                        <li>
+                            Igualdad de Condiciones: Un reglamento claro y equitativo asegura que todos los participantes compitan en condiciones similares. 
+                    Establecer normas sobre el tipo de calzado, la cantidad de suministros que se pueden recibir en los puntos de avituallamiento y otros 
+                    aspectos, evita desventajas injustas y promueve una competencia justa.
+                        </li>
+                        <li>
+                            Protección del Entorno: Incluir directrices ambientales en el reglamento ayuda a preservar los espacios naturales donde se lleva a 
+                    cabo la carrera. Estas normas pueden abordar cuestiones como la prohibición de dejar basura, restricciones en determinadas áreas 
+                    sensibles o medidas para minimizar el impacto ambiental de la competición.
+                        </li>
                 </div>  
                 <span>
                     Acceso al reglamento: <a style="text-decoration: underline;" href="./pdf/PROYECTO INTEGRADOR 2023-24  v0.2 - Solo enunciado.pdf" target="_blank">archivo.pdf</a>
                 </span>
             </div>
-            <div id="contenedorWeb" class="hidden datosGenerales"></div>
-            <div id="contenedorClasificaciones" class="hidden datosGenerales"></div>
-            <div id="contenedorOrganizador" class="marcado datosGenerales">
-                <form action="" method="post" name="registerRace">
+            <div id="contenedorWeb" class="hidden datosGenerales">
+                Aqui puedes acceder a la página oficial de la entidad creadora de la Carrera:
+                <a href="https://www.google.com" id="enlacePagina" style="text-decoration: underline;">San Silvestre de León</a>
+            </div>
+            <div id="contenedorClasificaciones" class="hidden datosGenerales">
+                <i class="fa-solid fa-angle-left" title="Pagina anterior"></i>
+                <table>
+                    <tr>
+                        <th></th>
+                        <th>1ª Posición</th>
+                        <th>2ª Posición</th>
+                        <th>3ª Posición</th>
+                        <th>Año realizacion</th>
+                    </tr>
+                    <tr>
+                        <td>1:16:23</td>
+                        <td>Paco</td>
+                        <td>Ese</td>
+                        <td>Aquel</td>
+                        <td>2023</td>
+                    </tr>
+                    <tr>
+                        <td>1:16:23</td>
+                        <td>Paco</td>
+                        <td>Ese</td>
+                        <td>Aquel</td>
+                        <td>2023</td>
+                    </tr>
+                    <tr>
+                        <td>1:16:23</td>
+                        <td>Paco</td>
+                        <td>Ese</td>
+                        <td>Aquel</td>
+                        <td>2023</td>
+                    </tr>
+                    <tr>
+                        <td>1:16:23</td>
+                        <td>Paco</td>
+                        <td>Ese</td>
+                        <td>Aquel</td>
+                        <td>2023</td>
+                    </tr>
+                    <tr>
+                        <td>1:16:23</td>
+                        <td>Paco</td>
+                        <td>Ese</td>
+                        <td>Aquel</td>
+                        <td>2023</td>
+                    </tr>
+                    <tr>
+                        <td>1:16:23</td>
+                        <td>Paco</td>
+                        <td>Ese</td>
+                        <td>Aquel</td>
+                        <td>2023</td>
+                    </tr>
+                    <tr>
+                        <td>1:16:23</td>
+                        <td>Paco</td>
+                        <td>Ese</td>
+                        <td>Aquel</td>
+                        <td>2023</td>
+                    </tr>
+                    <tr>
+                        <td>1:16:23</td>
+                        <td>Paco</td>
+                        <td>Ese</td>
+                        <td>Aquel</td>
+                        <td>2023</td>
+                    </tr>
+                    <tr>
+                        <td>1:16:23</td>
+                        <td>Paco</td>
+                        <td>Ese</td>
+                        <td>Aquel</td>
+                        <td>2023</td>
+                    </tr>
+                    <tr>
+                        <td>1:16:23</td>
+                        <td>Paco</td>
+                        <td>Ese</td>
+                        <td>Aquel</td>
+                        <td>2023</td>
+                    </tr>
+                </table>
+                <i class="fa-solid fa-angle-right"  title="Pagina siguiente"></i>
+            </div>
+            <div id="contenedorOrganizador" class="hidden datosGenerales">
+                <form action="" method="post" name="edit">
                     <div id="form">
                     <ul id="primeraParte">
                         <li>
@@ -221,13 +311,10 @@
                             <label for="fotoPrincipal">Foto principal:</label>
                             <input type="file" name="fotoPrincipal" id="fotoPrincipal" accept="image/png, image/jpeg, image/jpg">
                         </li>
-
-                        <li>
-                            <label for="gpx">Archivo ruta:</label>
-                            <input type="file" name="gpx" id="gpx" accept=".gpx">
-                        </li>
                     </ul>
-    
+                    
+                    <div id="divisoria"></div>
+
                     <ul id="segundaParte">
                         <li>
                             <label for="fechaRealizacion">Fecha realizacion:</label>
@@ -240,12 +327,6 @@
                         </li>
 
                         <li>
-                            <label for="servicios">Servicios:</label>
-                            <select name="servicios" id="servicios" multiple>
-                            </select>
-                        </li>
-
-                        <li>
                             <label for="fotosAnteriores">Fotos Anteriores:</label>
                             <input type="file" name="fotosAnteriores[]" id="fotosAnteriores" accept="image/png, image/jpeg, image/jpg" multiple>
                         </li>
@@ -254,7 +335,7 @@
                 </div>
                     <div id="envio">
                         <input type="button" value="Eliminar" name="delete" id="delete">
-                        <input type="submit" value="Modificar" name="send">
+                        <input type="submit" value="Modificar" name="send" id="update">
                     </div>
                 </form>
             </div>

@@ -212,6 +212,7 @@ main {
 
 #datos h3 {
     margin-left: 30px;
+    margin-bottom: 0px;
 }
 
 #fotosVariadas i {
@@ -289,13 +290,18 @@ main {
     grid-area: desnivelNeg;
     align-self: center;
     justify-self: center;
-    margin-bottom: 17px;
+    margin-bottom: 47px;
 }
 
 #premios {
     grid-area: premios;
     align-self: center;
     justify-self: center;
+}
+
+.prize {
+    display: block;
+    text-align: end;
 }
 
 .underlined {
@@ -329,18 +335,35 @@ main {
     gap: 20px;
 }
 
-#contenedorReglamento {
-    overflow-y: scroll;
-}
-
 #contenedorReglamento span {
     display: block;
     text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid var(--octavo);
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
-#contendidoReglamento {
+#contenidoReglamento {
+    width: 90%;
+    height: 50vh;
     text-align: justify;
     padding: 50px;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    scrollbar-color: var(--septimo) var(--septimo);
+}
+
+#contenidoReglamento:hover {
+    scrollbar-color: var(--octavo) var(--septimo);
+}
+
+#contenedorWeb {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
 }
 
 #form {
@@ -378,7 +401,7 @@ main {
 }
 
 #contenedorOrganizador li {
-    padding: 25px;
+    padding: 35px;
     list-style: none;
     display: flex;
     justify-content: space-between;
@@ -388,10 +411,10 @@ main {
     border-radius: 20px;
 }
 
-#primeraParte {
+#primeraParte, #segundaParte {
     display: flex;
     flex-direction: column;
-    gap: 28px;
+    gap: 35px;
 }
 #contenedorOrganizador ul {
     padding: 0;
@@ -416,6 +439,39 @@ main {
     width: 172px;
     height: 40px;
     box-shadow: none;
+}
+
+#contenedorClasificaciones {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+table {
+    width: 70%;
+    border: 3px solid var(--octavo);
+}
+
+th, td {
+    width: 20%;
+    text-align: center;
+    border: 1px solid var(--sexto);
+}
+
+th:first-of-type {
+    border: none;
+}
+
+#contenedorClasificaciones i {
+    font-size: 60px;
+    cursor: pointer;
+}
+
+#divisoria {
+    width: 2px;
+    height: 50vb;
+    background-color: var(--octavo);
 }
 
 .hidden {
