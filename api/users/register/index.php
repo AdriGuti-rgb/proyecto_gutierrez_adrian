@@ -21,7 +21,7 @@
         try {            
             $json_data = file_get_contents("php://input");
             $data = json_decode($json_data, true);
-            echo $_FILES["photo"];
+            
             $name = $data["name"];
             $username = $data['username'];
             $mail = $data["mail"];

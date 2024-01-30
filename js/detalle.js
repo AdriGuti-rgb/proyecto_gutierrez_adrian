@@ -1,4 +1,10 @@
 if (localStorage.getItem("rol") == "User") document.getElementById("tipoOrganizador").style.visibility = "hidden";
+if (localStorage.getItem("rol") == "Anonimous") {
+    document.getElementById("iconoFav").style.visibility = "hidden";
+    document.getElementById("tipoOrganizador").style.visibility = "hidden";
+    document.getElementById("contenedorOrganizador").style.visibility = "hidden";
+}
+
 
 fetch("http://localhost/php/proyecto/api/races/favourites/", {
     headers: {
@@ -19,8 +25,6 @@ fetch("http://localhost/php/proyecto/api/races/favourites/", {
         }
     }
 })
-
-
 
 function handleFavourite (e) {
     let method;
@@ -53,23 +57,39 @@ function handleFavourite (e) {
 function handleTipeClick (e) {
     document.querySelectorAll("#tiposSelector .marcado")[0].classList.remove("marcado");
     e.target.classList.toggle("marcado");
+    document.querySelectorAll("#general .marcado")[0].classList.add("hidden");
+    document.querySelectorAll("#general .marcado")[0].classList.remove("marcado");
+    let contenedor;
     switch (e.target.id) {
         case "tipoDetalle":
-            document.querySelectorAll("#general .marcado")[0].classList.remove("marcado");
-            document.getElementById("contenedorDetalles").classList.remove("hidden");
-            document.querySelectorAll("#general .marcado")[0].classList.add("hidden");
-            document.getElementById("contenedorDetalles").classList.add("marcado");
+            contenedor = "contenedorDetalles";
             break;
         case "tipoMapa":
-            document.querySelectorAll("#general .marcado")[0].classList.remove("marcado");
-            document.getElementById("contenedorMapa").classList.remove("hidden");
-            document.querySelectorAll("#general .marcado")[0].classList.add("hidden");
-            document.getElementById("contenedorMapa").classList.add("marcado");
+            contenedor = "contenedorMapa";
+            break;
+
+        case "tipoReglamento":
+            contenedor = "contenedorReglamento";
+            break;
+
+        case "tipoWeb":
+            contenedor = "contenedorWeb";
+            break;
+
+        case "tipoClasificaciones":
+            contenedor = "contenedorClasificaciones";
+            break;
+
+        case "tipoOrganizador":
+            contenedor = "contenedorOrganizador";
             break;
     
         default:
             break;
     }
+
+    document.getElementById(contenedor).classList.add("marcado");
+    document.getElementById(contenedor).classList.remove("hidden");
 }
 
 document.getElementById("iconoFav").addEventListener("click", handleFavourite);

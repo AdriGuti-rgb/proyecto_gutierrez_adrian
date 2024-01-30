@@ -329,6 +329,95 @@ main {
     gap: 20px;
 }
 
+#contenedorReglamento {
+    overflow-y: scroll;
+}
+
+#contenedorReglamento span {
+    display: block;
+    text-align: center;
+}
+
+#contendidoReglamento {
+    text-align: justify;
+    padding: 50px;
+}
+
+#form {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around   ;
+    align-items: center;
+}
+
+#contenedorOrganizador input, #contenedorOrganizador select {
+    color: var(--negro);
+    width: 271px;
+    height: 36px;
+    border-radius: 5px;
+    background: var(--blanco);
+    box-shadow: 3px 3px 4px 0px var(--octavo);
+    font-family: 'Inknut Antiqua', serif;
+}
+
+#contenedorOrganizador #servicios {
+    width: 271px;
+    height: 130px;
+    border-radius: 5px;
+    background: var(--blanco);
+    box-shadow: 3px 3px 4px 0px var(--octavo);
+    font-family: 'Inknut Antiqua', serif;
+}
+
+#contenedorOrganizador input[type="submit"] {
+    width: 172px;
+    height: 40px;
+    background-color: var(--primero);
+    box-shadow: none;
+    border-color: var(--negro);
+}
+
+#contenedorOrganizador li {
+    padding: 25px;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin: 0;
+    transition: background-color 0.5s ease;
+    border-radius: 20px;
+}
+
+#primeraParte {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+#contenedorOrganizador ul {
+    padding: 0;
+}
+
+#envio {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 100px;
+    padding-top: 50px;
+}
+
+#contenedorOrganizador li:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+}
+
+#contenedorOrganizador #delete {
+    background-color: red;
+    color: var(--negro);
+    width: 172px;
+    height: 40px;
+    box-shadow: none;
+}
+
 .hidden {
     display: none !important;
 }

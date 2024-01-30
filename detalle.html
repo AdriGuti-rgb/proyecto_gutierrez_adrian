@@ -36,15 +36,15 @@
         <div id="none2"></div>
         <div id="none3"></div>
         <div id="tiposSelector">
-            <div id="tipoDetalle" class="tipos marcado">Detalles</div>
+            <div id="tipoDetalle" class="tipos">Detalles</div>
             <div id="tipoMapa" class="tipos">Mapa</div>
             <div id="tipoReglamento" class="tipos">Reglamento</div>
             <div id="tipoWeb" class="tipos">Enlace web</div>
             <div id="tipoClasificaciones" class="tipos">Clasificaciones</div>
-            <div id="tipoOrganizador" class="tipos">Opciones</div>
+            <div id="tipoOrganizador" class="tipos marcado">Opciones</div>
         </div>
         <div id="general">
-            <div id="contenedorDetalles" class="marcado datosGenerales">
+            <div id="contenedorDetalles" class="hidden datosGenerales">
 
                 <div id="datos">
                     <h3>San Silvestre de León</h3>
@@ -176,10 +176,88 @@
                     <img src="./img/fotoPrueba.jpg" alt="Mapa">
                 </div>
             </div>
-            <div id="contenedorReglamento" class="hidden datosGenerales"></div>
+            <div id="contenedorReglamento" class="hidden datosGenerales">
+                <div id="contendidoReglamento">
+                    Tener un reglamento para una carrera de montaña es fundamental para garantizar la seguridad, el orden y la equidad durante el evento. 
+                    Estas sn algunas razones por las cuales es beneficioso contar con un reglamento bien estructurado:
+                    <ul>
+                        <li>
+                            Seguridad de los Participantes: Un reglamento detallado puede establecer normas de seguridad, como la obligatoriedad de llevar 
+                            equipo adecuado, limitaciones en el uso de ciertas rutas peligrosas, y protocolos en caso de emergencias médicas. Esto contribuye a 
+                            minimizar riesgos y proteger la integridad física de los corredores.
+                        </li>
+                        <li>
+                            Igualdad de Condiciones: Un reglamento claro y equitativo asegura que todos los participantes compitan en condiciones similares. 
+                    Establecer normas sobre el tipo de calzado, la cantidad de suministros que se pueden recibir en los puntos de avituallamiento y otros 
+                    aspectos, evita desventajas injustas y promueve una competencia justa.
+                        </li>
+                        <li>
+                            Protección del Entorno: Incluir directrices ambientales en el reglamento ayuda a preservar los espacios naturales donde se lleva a 
+                    cabo la carrera. Estas normas pueden abordar cuestiones como la prohibición de dejar basura, restricciones en determinadas áreas 
+                    sensibles o medidas para minimizar el impacto ambiental de la competición.
+                        </li>
+                </div>  
+                <span>
+                    Acceso al reglamento: <a style="text-decoration: underline;" href="./pdf/PROYECTO INTEGRADOR 2023-24  v0.2 - Solo enunciado.pdf" target="_blank">archivo.pdf</a>
+                </span>
+            </div>
             <div id="contenedorWeb" class="hidden datosGenerales"></div>
             <div id="contenedorClasificaciones" class="hidden datosGenerales"></div>
-            <div id="contenedorOrganizador" class="hidden datosGenerales"></div>
+            <div id="contenedorOrganizador" class="marcado datosGenerales">
+                <form action="" method="post" name="registerRace">
+                    <div id="form">
+                    <ul id="primeraParte">
+                        <li>
+                            <label for="nombreCarrera">Nombre carrera:</label>
+                            <input type="text" name="nombreCarrera" id="nombreCarrera">
+                        </li>
+
+                        <li>
+                            <label for="poblacion">Poblacion:</label>
+                            <input type="text" name="poblacion" id="poblacion">
+                        </li>
+                        
+                        <li>
+                            <label for="fotoPrincipal">Foto principal:</label>
+                            <input type="file" name="fotoPrincipal" id="fotoPrincipal" accept="image/png, image/jpeg, image/jpg">
+                        </li>
+
+                        <li>
+                            <label for="gpx">Archivo ruta:</label>
+                            <input type="file" name="gpx" id="gpx" accept=".gpx">
+                        </li>
+                    </ul>
+    
+                    <ul id="segundaParte">
+                        <li>
+                            <label for="fechaRealizacion">Fecha realizacion:</label>
+                            <input type="date" name="fechaRealizacion" id="fechaRealizacion">
+                        </li>
+
+                        <li>
+                            <label for="distancia">Distancia:</label>
+                            <input type="number" name="distancia" id="distancia">
+                        </li>
+
+                        <li>
+                            <label for="servicios">Servicios:</label>
+                            <select name="servicios" id="servicios" multiple>
+                            </select>
+                        </li>
+
+                        <li>
+                            <label for="fotosAnteriores">Fotos Anteriores:</label>
+                            <input type="file" name="fotosAnteriores[]" id="fotosAnteriores" accept="image/png, image/jpeg, image/jpg" multiple>
+                        </li>
+
+                    </ul>
+                </div>
+                    <div id="envio">
+                        <input type="button" value="Eliminar" name="delete" id="delete">
+                        <input type="submit" value="Modificar" name="send">
+                    </div>
+                </form>
+            </div>
         </div>
         
 
