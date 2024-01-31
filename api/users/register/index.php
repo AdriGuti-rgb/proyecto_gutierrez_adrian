@@ -2,17 +2,18 @@
 
     require_once "../../conexion.php";
     $con = new Conexion();
+    
+    // header("Access-Control-Allow-Origin: *");
+    header("Access-Control-Allow-Origin: https://localhost/php/proyecto/registro.html");
 
     if ($_SERVER["REQUEST_METHOD"] === "OPTIONS") {
-        header("Access-Control-Allow-Origin: *");
         header("Access-Control-Allow-Methods: POST, OPTIONS");
         header("Access-Control-Allow-Headers: Content-Type");
         header("Content-Length: 0");
         header("HTTP/1.1 200 OK");
         exit;
-    }    
+    }
 
-    header("Access-Control-Allow-Origin: *");
     header("Access-Control-Allow-Methods: POST, OPTIONS");
     header("Access-Control-Allow-Headers: Content-Type");
     header('Content-Type: application/json');
@@ -29,17 +30,20 @@
             if (!file_exists($rutaDestino)) {
                 mkdir($rutaDestino, 0777, true);
             }
-            move_uploaded_file($_FILES['file']['tmp_name'], '../../../img/userPhotos/'.strtolower($name).".png");
+            move_uploaded_file($_FILES['file']['tmp_name'], '../../../img/userPhotos/'.strtolower($username).".png");
 
             $uniqid = uniqid();
             $hash = md5($uniqid);
             $idAlfanumerico = substr($hash, 0, 20); 
+        
+            // $con->autocommit(false);  
+
             $sqlNormal = "
                     INSERT INTO users (id, name, username, mail, pass, city, photo)
-                    VALUES ('$idAlfanumerico', '$name', '$username', '$mail', '$pass', '$city', '$name.png')
+                    VALUES ('$idAlfanumerico', '$name', '$username', '$mail', '$pass', '$city', '$username.png')
                 ";
             
-                $con->query($sqlNormal);
+            $con->query($sqlNormal);
                 
             if (isset($_POST['phone']) && isset($_POST['club'])) {
                 $phone = $_POST['phone'];
@@ -50,6 +54,8 @@
                 ";
                 $con->query($sqlOrganizer);
             }
+
+            // $con->commit();
 
             header("HTTP/1.1 201 Created");
 

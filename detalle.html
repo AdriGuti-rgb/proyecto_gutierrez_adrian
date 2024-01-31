@@ -13,7 +13,7 @@
     <title>RaceMapp | Carreras</title>
 </head>
 <body>
-    <div id="tapar hidden"></div>
+    <div id="tapar" class="hidden"></div>
     <div id="todo">
         <header>
             <div id="logoTitulo">
@@ -212,87 +212,9 @@
                 <a href="https://www.google.com" id="enlacePagina" style="text-decoration: underline;">San Silvestre de León</a>
             </div>
             <div id="contenedorClasificaciones" class="hidden datosGenerales">
-                <i class="fa-solid fa-angle-left" title="Pagina anterior"></i>
-                <table>
-                    <tr>
-                        <th></th>
-                        <th>1ª Posición</th>
-                        <th>2ª Posición</th>
-                        <th>3ª Posición</th>
-                        <th>Año realizacion</th>
-                    </tr>
-                    <tr>
-                        <td>1:16:23</td>
-                        <td>Paco</td>
-                        <td>Ese</td>
-                        <td>Aquel</td>
-                        <td>2023</td>
-                    </tr>
-                    <tr>
-                        <td>1:16:23</td>
-                        <td>Paco</td>
-                        <td>Ese</td>
-                        <td>Aquel</td>
-                        <td>2023</td>
-                    </tr>
-                    <tr>
-                        <td>1:16:23</td>
-                        <td>Paco</td>
-                        <td>Ese</td>
-                        <td>Aquel</td>
-                        <td>2023</td>
-                    </tr>
-                    <tr>
-                        <td>1:16:23</td>
-                        <td>Paco</td>
-                        <td>Ese</td>
-                        <td>Aquel</td>
-                        <td>2023</td>
-                    </tr>
-                    <tr>
-                        <td>1:16:23</td>
-                        <td>Paco</td>
-                        <td>Ese</td>
-                        <td>Aquel</td>
-                        <td>2023</td>
-                    </tr>
-                    <tr>
-                        <td>1:16:23</td>
-                        <td>Paco</td>
-                        <td>Ese</td>
-                        <td>Aquel</td>
-                        <td>2023</td>
-                    </tr>
-                    <tr>
-                        <td>1:16:23</td>
-                        <td>Paco</td>
-                        <td>Ese</td>
-                        <td>Aquel</td>
-                        <td>2023</td>
-                    </tr>
-                    <tr>
-                        <td>1:16:23</td>
-                        <td>Paco</td>
-                        <td>Ese</td>
-                        <td>Aquel</td>
-                        <td>2023</td>
-                    </tr>
-                    <tr>
-                        <td>1:16:23</td>
-                        <td>Paco</td>
-                        <td>Ese</td>
-                        <td>Aquel</td>
-                        <td>2023</td>
-                    </tr>
-                    <tr>
-                        <td>1:16:23</td>
-                        <td>Paco</td>
-                        <td>Ese</td>
-                        <td>Aquel</td>
-                        <td>2023</td>
-                    </tr>
-                </table>
-                <i class="fa-solid fa-angle-right"  title="Pagina siguiente"></i>
+                <i class="fa-solid fa-angle-left" title="Pagina anterior" id="anterior"></i>
+                <table id="tabla"></table>
+                <i class="fa-solid fa-angle-right"  title="Pagina siguiente" id="siguiente"></i>
             </div>
             <div id="contenedorOrganizador" class="hidden datosGenerales">
                 <form action="" method="post" name="edit">
@@ -335,17 +257,17 @@
                     </ul>
                 </div>
                     <div id="envio">
-                        <input type="button" value="Eliminar" name="delete" id="delete">
+                        <input type="button" value="Eliminar" name="eliminar" id="eliminar">
                         <input type="submit" value="Modificar" name="send" id="update">
-                        <input type="button" value="Clasificaciones" name="clasifications" id="clasifications">
+                        <input type="button" value="Clasificaciones" name="clasifications" id="clasifications" class="hidden">
                     </div>
                 </form>
             </div>
         </div>
         
-        <div id="clasificacionesAntiguas">
+        <div id="clasificacionesAntiguas" class="hidden">
             <form action="" method="post" name="clasifications">
-                <h2>Clasificaciones</h2>
+                <h4>Clasificaciones</h4>
                 <ul>
                     <li>
                         <label for="ganador">Ganador: </label>
@@ -360,18 +282,34 @@
                         <input type="text" name="tercerPuesto" id="tercerPuesto">
                     </li>
                     <li>
+                        <label for="tiempo">Tiempo: </label>
+                        <input type="text" name="tiempo" id="tiempo" placeholder="hh:mm:ss">
+                    </li>
+                    <li>
                         <label for="año">Año realizacion:</label>
                         <select name="año" id="año">
                             <option value="2023">2023</option>
+                            <option value="2022">2022</option>
+                            <option value="2021">2021</option>
                         </select>
                     </li>
+                    <li>
+                        <input type="button" value="Cancelar" name="cancel" id="cancel">
+                        <input type="button" value="Añadir" name="add" id="confirmarClasi">
+                    </li>
                 </ul>
-
-
-
             </form>
         </div>
 
+        <div id="confirmarBorrar" class="hidden">
+            <span>
+                ¿Seguro que desea eliminar la carrera y todos sus datos?
+            </span>
+            <div>
+                <input type="button" value="Cancelar" name="cancelar" id="cancelar">
+                <input type="button" value="Eliminar" name="delete" id="delete">
+            </div>
+        </div>
     </main>
 
     <footer>

@@ -30,7 +30,8 @@
             $id_category = $races[0]["id_category"];
             $id_modality = $races[0]["id_modality"];
             
-            $sql = "SELECT winner, second_place, third_place, year, time FROM older_clasifications WHERE id_race = '$id_race'";
+            $sql = "SELECT winner, second_place, third_place, year_race, time_race FROM older_clasifications WHERE id_race = '$id_race'
+                            ORDER BY year_race DESC";
             $resultado = $con->query($sql);
             $clasifications = $resultado->fetch_all(MYSQLI_ASSOC);
             

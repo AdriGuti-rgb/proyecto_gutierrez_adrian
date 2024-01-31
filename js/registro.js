@@ -222,19 +222,21 @@ function getParams(e) {
     if (form.elements.telefono != null 
         && form.elements.entidad != null) {
             formData.append('phone', `${form.elements.telefono.value}`);
-            formData.append('username', `${form.elements.entidad.value}`);
+            formData.append('club', `${form.elements.entidad.value}`);
         }
+        console.log(formData);
 
     fetch("http://localhost/php/proyecto/api/users/register/", {
         method: "POST",
+        mode: "cors",
         body: formData
     }).then( response => {
-        if (response.status === 201) return response.json()
+        if (response.status === 201) location.href ="http://localhost/php/proyecto/index.html";
         else putErrors("Error en los datos")
-}).then(data => {
-    if (data.message == "Usuario creado") location.href ="http://localhost/php/proyecto/index.html"; 
-            else putErrors(data.message)
-        }).catch(error => console.error(error));
+    }).then(data => {
+        if (data.message == "Usuario creado") location.href ="http://localhost/php/proyecto/index.html"; 
+                else putErrors(data.message)
+    }).catch(error => console.error(error));
 }
 
 function putErrors (error) {

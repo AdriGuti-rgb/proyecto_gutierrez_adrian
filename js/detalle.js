@@ -11,7 +11,11 @@ let race = {
 }
 let date = new Date();
 let currentYear = date.getFullYear()
-console.log(currentYear);
+
+let currentPage = 0;
+let itemsPerPage = 10;
+let totalPages;
+let globalClasifications;
 
 /* Carreras favoritas del usuario */
 fetch("http://localhost/php/proyecto/api/races/favourites/", {
@@ -53,6 +57,9 @@ fetch("http://localhost/php/proyecto/api/races/oneRace/", {
         let category = data[3].type
         let modality = data[4]
 
+        globalClasifications = olderClasifications
+
+        if (date.toJSON().slice(0,10) > raceData.race_day) document.getElementById("clasifications").classList.remove("hidden")
         document.getElementById("enlacePagina").textContent = raceData.name
 
         renderOptions(raceData)
@@ -83,7 +90,46 @@ function renderDetails (raceData, modality, category, services) {
 }
 
 function renderClasifications (olderClasifications) {
-    // console.log(olderClasifications);
+    totalPages = Math.ceil((olderClasifications.length / itemsPerPage) - 1);
+    let table = document.getElementById('tabla');
+    table.innerHTML = `
+        <tr>
+            <th></th>
+            <th>1ª Posición</th>
+            <th>2ª Posición</th>
+            <th>3ª Posición</th>
+            <th>Año realizacion</th>
+        </tr>`;
+    if (olderClasifications.length == 0) document.getElementById("contenedorClasificaciones").innerHTML = "<h2>Todavia no hay clasificaciones disponibles</h2>"
+    if (olderClasifications.length <= 10) {
+        document.getElementById("anterior").classList.add("hidden")
+        document.getElementById("siguiente").classList.add("hidden")
+    }
+    olderClasifications.filter( (_, index) => Math.trunc(index / itemsPerPage) == currentPage )
+        .forEach( item => {
+        table.innerHTML += `
+            <tr>
+                <td>${item.time_race}</td>
+                <td>${item.winner}</td>
+                <td>${item.second_place}</td>
+                <td>${item.third_place}</td>
+                <td>${item.year_race}</td>
+            </tr>`;
+    });
+}
+
+function handlePrevClick () {
+    if (currentPage > 0) {
+        currentPage--;
+    }
+    renderClasifications(globalClasifications);
+}
+
+function handleNextClick () {
+    if (currentPage < totalPages) {
+        currentPage++;
+    }
+    renderClasifications(globalClasifications);
 }
 
 function renderServices (services) {
@@ -120,7 +166,6 @@ function renderOptions (raceData) {
     form.elements.nombreCarrera.value = raceData.name
     form.elements.poblacion.value = raceData.poblation
     form.elements.fechaRealizacion.value = raceData.race_day
-    console.log(date.toJSON().slice(0,10) < raceData.race_day)
     form.elements.distancia.value = raceData.distance
 }
 
@@ -219,8 +264,54 @@ function handleOptionsRace (e) {
     });
 }
 
+function addClasifications () {
+    let formClasi = document.forms.clasifications;
+    let winner = formClasi.elements.ganador.value;
+    let second_place = formClasi.elements.segundoPuesto.value;
+    let third_place = formClasi.elements.tercerPuesto.value;
+    let year = formClasi.elements.año.value
+    let time = formClasi.elements.tiempo.value
+
+    let clasifications = {
+        "winner": winner,
+        "second_place": second_place,
+        "third_place": third_place,
+        "year": year,
+        "time": time,
+        "raceName": localStorage.getItem("raceName")
+    }
+
+    fetch("http://localhost/php/proyecto/api/races/olderClasifications/", {
+        method: "POST",
+        body: JSON.stringify(clasifications)
+    })
+    .then( response => {
+        if (response.status === 201) window.reload()
+            else if (response.status === 404) alert(response.statusText)
+            else console.log("Todo mal");
+    })
+    .then( data => {
+        if (data) console.log(data);
+    })
+}
+
+function handleModalClasi () {
+    document.getElementById("clasificacionesAntiguas").classList.toggle("hidden")
+    document.getElementById("tapar").classList.toggle("hidden")
+}
+
+function handleModalEliminar () {
+    document.getElementById("confirmarBorrar").classList.toggle("hidden")
+    document.getElementById("tapar").classList.toggle("hidden")
+}
+
 form.elements.send.addEventListener("click", handleOptionsRace);
-form.elements.delete.addEventListener("click", handleOptionsRace);
+document.getElementById("delete").addEventListener("click", handleOptionsRace)
+form.elements.eliminar.addEventListener("click", handleModalEliminar);
+document.getElementById("cancelar").addEventListener("click", handleModalEliminar)
+document.getElementById("confirmarClasi").addEventListener("click", addClasifications)
+document.getElementById("clasifications").addEventListener("click", handleModalClasi)
+document.getElementById("cancel").addEventListener("click", handleModalClasi)
 document.getElementById("iconoFav").addEventListener("click", handleFavourite);
 document.getElementById("tipoDetalle").addEventListener("click", handleTipeClick)
 document.getElementById("tipoMapa").addEventListener("click", handleTipeClick)
@@ -228,3 +319,5 @@ document.getElementById("tipoReglamento").addEventListener("click", handleTipeCl
 document.getElementById("tipoWeb").addEventListener("click", handleTipeClick)
 document.getElementById("tipoClasificaciones").addEventListener("click", handleTipeClick)
 document.getElementById("tipoOrganizador").addEventListener("click", handleTipeClick)
+document.getElementById("anterior").addEventListener("click", handlePrevClick);
+document.getElementById("siguiente").addEventListener("click", handleNextClick);

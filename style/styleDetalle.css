@@ -405,8 +405,9 @@ main {
 
 #contenedorOrganizador input[type="submit"]:hover,
 #contenedorOrganizador #clasifications:hover,
-#contenedorOrganizador #delete:hover {
+#contenedorOrganizador #eliminar:hover {
     transform: scale(1.01);
+    cursor: pointer;
 }
 
 #contenedorOrganizador li {
@@ -442,7 +443,7 @@ main {
     border-radius: 20px;
 }
 
-#contenedorOrganizador #delete {
+#contenedorOrganizador #eliminar {
     background-color: red;
     color: var(--negro);
     width: 172px;
@@ -504,24 +505,110 @@ th:first-of-type {
 }
 
 #clasificacionesAntiguas {
-    width: 60vh;
-    height: 20vw;
+    width: 66vh;
+    height: 26vw;
     border-radius: 20px;
-    top: 14vw;
-    left: 80vh;
+    top: 9.5vw;
+    left: 71.5vh;
     position: absolute;
     background-color: var(--tercero);
+    z-index: 4;
 }
 
 #clasificacionesAntiguas li {
-    padding: 10px;
+    padding: 12px;
     margin-right: 40px;
     list-style: none;
     display: flex;
+    border-radius: 10px;
     justify-content: space-between;
+    transition: background-color 0.5s;
 }
 
-#clasificacionesAntiguas h2 {
+#clasificacionesAntiguas li:hover {
+    border-radius: 10px;
+    background-color: var(--segundo);
+}
+
+#clasificacionesAntiguas li:last-of-type {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+#clasificacionesAntiguas li:last-of-type:hover {
+    background-color: var(--tercero);
+}
+
+#confirmarClasi:hover,
+#cancel:hover {
+    transform: scale(1.01);
+}
+
+#clasificacionesAntiguas h4 {
+    text-align: center;
+}
+
+#clasificacionesAntiguas input[type="text"],
+#año {
+    color: var(--negro);
+    width: 271px;
+    height: 36px;
+    border-radius: 5px;
+    background: var(--blanco);
+    box-shadow: 3px 3px 4px 0px var(--cuarto);
+    font-family: 'Inknut Antiqua', serif;
+}
+
+#año, #año option {
+    text-align: center;
+}
+
+#confirmarClasi, #cancelar {
+    background-color: green;
+    color: var(--negro);
+    width: 172px;
+    height: 40px;
+    box-shadow: none;
+    border-radius: 5px;
+    border: none;
+    font-family: 'Inknut Antiqua', serif;
+    transition: all 0.5s;
+    cursor: pointer;
+}
+
+#cancel, #delete {
+    background-color: red;
+    color: var(--negro);
+    width: 172px;
+    height: 40px;
+    box-shadow: none;
+    border-radius: 5px;
+    border: none;
+    font-family: 'Inknut Antiqua', serif;
+    transition: all 0.5s;
+    cursor: pointer;
+}
+
+#confirmarBorrar {
+    width: 50vh;
+    height: 17vw;
+    border-radius: 20px;
+    top: 15.5vw;
+    left: 78.5vh;
+    position: absolute;
+    background-color: var(--tercero);
+    z-index: 4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+}
+
+#confirmarBorrar  span {
+    display: block;
     text-align: center;
 }
 
