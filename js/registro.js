@@ -153,8 +153,6 @@ function handleMarc (e) {
             send.addEventListener("click", getParams);
             document.getElementById("vista").addEventListener("click", mostrarContrasena);
     }
-    
-    
 
     document.getElementById("checkNormal").addEventListener("click", handleMarc);
     document.getElementById("checkOrganizador").addEventListener("click", handleMarc);
@@ -185,11 +183,9 @@ function anadirLocalidades (e) {
 }
 
 
-document.getElementById("vista").addEventListener("click", mostrarContrasena);
-
 function mostrarContrasena (e) {
     let contrasenaInput = document.getElementById("contrasena");
-
+    
     if (contrasenaInput.type === "password") {
         contrasenaInput.type = "text";
         e.target.classList.remove("fa-eye");
@@ -211,21 +207,11 @@ function getParams(e) {
     let name = form.elements.nombre.value;
     let username = form.elements.nombreMostrado.value;
     let pass = form.elements.contrasena.value;
-    let mail = form.elements.correo.value;    
-    let photo = form.elements.fotoPerfil.value;
+    let mail = form.elements.correo.value;
     let city = form.elements.localidad.value;
-
     let file = form.elements.fotoPerfil.files[0];
     let formData = new FormData();   
     
-    // let user = {
-        //     "name": `${name}`,
-        //     "username": `${username}`,
-        //     "mail": `${mail}`,
-        //     "pass": `${pass}`,
-        //     "city": `${city}`
-        // };
-        
     formData.append('name', `${name}`);
     formData.append('username', `${username}`);
     formData.append('mail', `${mail}`);
@@ -235,47 +221,20 @@ function getParams(e) {
     
     if (form.elements.telefono != null 
         && form.elements.entidad != null) {
-            
-            // user = {
-            //     "name": `${name}`,
-            //     "username": `${username}`,
-            //     "mail": `${mail}`,
-            //     "pass": `${pass}`,
-            //     "city": `${city}`,
-            //     "phone": `${form.elements.telefono.value}`,
-            //     "club": `${form.elements.entidad.value}`
-            // };
-            formData.append('name', `${form.elements.telefono.value}`);
+            formData.append('phone', `${form.elements.telefono.value}`);
             formData.append('username', `${form.elements.entidad.value}`);
-    }
-        
-    // fetch("http://localhost/php/proyecto/api/users/register/", {
-    //     method: "POST",
-    //     headers: {
-    //         "Content-Type": "application/json;charset=utf-8"
-    //     },
-    //     mode: "cors",
-    //     body: JSON.stringify(user)
-    // }).then( response => {
-    //     if (response.status === 201) return response.json()
-    //         else putErrors("Error en los datos")
-    // }).then(data => {
-    //     // if (data.message == "Usuario creado") location.href ="http://localhost/php/proyecto/index.html"; 
-    //     //     else putErrors(data.message)
-
-    // }).catch(error => console.error(error));
+        }
 
     fetch("http://localhost/php/proyecto/api/users/register/", {
         method: "POST",
         body: formData
     }).then( response => {
         if (response.status === 201) return response.json()
-            else putErrors("Error en los datos")
-    }).then(data => {
-        // if (data.message == "Usuario creado") location.href ="http://localhost/php/proyecto/index.html"; 
-        //     else putErrors(data.message)
-
-    }).catch(error => console.error(error));
+        else putErrors("Error en los datos")
+}).then(data => {
+    if (data.message == "Usuario creado") location.href ="http://localhost/php/proyecto/index.html"; 
+            else putErrors(data.message)
+        }).catch(error => console.error(error));
 }
 
 function putErrors (error) {
@@ -286,3 +245,6 @@ function putErrors (error) {
     div.innerHTML = `${error}`;
     main[0].append(div);
 }
+    
+
+document.getElementById("vista").addEventListener("click", mostrarContrasena);

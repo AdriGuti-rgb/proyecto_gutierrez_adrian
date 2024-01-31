@@ -13,6 +13,7 @@
     <title>RaceMapp | Carreras</title>
 </head>
 <body>
+    <div id="tapar hidden"></div>
     <div id="todo">
         <header>
             <div id="logoTitulo">
@@ -336,11 +337,40 @@
                     <div id="envio">
                         <input type="button" value="Eliminar" name="delete" id="delete">
                         <input type="submit" value="Modificar" name="send" id="update">
+                        <input type="button" value="Clasificaciones" name="clasifications" id="clasifications">
                     </div>
                 </form>
             </div>
         </div>
         
+        <div id="clasificacionesAntiguas">
+            <form action="" method="post" name="clasifications">
+                <h2>Clasificaciones</h2>
+                <ul>
+                    <li>
+                        <label for="ganador">Ganador: </label>
+                        <input type="text" name="ganador" id="ganador">
+                    </li>
+                    <li>
+                        <label for="segundoPuesto">Segundo puesto: </label>
+                        <input type="text" name="segundoPuesto" id="segundoPuesto">
+                    </li>
+                    <li>
+                        <label for="tercerPuesto">Tercer puesto: </label>
+                        <input type="text" name="tercerPuesto" id="tercerPuesto">
+                    </li>
+                    <li>
+                        <label for="año">Año realizacion:</label>
+                        <select name="año" id="año">
+                            <option value="2023">2023</option>
+                        </select>
+                    </li>
+                </ul>
+
+
+
+            </form>
+        </div>
 
     </main>
 

@@ -9,6 +9,10 @@ let form = document.forms.edit;
 let race = {
     "name": localStorage.getItem("raceName")
 }
+let date = new Date();
+let currentYear = date.getFullYear()
+console.log(currentYear);
+
 /* Carreras favoritas del usuario */
 fetch("http://localhost/php/proyecto/api/races/favourites/", {
     headers: {
@@ -49,6 +53,8 @@ fetch("http://localhost/php/proyecto/api/races/oneRace/", {
         let category = data[3].type
         let modality = data[4]
 
+        document.getElementById("enlacePagina").textContent = raceData.name
+
         renderOptions(raceData)
         renderDetails(raceData, modality, category, raceServices)
         renderClasifications(olderClasifications)
@@ -70,31 +76,52 @@ function renderDetails (raceData, modality, category, services) {
         <span class="underlined" id="premiosInfo">Premios:</span>
         <span>${modality.first_prize} €</span>
         <span class="prize">${modality.second_prize} €</span>
-        <span class="prize">${modality.third_prize} €</span>`;
+        <span class="prize">${modality.third_prize} €</span>
+    `;
 
     renderServices(services);
-
 }
 
 function renderClasifications (olderClasifications) {
-    console.log(olderClasifications);
+    // console.log(olderClasifications);
 }
 
 function renderServices (services) {
-
+    services.forEach( ({type}) => {
+        let i = document.createElement("i");
+        i.classList.add("fa-solid")
+        switch (type) {
+            case "Tiempos intermedios":
+                i.classList.add("fa-stopwatch-20")
+                break;
+            case "Zonas ecologicas":
+                i.classList.add("fa-leaf")
+                break;
+            case "Avituallamiento liquido":
+                i.classList.add("fa-bottle-water")
+                break;
+            case "Avituallamiento solido":
+                i.classList.add("fa-utensils")
+                break;
+            case "Parking":
+                i.classList.add("fa-square-parking")
+                break;
+            case "Puestos de socorro":
+                i.classList.add("fa-suitcase-medical")
+                break;
+            default:
+                break;
+        }
+        document.getElementById("serviciosInfo").append(i)
+    })
 }
 
 function renderOptions (raceData) {
     form.elements.nombreCarrera.value = raceData.name
     form.elements.poblacion.value = raceData.poblation
     form.elements.fechaRealizacion.value = raceData.race_day
+    console.log(date.toJSON().slice(0,10) < raceData.race_day)
     form.elements.distancia.value = raceData.distance
-
-    // services.forEach( ({type}) => {
-    //     let option = new Option(type, type, false, false)
-    //     form.elements.servicios.append(option);
-    // });
-
 }
 
 function handleFavourite (e) {
@@ -163,8 +190,6 @@ function handleOptionsRace (e) {
     e.preventDefault();
     let method = e.target.id == "delete" ? "DELETE" : "UPDATE";
 
-    console.log(form.elements.fotoPrincipal.files.length);
-
     if (method === "UPDATE") {
         race.secondName = form.elements.nombreCarrera.value
         race.poblation = form.elements.poblacion.value
@@ -185,7 +210,7 @@ function handleOptionsRace (e) {
         body: JSON.stringify(race)
     }).then( response => {
         if (response.status == 203) location.href = "./paginaPpal.html"
-            // else if (response.status === 200) location.href = "./paginaPpal.html"
+            else if (response.status === 200) location.href = "./paginaPpal.html"
             else if (response.status === 404) alert(response.statusText)
             else console.log("Todo mal");
     })

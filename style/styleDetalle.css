@@ -31,7 +31,7 @@ body {
 header {
     background-color: var(--segundo);
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-    z-index: 1;
+    /* z-index: 1; */
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -92,6 +92,7 @@ i {
 #imgPerfilSuperior {
     width: 40px;
     height: 40px;
+    border-radius: 50%;
 }
 
 #perfil {
@@ -398,6 +399,14 @@ main {
     background-color: var(--primero);
     box-shadow: none;
     border-color: var(--negro);
+    border: none;
+    transition: all 0.5s;
+}
+
+#contenedorOrganizador input[type="submit"]:hover,
+#contenedorOrganizador #clasifications:hover,
+#contenedorOrganizador #delete:hover {
+    transform: scale(1.01);
 }
 
 #contenedorOrganizador li {
@@ -439,6 +448,18 @@ main {
     width: 172px;
     height: 40px;
     box-shadow: none;
+    border: none;
+    transition: all 0.5s;
+}
+
+#contenedorOrganizador #clasifications {
+    background-color: green;
+    color: var(--negro);
+    width: 172px;
+    height: 40px;
+    box-shadow: none;
+    border: none;
+    transition: all 0.5s;
 }
 
 #contenedorClasificaciones {
@@ -472,6 +493,36 @@ th:first-of-type {
     width: 2px;
     height: 50vb;
     background-color: var(--octavo);
+}
+
+#tapar {
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.75);
+    position: absolute;
+    z-index: 1;
+}
+
+#clasificacionesAntiguas {
+    width: 60vh;
+    height: 20vw;
+    border-radius: 20px;
+    top: 14vw;
+    left: 80vh;
+    position: absolute;
+    background-color: var(--tercero);
+}
+
+#clasificacionesAntiguas li {
+    padding: 10px;
+    margin-right: 40px;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+}
+
+#clasificacionesAntiguas h2 {
+    text-align: center;
 }
 
 .hidden {

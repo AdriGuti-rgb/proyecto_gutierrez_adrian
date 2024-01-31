@@ -62,3 +62,18 @@ function renovateToken() {
     }
     setTimeout(renovateToken, time);
 };
+
+/* Poner fotos perfil */
+fetch("http://localhost/php/proyecto/api/users/main_photo/", {
+    headers: {
+        Authorization: `${localStorage.getItem("token")}`
+    }
+    }).then( response => {
+        if (response.status === 200) return response.json()
+            else if (response.status === 404) alert(response.statusText)
+            else if (response.status === 401) expirationToken()
+            else console.log("Todo mal");
+    }).then( data => {
+        document.getElementById("imgPerfilSuperior").src = `./img/userPhotos/${data.photo}`
+        if (document.getElementById("fotoPerfilGrande")) document.getElementById("fotoPerfilGrande").src = `./img/userPhotos/${data.photo}`
+    })
