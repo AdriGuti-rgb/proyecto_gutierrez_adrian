@@ -2,9 +2,15 @@ let selectLocalidadNormal = document.getElementById("localidadNormal");
 let selectLocalidadOrganizador = "";
 let form;
 let send; 
+let canSubmitEmail = false
+let canSubmitPass = false
+let canSubmitUser = false
 
 form = document.forms.login;
 send = form.elements.send;
+form.elements.nombreMostrado.addEventListener("blur", checkUsername)
+form.elements.contrasena.addEventListener("blur", checkPass)
+form.elements.correo.addEventListener("blur", checkMail)
 
 if (document.getElementById("checkNormal") != null) document.getElementById("checkNormal").addEventListener("click", handleMarc);
 if (document.getElementById("checkOrganizador") != null) document.getElementById("checkOrganizador").addEventListener("click", handleMarc);
@@ -40,7 +46,7 @@ function handleMarc (e) {
                             <ul>
                                 <div id="camposOrganizador">
                                 <li>
-                                    <label for="nombre">Nombre de usuario:</label>
+                                    <label for="nombre">Nombre completo:</label>
                                     <input type="text" name="nombre" id="nombre" required>
                                 </li>
                                 <li>
@@ -83,6 +89,9 @@ function handleMarc (e) {
             main[0].append(contenedor);
             form = document.forms.login;
             send = form.elements.send;
+            form.elements.nombreMostrado.addEventListener("blur", checkUsername)
+            form.elements.contrasena.addEventListener("blur", checkPass)
+            form.elements.correo.addEventListener("blur", checkMail)
             send.addEventListener("click", getParams);
             document.getElementById("vista").addEventListener("click", mostrarContrasena);
     }
@@ -150,6 +159,9 @@ function handleMarc (e) {
             main[0].append(contenedor);
             form = document.forms.login;
             send = form.elements.send;
+            form.elements.nombre.addEventListener("blur", checkUsername)
+            form.elements.contrasena.addEventListener("blur", checkPass)
+            form.elements.correo.addEventListener("blur", checkMail)
             send.addEventListener("click", getParams);
             document.getElementById("vista").addEventListener("click", mostrarContrasena);
     }
@@ -160,8 +172,6 @@ function handleMarc (e) {
     if (document.getElementById("localidadOrganizador") != null) document.getElementById("localidadOrganizador").addEventListener("click", anadirLocalidades);
     if (document.getElementById("localidadNormal") != null) document.getElementById("localidadNormal").addEventListener("click", anadirLocalidades);
 }
-
-selectLocalidadNormal.addEventListener("click", anadirLocalidades)
 
 function anadirLocalidades (e) {
     let localidades = [];
@@ -182,6 +192,58 @@ function anadirLocalidades (e) {
     e.target.removeEventListener("click", anadirLocalidades)
 }
 
+function checkUsername (e) {
+    fetch("http://localhost/php/proyecto/api/users/login/")
+        .then( response => {
+            if (response.status === 200) return response.json()
+                else if (response.status === 404) alert(response.statusText)
+                else console.log("Todo mal");
+        }).then( data => {
+            if (data && e.target.value.trim() != "") {
+                try {
+                    data.forEach( ({username}) => {
+                        if (e.target.value == username) {
+                            e.target.style.borderColor = "red"
+                            throw new Error("Usuario inválido. Seleccione otro") 
+                        } else {
+                            e.target.style.borderColor = "white"
+                            canSubmitUser = true
+                        }
+                    });
+                } catch (error) {
+                    putErrors(error)
+                }
+            }
+        })
+}
+
+function checkPass (e) {
+    let contrasena = e.target.value;
+    let regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+
+    if (!contrasena.match(regex)) {
+        putErrors("La contraseña no cumple con los requisitos")
+        e.target.style.borderColor = "red"
+    } else {
+        document.getElementById("error").remove()
+        e.target.style.borderColor = "white"
+        canSubmitPass = true
+    }
+}
+
+function checkMail (e) {
+    let mail = e.target.value;
+    let regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+    if (!mail.match(regex)) {
+        putErrors("El correo no cumple con los requisitos")
+        e.target.style.borderColor = "red"
+    } else {
+        document.getElementById("error").remove()
+        e.target.style.borderColor = "white"
+        canSubmitEmail = true
+    }
+}
 
 function mostrarContrasena (e) {
     let contrasenaInput = document.getElementById("contrasena");
@@ -197,46 +259,44 @@ function mostrarContrasena (e) {
     }
 }
 
-
-send.addEventListener("click", getParams);
-
 function getParams(e) {
-
     e.preventDefault();
 
-    let name = form.elements.nombre.value;
-    let username = form.elements.nombreMostrado.value;
-    let pass = form.elements.contrasena.value;
-    let mail = form.elements.correo.value;
-    let city = form.elements.localidad.value;
-    let file = form.elements.fotoPerfil.files[0];
-    let formData = new FormData();   
+    if (checkSubmit()) {
+        let name = form.elements.nombre.value;
+        let username = form.elements.nombreMostrado.value;
+        let pass = form.elements.contrasena.value;
+        let mail = form.elements.correo.value;
+        let city = form.elements.localidad.value;
+        let file = form.elements.fotoPerfil.files[0];
+        let formData = new FormData();   
+        
+        formData.append('name', `${name}`);
+        formData.append('username', `${username}`);
+        formData.append('mail', `${mail}`);
+        formData.append('pass', `${pass}`);
+        formData.append('city', `${city}`);
+        formData.append('file', file); 
+        
+        if (form.elements.telefono != null 
+            && form.elements.entidad != null) {
+                formData.append('phone', `${form.elements.telefono.value}`);
+                formData.append('club', `${form.elements.entidad.value}`);
+            }
     
-    formData.append('name', `${name}`);
-    formData.append('username', `${username}`);
-    formData.append('mail', `${mail}`);
-    formData.append('pass', `${pass}`);
-    formData.append('city', `${city}`);
-    formData.append('file', file); 
-    
-    if (form.elements.telefono != null 
-        && form.elements.entidad != null) {
-            formData.append('phone', `${form.elements.telefono.value}`);
-            formData.append('club', `${form.elements.entidad.value}`);
-        }
-        console.log(formData);
+        fetch("http://localhost/php/proyecto/api/users/register/", {
+            method: "POST",
+            mode: "cors",
+            body: formData
+        }).then( response => {
+            if (response.status === 201) location.href ="http://localhost/php/proyecto/index.html";
+            else putErrors("Error en los datos")
+        }).then(data => {
+            if (data.message == "Usuario creado") location.href ="http://localhost/php/proyecto/index.html"; 
+                    else putErrors(data.message)
+        }).catch(error => console.error(error));
+    } else putErrors("Rellene los datos correctamente")
 
-    fetch("http://localhost/php/proyecto/api/users/register/", {
-        method: "POST",
-        mode: "cors",
-        body: formData
-    }).then( response => {
-        if (response.status === 201) location.href ="http://localhost/php/proyecto/index.html";
-        else putErrors("Error en los datos")
-    }).then(data => {
-        if (data.message == "Usuario creado") location.href ="http://localhost/php/proyecto/index.html"; 
-                else putErrors(data.message)
-    }).catch(error => console.error(error));
 }
 
 function putErrors (error) {
@@ -247,6 +307,11 @@ function putErrors (error) {
     div.innerHTML = `${error}`;
     main[0].append(div);
 }
-    
+
+function checkSubmit () {
+    return canSubmit = canSubmitEmail && canSubmitPass && canSubmitUser;
+}
 
 document.getElementById("vista").addEventListener("click", mostrarContrasena);
+selectLocalidadNormal.addEventListener("click", anadirLocalidades)
+send.addEventListener("click", getParams);

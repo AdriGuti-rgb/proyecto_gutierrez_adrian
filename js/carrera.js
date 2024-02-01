@@ -161,8 +161,17 @@ function calcultateSlope (){
             const xmlDoc = parser.parseFromString(textContent, "application/xml");
             const json = toGeoJSON.gpx(xmlDoc);
             const coor = json.features[0].geometry.coordinates;
+
             
             let altitudes = coor.map(item => item[2]);
+            let coordenadas = [];
+            coor.forEach((item, index) => {
+                if ((index % 3 == 0) && (index % 2 == 0) && (index % 4 == 0)) {
+                    coordenadas.push([item[1],item[0]])
+                }
+            })
+            console.log(coordenadas.length);
+            console.log(JSON.stringify(coordenadas));
 
             let values = altitudes.reduce( ({pos, neg, prev}, item) => {
                             if (item < prev) pos += (prev - item)

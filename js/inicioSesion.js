@@ -1,5 +1,7 @@
 let form;
 let send; 
+let canSubmitPass = false
+localStorage.clear();
 
 /* Modal inicio de sesión */
 document.getElementById("abrirModal").addEventListener("click", openModal);
@@ -27,7 +29,7 @@ function openModal (e) {
     
                 <div class="campos">
                     <label for="contrasena">Contraseña:</label>
-                    <input type="password" name="contrasena" id="contrasena" placeholder="Introduzca una contraseña"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
+                    <input type="password" name="contrasena" id="contrasena" placeholder="Introduzca una contraseña" required>
                     <i class="fa-solid fa-eye" id="vista"></i>
                 </div>
     
@@ -50,10 +52,9 @@ function openModal (e) {
     form = document.forms.login;
     send = form.elements.send;
     send.addEventListener("click", getParams);
+    form.elements.contrasena.addEventListener("blur", checkPass);
     document.getElementById("vista").addEventListener("click", mostrarContrasena);
-    document.getElementById("anonimo").addEventListener("click", () => {
-        localStorage.setItem("rol", "Anonimous");
-    });
+    document.getElementById("anonimo").addEventListener("click", () => localStorage.setItem("rol", "Anonimous"));
 
     if (document.getElementById("cerrar") != null) document.getElementById("cerrar").addEventListener("click", () => {
             inicioSesion.remove()
@@ -99,44 +100,59 @@ function mostrarContrasena (e) {
     }
 }
 
-localStorage.clear();
+function checkPass (e) {
+    let contrasena = e.target.value;
+    let regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+
+    if (!contrasena.match(regex)) {
+        putErrors("La contraseña no cumple con los requisitos")
+        e.target.style.borderColor = "red"
+    } else {
+        document.getElementById("error").remove()
+        e.target.style.borderColor = "white"
+        canSubmitPass = true
+    }
+}
 
 function getParams(e) {
     e.preventDefault();
     
-    let username = document.getElementById("nombre").value;
-    let pass = document.getElementById("contrasena").value;
-    let user = {
-        "username": username,
-        "pass": pass
-    };
+    if (canSubmitPass) {
+        let username = document.getElementById("nombre").value;
+        let pass = document.getElementById("contrasena").value;
+        let user = {
+            "username": username,
+            "pass": pass
+        };
+    
+        if (username == "" || pass == "") putErrors("Rellene todos los campos")
+            else {
+                fetch("http://localhost/php/proyecto/api/users/login/", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json;charset=utf-8"
+                    },
+                    mode: "cors",
+                    body: JSON.stringify(user)
+                }).then( response => {
+                    if (response.status === 200) return response.json()
+                        else if (response.status === 404) alert(response.statusText)
+                        else throw new Error("Hubo un problema con la solicitud")
+                }).then(data => {                
+                    let arrayDevuelto = Object.keys(data);
+            
+                    if (arrayDevuelto.length == 1) putErrors(data.error)
+                        else {
+                            localStorage.setItem('token', data.token);
+                            localStorage.setItem('username', data.username);
+                            localStorage.setItem('name', data.name);
+                            localStorage.setItem("rol", data.rol);
+                            location.href ="http://localhost/php/proyecto/paginaPpal.html";
+                    }
+                }).catch(error => console.error(error));
+            }
+    } else putErrors("Rellene los datos correctamente")
 
-    if (username == "" || pass == "") putErrors("Rellene todos los campos")
-        else {
-            fetch("http://localhost/php/proyecto/api/users/login/", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json;charset=utf-8"
-                },
-                mode: "cors",
-                body: JSON.stringify(user)
-            }).then( response => {
-                if (response.status === 200) return response.json()
-                    else if (response.status === 404) alert(response.statusText)
-                    else throw new Error("Hubo un problema con la solicitud")
-            }).then(data => {                
-                let arrayDevuelto = Object.keys(data);
-        
-                if (arrayDevuelto.length == 1) putErrors(data.error)
-                    else {
-                        localStorage.setItem('token', data.token);
-                        localStorage.setItem('username', data.username);
-                        localStorage.setItem('name', data.name);
-                        localStorage.setItem("rol", data.rol);
-                        location.href ="http://localhost/php/proyecto/paginaPpal.html";
-                }
-            }).catch(error => console.error(error));
-        }
 }
 
 function putErrors (error) {

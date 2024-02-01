@@ -88,27 +88,22 @@
             if (!$exists) echo json_encode(array("error" => "Credenciales inválidas"));
    
         } catch (mysqli_sql_exception $e) {
-            header("HTTP/1.1 404 Not Found");
+            header("HTTP/1.1 405 Not Found");
         }
-    } else {
-        header("HTTP/1.1 400 Bad request");
-    }
+    } 
 
-    
-/* Crear el token de cada usuario para devolverlo */
+    if ($_SERVER["REQUEST_METHOD"] === "GET") {
+        try {
+            $sql = "SELECT * FROM users";
+            $resultado = $con->query($sql);
+            $users = $resultado->fetch_all(MYSQLI_ASSOC);
+            header("HTTP/1.1 200 OK");
+            
+            echo json_encode($users);
 
-    function generateJWT($payload, $key) {
-
-        $header = base64_encode(json_encode(['typ' => 'JWT', 'alg' => 'HS256']));
-
-        $payloadBase64 = base64_encode(json_encode($payload));
-
-        $signature = hash_hmac('sha256', "$header.$payloadBase64", $key, true);
-        $signatureBase64 = base64_encode($signature);
-
-        $token = "$header.$payloadBase64.$signatureBase64";
-
-        return $token;
-    }
+        } catch (mysqli_sql_exception $e) {
+            header("HTTP/1.1 404 Not found");
+        }
+    } 
     
 ?>

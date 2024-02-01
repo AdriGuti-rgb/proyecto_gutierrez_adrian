@@ -1,4 +1,4 @@
-let map = L.map("map")
+let map = L.map("mapa")
             .setView([42.60, -5.57], 13)
 
 
@@ -20,3 +20,4 @@ L.polyline( [
     [41.60, -8.57],
     [44.60, -6.57]
 ], {color: "black", weight: 10} ).addTo(map)
+
