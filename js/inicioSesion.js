@@ -108,7 +108,7 @@ function checkPass (e) {
         putErrors("La contraseña no cumple con los requisitos")
         e.target.style.borderColor = "red"
     } else {
-        document.getElementById("error").remove()
+        if (document.getElementById("error")) document.getElementById("error").remove()
         e.target.style.borderColor = "white"
         canSubmitPass = true
     }

@@ -34,6 +34,11 @@
                 $rol = $decoded->rol;
                 $id = $decoded->user_id;
 
+                $con->autocommit(false);
+
+                $sqlFavourite = "DELETE FROM favourites WHERE id_user = '$id'";
+                $resultado = $con->query($sqlFavourite);
+
                 if ($rol == "Organizer") {
                     $sqlOrganizer = "DELETE FROM organizers WHERE id_user = '$id'";
                     $con->query($sqlOrganizer);
@@ -42,6 +47,7 @@
                 $sqlUser = "DELETE FROM users WHERE id = '$id'";
                 $resultado = $con->query($sqlUser);
 
+                $con->commit();
                 
                 echo json_encode("Todo bien");
 

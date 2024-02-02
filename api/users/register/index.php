@@ -2,8 +2,7 @@
 
     require_once "../../conexion.php";
     $con = new Conexion();
-    
-    // header("Access-Control-Allow-Origin: *");
+
     header("Access-Control-Allow-Origin: https://localhost/php/proyecto/registro.html");
 
     if ($_SERVER["REQUEST_METHOD"] === "OPTIONS") {

@@ -22,19 +22,38 @@
             $json_data = file_get_contents("php://input");
             $data = json_decode($json_data, true);
             
-            $raceName = $data["raceName"];
-            $category = $data['categories'];
-            $total_slope = $data["total_slope"];
-            $positive_slope = $data['positive_slope'];
-            $negative_slope = $data['negative_slope'];
-            $distance = $data["distance"];
-            $poblation = $data['poblation'];
-            $main_photo = $data['main_photo'];
-            $gpx = $data['gpx'];
-            $race_day = $data['race_day'];
-            $services = $data['services'];
-            $modality = $data['modality'];
-            $older_photos = $data['older_photos'];
+            $raceName = $_POST["raceName"];
+            $category = $_POST['categories'];
+            $total_slope = $_POST["total_slope"];
+            $positive_slope = $_POST['positive_slope'];
+            $negative_slope = $_POST['negative_slope'];
+            $distance = $_POST["distance"];
+            $poblation = $_POST['poblation'];
+            $main_photo = $_FILES['main_photo'];
+            $race_day = $_POST['race_day'];
+            $services = $_POST['services'];
+            $modality = $_POST['modality'];
+            $older_photos = $_FILES['older_photos'];
+
+            $rutaDestinoOlder = '../../../img/races/' . $raceName . '/olderPhotos/';
+            $rutaDestinoMain = '../../../img/races/' . $raceName . '/';
+
+            if (!file_exists($rutaDestinoOlder)) {
+                mkdir($rutaDestinoOlder, 0777, true);
+            }
+
+            if (!file_exists($rutaDestinoMain)) {
+                mkdir($rutaDestinoMain, 0777, true);
+            }
+
+            $contador = 1;
+
+            foreach ($older_photos['tmp_name'] as $key => $tmpName) {
+                move_uploaded_file($tmpName, '../../../img/races/' . $raceName . '/olderPhotos/' . strtolower($raceName)."$contador.png");
+                $contador++;
+            }
+
+            move_uploaded_file($main_photo['tmp_name'], '../../../img/races/' . $raceName . '/' . strtolower($raceName). ".png");
 
             $uniqid = uniqid();
             $hash = md5($uniqid);
@@ -94,10 +113,10 @@
                     $con->query($sqlPhotosInsert);
                 }
 
-                $con->commit();
+                // $con->commit();
             } else header("HTTP/1.1 404 Not Found");
 
-            header("HTTP/1.1 201 Created");
+            // header("HTTP/1.1 201 Created");
 
         } catch (mysqli_sql_exception $e) {
             echo json_encode(array("message" => $e->getMessage()));

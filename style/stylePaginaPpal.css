@@ -393,7 +393,7 @@ select {
 
 #favoritas {
     background-color: var(--blanco);
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.55);
+    box-shadow: 0px 0px 40px var(--negro);
     border-radius: 10px;
     width: 500px;
     height: 730px;
