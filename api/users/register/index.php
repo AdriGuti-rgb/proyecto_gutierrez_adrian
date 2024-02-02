@@ -36,11 +36,13 @@
             $hash = md5($uniqid);
             $idAlfanumerico = substr($hash, 0, 20); 
         
-            // $con->autocommit(false);  
+            $con->autocommit(false);  
+
+            $hashPass = password_hash($pass, PASSWORD_BCRYPT);
 
             $sqlNormal = "
                     INSERT INTO users (id, name, username, mail, pass, city, photo)
-                    VALUES ('$idAlfanumerico', '$name', '$username', '$mail', '$pass', '$city', '$username.png')
+                    VALUES ('$idAlfanumerico', '$name', '$username', '$mail', '$hashPass', '$city', '$username.png')
                 ";
             
             $con->query($sqlNormal);
@@ -55,7 +57,7 @@
                 $con->query($sqlOrganizer);
             }
 
-            // $con->commit();
+            $con->commit();
 
             header("HTTP/1.1 201 Created");
 

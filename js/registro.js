@@ -159,7 +159,7 @@ function handleMarc (e) {
             main[0].append(contenedor);
             form = document.forms.login;
             send = form.elements.send;
-            form.elements.nombre.addEventListener("blur", checkUsername)
+            form.elements.nombreMostrado.addEventListener("blur", checkUsername)
             form.elements.contrasena.addEventListener("blur", checkPass)
             form.elements.correo.addEventListener("blur", checkMail)
             send.addEventListener("click", getParams);
@@ -225,7 +225,7 @@ function checkPass (e) {
         putErrors("La contraseña no cumple con los requisitos")
         e.target.style.borderColor = "red"
     } else {
-        document.getElementById("error").remove()
+        if (document.getElementById("error")) document.getElementById("error").remove()
         e.target.style.borderColor = "white"
         canSubmitPass = true
     }
@@ -239,7 +239,7 @@ function checkMail (e) {
         putErrors("El correo no cumple con los requisitos")
         e.target.style.borderColor = "red"
     } else {
-        document.getElementById("error").remove()
+        if (document.getElementById("error")) document.getElementById("error").remove()
         e.target.style.borderColor = "white"
         canSubmitEmail = true
     }

@@ -43,9 +43,11 @@
                 "pass" => $password
             );
 
+            
+
             foreach ($users as $key => $value) {
                 if ($value["username"] == $datos["username"]
-                        && $value["pass"] == $datos["pass"]) {
+                        && password_verify($datos["pass"], $value["pass"])) {
                             $idAlfanumerico = $value["id"];
                             $username = $value["username"];
                             $name = $value["name"];
