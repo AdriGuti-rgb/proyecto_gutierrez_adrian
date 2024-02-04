@@ -19,25 +19,27 @@ let globalClasifications;
 let coor;
 
 /* Carreras favoritas del usuario */
-fetch("http://localhost/php/proyecto/api/races/favourites/", {
-    headers: {
-        Authorization: `${localStorage.getItem("token")}`
-    }
-})
-.then( response => {
-    if (response.status === 200) return response.json()
-        else if (response.status === 404) alert(response.statusText)
-        else console.log("Todo mal");
-})
-.then( data => {
-    if (data) {
-        let carrera = data.find( ({name}) => name == localStorage.getItem("raceName"));
-        if (carrera) {
-            document.getElementById("iconoFav").classList.toggle("fa-regular")
-            document.getElementById("iconoFav").classList.toggle("fa-solid")
+if (localStorage.getItem("rol") == "Organizer") {
+    fetch("http://localhost/php/proyecto/api/races/checkOrganizator/", {
+        method: "POST",
+        headers: {
+            Authorization: `${localStorage.getItem("token")}`
+        },
+        body: JSON.stringify(race)
+    })
+    .then( response => {
+        if (response.status !== 200) {
+            document.getElementById("contenedorOrganizador").style.visibility = "hidden"
+            document.getElementById("tipoOrganizador").style.visibility = "hidden"
         }
-    }
-})
+    })
+    .then( data => {
+        if (data) {
+        }
+    })
+}
+
+/* Comprobar si es organizador de esa carrera */
 
 
 /* Datos de la carrera seleccionada */
@@ -62,7 +64,7 @@ fetch("http://localhost/php/proyecto/api/races/oneRace/", {
 
         globalClasifications = olderClasifications
 
-        if (date.toJSON().slice(0,10) > raceData.race_day) document.getElementById("clasifications").classList.remove("hidden")
+        if (date.toJSON().slice(0,10) > raceData.race_day) form.elements.clasifications.classList.remove("hidden")
         document.getElementById("enlacePagina").textContent = raceData.name
 
         renderOptions(raceData)
@@ -109,8 +111,8 @@ function renderClasifications (olderClasifications) {
         </tr>`;
     if (olderClasifications.length == 0) document.getElementById("contenedorClasificaciones").innerHTML = "<h2>Todavia no hay clasificaciones disponibles</h2>"
     if (olderClasifications.length <= 10) {
-        document.getElementById("anterior").classList.add("hidden")
-        document.getElementById("siguiente").classList.add("hidden")
+        if (document.getElementById("anterior")) document.getElementById("anterior").classList.add("hidden")
+        if (document.getElementById("siguiente")) document.getElementById("siguiente").classList.add("hidden")
     }
     olderClasifications.filter( (_, index) => Math.trunc(index / itemsPerPage) == currentPage )
         .forEach( item => {
@@ -206,6 +208,7 @@ function handleTipeClick (e) {
     document.querySelectorAll("#general .marcado")[0].classList.add("hidden");
     document.querySelectorAll("#general .marcado")[0].classList.remove("marcado");
     let contenedor;
+    console.log(e.target.id);
     switch (e.target.id) {
         case "tipoDetalle":
             contenedor = "contenedorDetalles";
@@ -234,6 +237,8 @@ function handleTipeClick (e) {
             break;
     }
 
+    console.log(contenedor);
+    console.log(document.getElementById(contenedor))
     document.getElementById(contenedor).classList.add("marcado");
     document.getElementById(contenedor).classList.remove("hidden");
 }
@@ -313,129 +318,132 @@ function handleModalEliminar () {
 }
   
 function loadMap () {
-  let map = L.map("map").setView(coor[0], 11)
-  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", 
-              {
-                  maxZoom: 19,
-                  attribution: "© OpenStreetMap"
-              }).addTo(map)
-  L.control.scale().addTo(map);
+    // if (!map) {
 
-  let sosArr = Math.trunc(coor.length / 90);
-  let waterArr = Math.trunc(coor.length / 80);
-  let foodArr = Math.trunc(coor.length / 50);
-  let ecoZona = Math.trunc(coor.length / 30);
-  let interTime1Arr = Math.trunc(coor.length / 5);
-  let interTime2Arr = Math.trunc(coor.length / 3);
-  let interTime3Arr = Math.trunc(coor.length / 2);
-  let park = coor[50]
-
-
-  
-
-  let startMarker = L.marker(coor[0], {
-      icon: L.divIcon({
-          className: 'leaflet-div-icon',
-          html: '<i class="fa-solid fa-play"></i>',
-      }),
-      title: "Salida"
-  }).addTo(map);
-
-  let arriveMarker = L.marker(coor[coor.length - 1], {
-      icon: L.divIcon({
-          className: 'leaflet-div-icon',
-          html: '<i class="fa-solid fa-flag-checkered"></i>',
-      }),
-      title: "Llegada"
-  }).addTo(map);
-
-  let interTime1 = L.marker(coor[interTime1Arr], {
-    icon: L.divIcon({
-        className: 'leaflet-div-icon',
-        html: '<i class="fa-solid fa-stopwatch-20"></i>',
-    }),
-    title: "Punto intermedio 1"
-  }).addTo(map);
-
-  let interTime2 = L.marker(coor[interTime2Arr], {
-    icon: L.divIcon({
-        className: 'leaflet-div-icon',
-        html: '<i class="fa-solid fa-stopwatch-20"></i>',
-    }),
-    title: "Punto intermedio 2"
-  }).addTo(map);
-
-  let interTime3 = L.marker(coor[interTime3Arr], {
-    icon: L.divIcon({
-        className: 'leaflet-div-icon',
-        html: '<i class="fa-solid fa-stopwatch-20"></i>',
-    }),
-    title: "Punto intermedio 3"
-  }).addTo(map);
-
-  let finalTime = L.marker(coor[coor.length - 100], {
-    icon: L.divIcon({
-        className: 'leaflet-div-icon',
-        html: '<i class="fa-solid fa-stopwatch"></i>',
-    }),
-    title: "Salida"
-  }).addTo(map);
-
-  let ecoZone = L.marker(coor[ecoZona], {
-    icon: L.divIcon({
-        className: 'leaflet-div-icon',
-        html: '<i class="fa-solid fa-leaf"></i>',
-    }),
-    title: "Zona ecológica"
-  }).addTo(map);
-
-  let food = L.marker(coor[foodArr], {
-    icon: L.divIcon({
-        className: 'leaflet-div-icon',
-        html: '<i class="fa-solid fa-utensils"></i>',
-    }),
-    title: "Avituallamiento sólido"
-  }).addTo(map);
-
-  let water = L.marker(coor[waterArr], {
-    icon: L.divIcon({
-        className: 'leaflet-div-icon',
-        html: '<i class="fa-solid fa-bottle-water"></i>',
-    }),
-    title: "Avituallamiento líquido"
-  }).addTo(map);
-
-  let parking = L.marker(park, {
-    icon: L.divIcon({
-        className: 'leaflet-div-icon',
-        html: '<i class="fa-solid fa-square-parking"></i>',
-    }),
-    title: "Parking"
-  }).addTo(map);
-
-  let sos = L.marker(coor[sosArr], {
-    icon: L.divIcon({
-        className: 'leaflet-div-icon',
-        html: '<i class="fa-solid fa-suitcase-medical"></i>',
-    }),
-    title: "Puesto de socorro"
-  }).addTo(map);
-
-  startMarker.bindPopup("Punto de salida")
-  arriveMarker.bindPopup("Punto de llegada")
-  interTime1.bindPopup("Punto intermedio 1")
-  interTime2.bindPopup("Punto intermedio 2")
-  interTime3.bindPopup("Punto intermedio 3")
-  finalTime.bindPopup("Tiempo final")
-  ecoZone.bindPopup("Zona ecológica")
-  food.bindPopup("Avituallamiento sólido")
-  water.bindPopup("Avituallamiento líquido")
-  parking.bindPopup("Parking")
-  sos.bindPopup("Puesto de socorro")
-  // .openPopup() Hace que cuando entre a la pagina, este abierto
-  // L.circle([42.804963, -5.631211], {radius: 1000, color: "orange"}).addTo(map);
-
-  L.polyline(coor , {color: "blue", weight: 3}).addTo(map);
+        let map = L.map("map").setView(coor[0], 11)
+        L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", 
+                    {
+                        maxZoom: 19,
+                        attribution: "© OpenStreetMap"
+                    }).addTo(map)
+        L.control.scale().addTo(map);
+        
+        let sosArr = Math.trunc(coor.length / 90);
+        let waterArr = Math.trunc(coor.length / 80);
+        let foodArr = Math.trunc(coor.length / 50);
+        let ecoZona = Math.trunc(coor.length / 30);
+        let interTime1Arr = Math.trunc(coor.length / 5);
+        let interTime2Arr = Math.trunc(coor.length / 3);
+        let interTime3Arr = Math.trunc(coor.length / 2);
+        let park = coor[50]
+        
+        
+        
+        
+        let startMarker = L.marker(coor[0], {
+            icon: L.divIcon({
+                className: 'leaflet-div-icon',
+                html: '<i class="fa-solid fa-play"></i>',
+            }),
+            title: "Salida"
+        }).addTo(map);
+        
+        let arriveMarker = L.marker(coor[coor.length - 1], {
+            icon: L.divIcon({
+                className: 'leaflet-div-icon',
+                html: '<i class="fa-solid fa-flag-checkered"></i>',
+            }),
+            title: "Llegada"
+        }).addTo(map);
+        
+        let interTime1 = L.marker(coor[interTime1Arr], {
+        icon: L.divIcon({
+            className: 'leaflet-div-icon',
+            html: '<i class="fa-solid fa-stopwatch-20"></i>',
+        }),
+        title: "Punto intermedio 1"
+        }).addTo(map);
+        
+        let interTime2 = L.marker(coor[interTime2Arr], {
+        icon: L.divIcon({
+            className: 'leaflet-div-icon',
+            html: '<i class="fa-solid fa-stopwatch-20"></i>',
+        }),
+        title: "Punto intermedio 2"
+        }).addTo(map);
+        
+        let interTime3 = L.marker(coor[interTime3Arr], {
+        icon: L.divIcon({
+            className: 'leaflet-div-icon',
+            html: '<i class="fa-solid fa-stopwatch-20"></i>',
+        }),
+        title: "Punto intermedio 3"
+        }).addTo(map);
+        
+        let finalTime = L.marker(coor[coor.length - 100], {
+        icon: L.divIcon({
+            className: 'leaflet-div-icon',
+            html: '<i class="fa-solid fa-stopwatch"></i>',
+        }),
+        title: "Salida"
+        }).addTo(map);
+        
+        let ecoZone = L.marker(coor[ecoZona], {
+        icon: L.divIcon({
+            className: 'leaflet-div-icon',
+            html: '<i class="fa-solid fa-leaf"></i>',
+        }),
+        title: "Zona ecológica"
+        }).addTo(map);
+        
+        let food = L.marker(coor[foodArr], {
+        icon: L.divIcon({
+            className: 'leaflet-div-icon',
+            html: '<i class="fa-solid fa-utensils"></i>',
+        }),
+        title: "Avituallamiento sólido"
+        }).addTo(map);
+        
+        let water = L.marker(coor[waterArr], {
+        icon: L.divIcon({
+            className: 'leaflet-div-icon',
+            html: '<i class="fa-solid fa-bottle-water"></i>',
+        }),
+        title: "Avituallamiento líquido"
+        }).addTo(map);
+        
+        let parking = L.marker(park, {
+        icon: L.divIcon({
+            className: 'leaflet-div-icon',
+            html: '<i class="fa-solid fa-square-parking"></i>',
+        }),
+        title: "Parking"
+        }).addTo(map);
+        
+        let sos = L.marker(coor[sosArr], {
+        icon: L.divIcon({
+            className: 'leaflet-div-icon',
+            html: '<i class="fa-solid fa-suitcase-medical"></i>',
+        }),
+        title: "Puesto de socorro"
+        }).addTo(map);
+        
+        startMarker.bindPopup("Punto de salida")
+        arriveMarker.bindPopup("Punto de llegada")
+        interTime1.bindPopup("Punto intermedio 1")
+        interTime2.bindPopup("Punto intermedio 2")
+        interTime3.bindPopup("Punto intermedio 3")
+        finalTime.bindPopup("Tiempo final")
+        ecoZone.bindPopup("Zona ecológica")
+        food.bindPopup("Avituallamiento sólido")
+        water.bindPopup("Avituallamiento líquido")
+        parking.bindPopup("Parking")
+        sos.bindPopup("Puesto de socorro")
+        // .openPopup() Hace que cuando entre a la pagina, este abierto
+        // L.circle([42.804963, -5.631211], {radius: 1000, color: "orange"}).addTo(map);
+        
+        L.polyline(coor , {color: "blue", weight: 3}).addTo(map);
+    // }
 }
 
 form.elements.send.addEventListener("click", handleOptionsRace);

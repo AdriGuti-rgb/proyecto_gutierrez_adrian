@@ -200,6 +200,7 @@ function checkUsername (e) {
                 else console.log("Todo mal");
         }).then( data => {
             console.log(data);
+            if (data.length == 0) canSubmitUser = true
             if (e.target.value.trim() != "") {
                 try {
                     data.forEach( ({username}) => {

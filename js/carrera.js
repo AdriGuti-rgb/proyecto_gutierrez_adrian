@@ -103,6 +103,9 @@ function registerRace (e) {
 
         fetch("http://localhost/php/proyecto/api/races/register/", {
             method: "POST",
+            headers: {
+                Authorization: `${localStorage.getItem("token")}`
+            },
             mode: "cors",
             body: formData
         }).then( response => {

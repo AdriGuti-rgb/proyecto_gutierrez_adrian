@@ -207,6 +207,11 @@ main {
     align-self: end;
 }
 
+#fotoCarrera img, #fotosVariadas img {
+    /* border: 2px solid var(--octavo); */
+    box-shadow: 0px 0px 20px var(--tercero);
+}
+
 #datos {
     grid-area: datos;
 }

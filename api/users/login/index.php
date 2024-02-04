@@ -29,7 +29,7 @@
             $resultado = $con->query($sql);
             $users = $resultado->fetch_all(MYSQLI_ASSOC);
             $exists = false;
-            
+
             header("HTTP/1.1 200 OK");
 
             $json_data = file_get_contents("php://input");
@@ -42,8 +42,6 @@
                 "username" => $username,
                 "pass" => $password
             );
-
-            
 
             foreach ($users as $key => $value) {
                 if ($value["username"] == $datos["username"]
