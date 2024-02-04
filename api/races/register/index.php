@@ -18,10 +18,7 @@
     header('Content-Type: application/json');
 
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
-        try {            
-            $json_data = file_get_contents("php://input");
-            $data = json_decode($json_data, true);
-            
+        try {
             $raceName = $_POST["raceName"];
             $category = $_POST['categories'];
             $total_slope = $_POST["total_slope"];
@@ -29,14 +26,18 @@
             $negative_slope = $_POST['negative_slope'];
             $distance = $_POST["distance"];
             $poblation = $_POST['poblation'];
-            $main_photo = $_FILES['main_photo'];
             $race_day = $_POST['race_day'];
             $services = $_POST['services'];
             $modality = $_POST['modality'];
+            $webRef = $_POST['webRef'];
+            $coor = $_POST["coor"];
             $older_photos = $_FILES['older_photos'];
+            $main_photo = $_FILES['main_photo'];
+            $regulation = $_FILES['pdf'];
 
             $rutaDestinoOlder = '../../../img/races/' . $raceName . '/olderPhotos/';
             $rutaDestinoMain = '../../../img/races/' . $raceName . '/';
+            $rutaDestinoPDF = '../../../pdf/';
 
             if (!file_exists($rutaDestinoOlder)) {
                 mkdir($rutaDestinoOlder, 0777, true);
@@ -46,14 +47,20 @@
                 mkdir($rutaDestinoMain, 0777, true);
             }
 
+            if (!file_exists($rutaDestinoPDF)) {
+                mkdir($rutaDestinoPDF, 0777, true);
+            }
+            
+            $finalNames = strtolower($raceName);
             $contador = 1;
 
             foreach ($older_photos['tmp_name'] as $key => $tmpName) {
-                move_uploaded_file($tmpName, '../../../img/races/' . $raceName . '/olderPhotos/' . strtolower($raceName)."$contador.png");
+                move_uploaded_file($tmpName, '../../../img/races/' . $raceName . '/olderPhotos/' . $finalNames ."$contador.png");
                 $contador++;
             }
 
-            move_uploaded_file($main_photo['tmp_name'], '../../../img/races/' . $raceName . '/' . strtolower($raceName). ".png");
+            move_uploaded_file($main_photo['tmp_name'], '../../../img/races/' . $raceName . '/' . $finalNames . ".png");
+            move_uploaded_file($regulation['tmp_name'], '../../../pdf/' . $finalNames . ".pdf");
 
             $uniqid = uniqid();
             $hash = md5($uniqid);
@@ -76,6 +83,7 @@
             $servicesConsulta = $resultadoServices->fetch_all(MYSQLI_ASSOC);
     
             $totalServices = array();
+
             foreach ($servicesConsulta as $key => $value) {
                 foreach ($services as $keyJS => $valueJS) {
                     if ($valueJS == $value["type"]) {
@@ -87,11 +95,14 @@
             if ($id_category != "" || $id_modality != "") {
                 $con->autocommit(false);  
 
+
                 $sqlNormal = "
                         INSERT INTO races ()
-                        VALUES ('$idAlfanumerico', '$raceName', '$race_day', '$positive_slope', '$negative_slope', '$total_slope', '$distance', '$poblation', '$main_photo', '$id_category', '$id_modality')
+                        VALUES ('$idAlfanumerico', '$raceName', '$race_day', '$positive_slope', '$negative_slope', '$total_slope', '$distance', '$poblation', '$finalNames.png', '$finalNames.pdf', '$webRef', '$coor', '$id_category', '$id_modality')
                     ";
                 $con->query($sqlNormal);
+
+                print_r ($totalServices);
 
                 foreach ($totalServices as $value) {
                     $sqlServicesInsert = "
@@ -101,22 +112,24 @@
                     $con->query($sqlServicesInsert);
                 }
 
-                foreach ($older_photos as $value) {
+                $contadorServicios = 0;
+                foreach ($older_photos["name"] as $value) {
                     $uniqid = uniqid();
                     $hash = md5($uniqid);
                     $idPhotos = substr($hash, 0, 20);
 
                     $sqlPhotosInsert = "
-                            INSERT INTO older_photos () 
-                            VALUES ('$idPhotos', '$value', '$idAlfanumerico')
-                        ";
+                    INSERT INTO older_photos () 
+                    VALUES ('$idPhotos', '$finalNames$contadorServicios.png', '$idAlfanumerico')
+                    ";
+                    $contadorServicios++;
                     $con->query($sqlPhotosInsert);
                 }
 
-                // $con->commit();
+                $con->commit();
             } else header("HTTP/1.1 404 Not Found");
 
-            // header("HTTP/1.1 201 Created");
+            header("HTTP/1.1 201 Created");
 
         } catch (mysqli_sql_exception $e) {
             echo json_encode(array("message" => $e->getMessage()));

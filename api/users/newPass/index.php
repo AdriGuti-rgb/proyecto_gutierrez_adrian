@@ -2,8 +2,10 @@
 
     use Firebase\JWT\JWT;
     use Firebase\JWT\Key;
+
     require '../../jwt/vendor/autoload.php';
     require_once "../../conexion.php";
+
     $con = new Conexion();
     session_start();
 
@@ -17,12 +19,11 @@
     }
 
     header("Access-Control-Allow-Origin: *");
-    header("Access-Control-Allow-Methods: POST, OPTIONS");
+    header("Access-Control-Allow-Methods: GET, OPTIONS");
     header("Access-Control-Allow-Headers: Content-Type");
     header('Content-Type: application/json');
 
-
-    if ($_SERVER["REQUEST_METHOD"] === "DELETE") {
+    if ($_SERVER["REQUEST_METHOD"] === "POST") {
         try {
             if (isset($_SESSION["key"])) {
                 $key = $_SESSION["key"];
@@ -30,44 +31,28 @@
                 $jwt = $headersJS["Authorization"];
 
                 $decoded = JWT::decode($jwt, new Key ($key, 'HS256'));
-                
-                $rol = $decoded->rol;
+
                 $id = $decoded->user_id;
-                $userNameJWT = $decoded->username;
 
-                $con->autocommit(false);
-                $con->begin_transaction();
+                $pass = $_POST["pass"];
 
-                $sqlFavourite = "DELETE FROM favourites WHERE id_user = '$id'";
-                $resultado = $con->query($sqlFavourite);
+                $hashPass = password_hash($pass, PASSWORD_BCRYPT);
 
-                if ($rol == "Organizer") {
-                    $sqlOrganizer = "DELETE FROM organizers WHERE id_user = '$id'";
-                    $con->query($sqlOrganizer);
-                }
+                $sql = "UPDATE users 
+                        SET pass = '$hashPass' 
+                        WHERE id = '$id'";
+                $resultado = $con->query($sql);
 
-                $sqlUser = "DELETE FROM users WHERE id = '$id'";
-                $resultado = $con->query($sqlUser);
 
-                if ($con->commit()) {
-                    if (file_exists('../../../img/userPhotos/'.strtolower($userNameJWT).".png")) {
-                        unlink('../../../img/userPhotos/'.strtolower($userNameJWT).".png");
-                    }
-                }
-                
-                echo json_encode("Todo bien");
+                header("HTTP/1.1 200 OK");
 
             } else {
                 echo json_encode(array("error" => "La clave no está disponible en la sesión."));
             }
         } catch (mysqli_sql_exception $e) {
             echo json_encode(array("error" => "Error: " . $e->getMessage()));
-            $con->rollback();
-        } catch (Firebase\JWT\ExpiredException $e) {
-            header("HTTP/1.1 401 Unauthorized");
         }
     } else {
         header("HTTP/1.1 400 Bad request");
     }
-    
 ?>

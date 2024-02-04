@@ -3,22 +3,10 @@ if (localStorage.getItem("rol") == "User") {
     document.getElementById("telefonoEntidad").remove();
     document.getElementById("entidadTelefono").remove();
 }
-document.getElementById("vista").addEventListener("click", mostrarContrasena);
+
 let form = document.forms.login;
-
-function mostrarContrasena (e) {
-    let contrasenaInput = document.getElementById("contrasena");
-
-    if (contrasenaInput.type === "password") {
-        contrasenaInput.type = "text";
-        e.target.classList.remove("fa-eye");
-        e.target.classList.add("fa-eye-slash");
-    } else {
-        contrasenaInput.type = "password";
-        e.target.classList.add("fa-eye");
-        e.target.classList.remove("fa-eye-slash");
-    }
-}
+let formConfirm = document.forms.cambioContrasena
+let regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
 
 /* Recojo las localidades para mostrarlas en el select */
 function anadirLocalidades (e) {
@@ -46,7 +34,7 @@ function anadirLocalidades (e) {
     el usuario pueda ver la contraseña que esta escribiendo
 */
 function mostrarContrasena (e) {
-    let contrasenaInput = document.getElementById("contrasena");
+    let contrasenaInput = document.getElementById("actual");
 
     if (contrasenaInput.type === "password") {
         contrasenaInput.type = "text";
@@ -90,7 +78,7 @@ fetch("http://localhost/php/proyecto/api/users/profile/", {
             form.elements.correo.value = data.mail;
             form.elements.localidad[0].textContent = data.city;
             form.elements.localidad[0].value = data.city;
-            form.elements.contrasena.value = data.pass;
+            // form.elements.contrasena.value = data.pass;
 
             if (data.phone != undefined && data.club != undefined) {
                 form.elements.telefono.value = data.phone;
@@ -100,55 +88,51 @@ fetch("http://localhost/php/proyecto/api/users/profile/", {
     })
 
 
-    // function mostrar(){
-    //     var archivo = document.getElementById("file").files[0];
-    //     var reader = new FileReader();
-    //     if (file) {
-    //       reader.readAsDataURL(archivo );
-    //       reader.onloadend = function () {
-    //         document.getElementById("img").src = reader.result;
-    //       }
-    //     }
-    //   }
-
 /* Recojo los datos para mandarlos a la api y hacer el update con put */
 
 function getParams (e) {
     e.preventDefault();
 
-    let elementos = Array.from(form.elements)
-    let limit;
-    let user = {};
-    if (localStorage.getItem("rol") == "User") limit = elementos.length - 2
-        else limit = elementos.length - 2
-
-    elementos.forEach( (item, index) => {
-        if (index < limit) {
-            if (item.value.trim() == "") {
-                if (item.name === "contrasena") user[item.name] = pass
-                    else user[item.name] = item.placeholder;
-            }
-                else user[item.name] = item.value;
-        }
-    })
+    let name = form.elements.nombreUsuario.value;
+    let username = form.elements.nombreMostrado.value;
+    let pass = form.elements.contrasena.value;
+    let mail = form.elements.correo.value;
+    let city = form.elements.localidad.value;
+    let file = form.elements.fotoPerfil.files[0];
+    let formData = new FormData();   
+    
+    formData.append('name', name);
+    formData.append('username', username);
+    formData.append('mail', mail);
+    formData.append('pass', pass);
+    formData.append('city', city);
+    
+    if (file) formData.append('file', file); 
+    
+    if (form.elements.telefono && form.elements.entidad) {
+            formData.append('phone', form.elements.telefono.value);
+            formData.append('club', form.elements.entidad.value);
+    }
 
     fetch("http://localhost/php/proyecto/api/users/update/", {
-        method: "PUT",
+        method: "POST",
         headers: {
-            Authorization: `${localStorage.getItem("token")}`
+            "Authorization": `${localStorage.getItem("token")}`
         },
         mode: "cors",
-        body: JSON.stringify(user)
+        body: formData
     }).then( response => {
         if (response.status === 200) {
-            localStorage.setItem('username', user.nombreMostrado);
-            localStorage.setItem('name', user.nombreUsuario);
-            window.location.reload()
+            localStorage.setItem('username', formData.get("username"));
+            localStorage.setItem('name', formData.get("name"));
+            location.reload()
         } else if (response.status === 401) expirationToken()
           else if (response.status === 404) alert(response.statusText)
           else console.log("Todo mal");
+        // if (response.status === 200) return response.json()
     })
     .then( data => {
+        if (data) console.log(data);
     });
 }
 
@@ -182,6 +166,7 @@ function verifyDelete () {
         let main = document.getElementsByTagName("main")
         main[0].append(div);
         secondForm = document.forms.deleteUserLogin;
+        document.getElementById("tapar").classList.remove("hidden")
         secondForm.elements.deleteSend.addEventListener("click", deleteUser);
     }
 }
@@ -211,6 +196,7 @@ function deleteUser (e) {
     } else {
         document.getElementById("confirmacion").remove()
         if (baja.checked) baja.checked = false;
+        document.getElementById("tapar").classList.add("hidden")
     }
 }
 
@@ -232,8 +218,124 @@ function expirationToken () {
     }, 5000);
 }
 
+function checkPass (e) {
+    let contrasena = e.target.value;
+
+    if (!contrasena.match(regex)) {
+        putErrors("La contraseña no cumple los requisitos")
+        e.target.style.borderColor = "red"
+    } else {
+        if (document.getElementById("error")) document.getElementById("error").remove()
+        e.target.style.borderColor = "white"
+
+        let formData = new FormData()
+        formData.append("pass", e.target.value)
+
+        fetch("http://localhost/php/proyecto/api/users/checkPass/", {
+            method: "POST",
+            headers: {
+                Authorization: `${localStorage.getItem("token")}`
+            },
+            body: formData
+            })
+            .then( response => {
+                if (response.status === 200) {
+                    formConfirm.elements.nueva.disabled = false
+                    formConfirm.elements.repetida.disabled = false
+                    document.getElementById("repetida").addEventListener("blur", e => {
+                        if (e.target.value != formConfirm.elements.nueva.value) {
+                            putErrors("Las contraseñas no coinciden")
+                            e.target.style.borderColor = "red"
+                        } else {
+                            if (document.getElementById("error")) document.getElementById("error").remove()
+                            e.target.style.borderColor = "white"
+                        }
+                    });
+                }
+                    else if (response.status === 401) putErrors(`Contraseña incorrecta`)
+                    else console.log("Todo mal");
+            })
+            .then( data => {
+            })
+        
+    }
+}
+
+function checkNewPass (e) {
+    let contrasena = e.target.value;
+
+    if (!contrasena.match(regex)) {
+        putErrors("La contraseña no cumple los requisitos")
+        e.target.style.borderColor = "red"
+    } else {
+        if (document.getElementById("error")) document.getElementById("error").remove()
+        e.target.style.borderColor = "white"
+        canSubmitPass = true
+
+    }
+}
+
+function changePass (e) {
+    e.target.disabled = true
+    document.getElementById("tapar").classList.remove("hidden");
+    document.getElementById("cambioContraseña").classList.remove("hidden")
+}
+
+function putErrors (error) {
+    if (document.getElementById("error") != null) document.getElementById("error").remove();
+    let div = document.createElement("div");
+    div.id = "error";
+    let cambioContraseña = document.getElementById("cambioContraseña");
+    div.innerHTML = `${error}`;
+    cambioContraseña.append(div);
+}
+
+function controlDivPass () {
+    document.getElementById("tapar").classList.add("hidden");
+    document.getElementById("cambioContraseña").classList.add("hidden")
+    formConfirm.elements.actual.value = ""
+    formConfirm.elements.repetida.value = ""
+    formConfirm.elements.nueva.value = ""
+    if (document.getElementById("error")) document.getElementById("error").remove()
+    formConfirm.elements.actual.style.borderColor = "white"
+    formConfirm.elements.nueva.style.borderColor = "white"
+    formConfirm.elements.repetida.style.borderColor = "white"
+    form.elements.contrasena.disabled = false
+    formConfirm.elements.repetida.disabled = true
+    formConfirm.elements.nueva.disabled = true
+}
+
+function sendData () {
+    if (canSubmitPass) {
+        let formData = new FormData()
+        formData.append("pass", formConfirm.elements.repetida.value)
+
+        fetch("http://localhost/php/proyecto/api/users/newPass/", {
+            method: "POST",
+            headers: {
+                Authorization: `${localStorage.getItem("token")}`
+            },
+            body: formData
+            })
+            .then( response => {
+                if (response.status === 200) window.location.reload()
+                    else if (response.status === 401) putErrors(`Error al modificar`)
+                    else console.log("Todo mal");
+            })
+            .then( data => {
+            })
+    }
+}
+
+
 /* Listeners */
 
+form.elements.contrasena.addEventListener("click", changePass)
 form.elements.send.addEventListener("click", getParams);
+formConfirm.cancel.addEventListener("click", controlDivPass)
+formConfirm.nueva.addEventListener("blur", checkNewPass)
+formConfirm.change.addEventListener("click", sendData)
 document.getElementById("localidad").addEventListener("click", anadirLocalidades);
+document.getElementById("vista").addEventListener("click", mostrarContrasena);
+document.getElementById("actual").addEventListener("blur", checkPass);
 baja.addEventListener('click', verifyDelete);

@@ -262,24 +262,19 @@ li:hover {
     border: solid 0.5px var(--negro);
 }
 
-/* Estilos generales */
-
-:root {
-    --primero: #0C7B85;
-    --segundo: #0FA3B1;
-    --tercero: #62C3D6;
-    --cuarto: #B5E2FA;
-    --quinto: #F9F7F3;
-    --sexto: #F3EBCC;
-    --septimo: #F2BF8B;
-    --octavo: #F7A072;
-    --negro: black;
-    --blanco: white;
-}
-
-body {
-    margin: 0;
-    font-family: 'Inknut Antiqua', serif;
+#error {
+    background-color: rgba(255, 0, 0, 0.8);
+    border: 2px solid red;
+    border-radius: 10px;
+    padding: 10px;
+    width: 230px;
+    height: fit-content;
+    position: absolute;
+    top: 46%;
+    right: 1.5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Estilos para dispositivos móviles */

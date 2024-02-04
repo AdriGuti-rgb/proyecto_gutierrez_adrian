@@ -199,7 +199,8 @@ function checkUsername (e) {
                 else if (response.status === 404) alert(response.statusText)
                 else console.log("Todo mal");
         }).then( data => {
-            if (data && e.target.value.trim() != "") {
+            console.log(data);
+            if (e.target.value.trim() != "") {
                 try {
                     data.forEach( ({username}) => {
                         if (e.target.value == username) {
@@ -272,6 +273,7 @@ function getParams(e) {
         let formData = new FormData();   
         
         formData.append('name', `${name}`);
+
         formData.append('username', `${username}`);
         formData.append('mail', `${mail}`);
         formData.append('pass', `${pass}`);
@@ -309,6 +311,9 @@ function putErrors (error) {
 }
 
 function checkSubmit () {
+    console.log(canSubmitEmail);
+    console.log(canSubmitPass);
+    console.log(canSubmitUser);
     return canSubmit = canSubmitEmail && canSubmitPass && canSubmitUser;
 }
 

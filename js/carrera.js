@@ -1,7 +1,11 @@
 if (localStorage.getItem("rol") == "Anonimous") location.href = "./paginaPpal.html"
+localStorage.removeItem("raceName");
 let inputGPX = document.getElementById("gpx");
 let form = document.forms.registerRace;
 let send = form.elements.send;
+let neg_slope;
+let pos_slope;
+let coordenadas = []
 
 fetch("http://localhost/php/proyecto/api/races/modalities/", )
     .then( response => {
@@ -24,9 +28,30 @@ fetch("http://localhost/php/proyecto/api/races/modalities/", )
             let option = new Option(item.type, item.type, false, selected);
             modalidad.append(option)
         });
+})
+
+fetch("http://localhost/php/proyecto/api/races/services/", )
+    .then( response => {
+        if (response.status === 200) return response.json()
+            else if (response.status === 404) alert(response.statusText)
+            else if (response.status === 401) expirationToken()
+            else console.log("Todo mal");
     })
+    .then( data => {
+        let form = document.forms.registerRace;
+        let servicios = form.elements.servicios;
 
+        data.sort( (a, b) => a.type > b.type)
+            .forEach( (item, index) => {
+                let selected = false;
 
+                if (index == 0) selected = true;
+                
+                let option = new Option(item.type, item.type, false, selected);
+                servicios.append(option)
+    })
+});
+        
 fetch("http://localhost/php/proyecto/api/races/categories/", )
     .then( response => {
         if (response.status === 200) return response.json()
@@ -35,9 +60,7 @@ fetch("http://localhost/php/proyecto/api/races/categories/", )
             else console.log("Todo mal");
     })
     .then( data => {
-
         let form = document.forms.registerRace;
-
         let categorias = form.elements.categorias;
 
         data.forEach( (item, index) => {
@@ -48,96 +71,49 @@ fetch("http://localhost/php/proyecto/api/races/categories/", )
             let option = new Option(item.type, item.type, false, selected);
             categorias.append(option)
         });
-    })
-
-    
-    
-    fetch("http://localhost/php/proyecto/api/races/services/", )
-        .then( response => {
-            if (response.status === 200) return response.json()
-                else if (response.status === 404) alert(response.statusText)
-                else if (response.status === 401) expirationToken()
-                else console.log("Todo mal");
-        })
-        .then( data => {
-            let form = document.forms.registerRace;
-
-            let servicios = form.elements.servicios;
-
-            data.sort( (a, b) => a.type > b.type)
-                .forEach( (item, index) => {
-                    let selected = false;
-
-                    if (index == 0) selected = true;
-                    
-                    let option = new Option(item.type, item.type, false, selected);
-                    servicios.append(option)
-        })
-    });
-        
-fetch("http://localhost/php/proyecto/api/races/categories/", )
-        .then( response => {
-            if (response.status === 200) return response.json()
-                else if (response.status === 404) alert(response.statusText)
-                else if (response.status === 401) expirationToken()
-                else console.log("Todo mal");
-        })
-        .then( data => {
-    
-            let form = document.forms.registerRace;
-    
-            let categorias = form.elements.categorias;
-    
-            data.forEach( (item, index) => {
-                let selected = false;
-    
-                if (index == 0) selected = true;
-                
-                let option = new Option(item.type, item.type, false, selected);
-                categorias.append(option)
-            });
-        })
+})
 
 function registerRace (e) {
     e.preventDefault();
 
-    let arrayServices = [];
-    
-    
     let formData = new FormData();
     
-    formData.append("raceName", form.elements.nombreCarrera.value)
-    formData.append("categories", form.elements.categorias.value)
-    formData.append("total_slope", form.elements.desnivel.value)
-    formData.append("distance", form.elements.distancia.value)
-    formData.append("positive_slope", form.elements.desnivelPos.value)
-    formData.append("negative_slope", form.elements.desnivelNeg.value)
-    formData.append("poblation", form.elements.poblacion.value)
-    formData.append("main_photo", form.fotoPrincipal.files[0])
-    formData.append("race_day", form.elements.fechaRealizacion.value)
-    formData.append("services", arrayServices)
-    formData.append("modality", form.elements.modalidad.value)
-    
-    Array.from(form.fotosAnteriores.files)
-        .forEach( item => {
-            console.log(item);
-            formData.append("older_photos[]", item)
-        })
+    if (coordenadas.length == 0) putErrors("Introduzca la ruta")
+    else {
+        formData.append("raceName", form.elements.nombreCarrera.value)
+        formData.append("categories", form.elements.categorias.value)
+        formData.append("total_slope", form.elements.desnivel.value)
+        formData.append("distance", form.elements.distancia.value)
+        formData.append("positive_slope", neg_slope)
+        formData.append("negative_slope", pos_slope)
+        formData.append("poblation", form.elements.poblacion.value)
+        formData.append("main_photo", form.fotoPrincipal.files[0])
+        formData.append("pdf", form.pdf.files[0])
+        formData.append("webRef", form.enlaceWeb.value)
+        formData.append("race_day", form.elements.fechaRealizacion.value)
+        formData.append("modality", form.elements.modalidad.value)
+        formData.append("coor", JSON.stringify(coordenadas))
 
-    Array.from(form.elements.servicios.selectedOptions)
-        .forEach( item => formData.append("services", item.value))
-    
-    fetch("http://localhost/php/proyecto/api/races/register/", {
-        method: "POST",
-        mode: "cors",
-        body: formData
-    }).then( response => {
-        if (response.status === 201) location.href = "./paginaPpal.html"
-            else if (response.status === 404) alert(response.statusText)
-            else throw new Error("Hubo un problema con la solicitud")
-    }).then(data => {                
-        if (data) console.log(data);
-    }).catch(error => console.error(error));
+
+        Array.from(form.fotosAnteriores.files)
+            .forEach( item => formData.append("older_photos[]", item))
+
+        Array.from(form.elements.servicios.selectedOptions)
+            .forEach( item => formData.append("services[]", item.value))
+
+        fetch("http://localhost/php/proyecto/api/races/register/", {
+            method: "POST",
+            mode: "cors",
+            body: formData
+        }).then( response => {
+            if (response.status === 201) location.href = "./paginaPpal.html"
+                else if (response.status === 404) alert(response.statusText)
+                else throw new Error("Hubo un problema con la solicitud")
+        }).then(data => {                
+            if (data) console.log(data);
+        }).catch(error => console.error(error));
+    }
+
 }
 
 function calcultateSlope (){
@@ -155,7 +131,7 @@ function calcultateSlope (){
             
             
             let altitudes = coor.map(item => item[2]);
-            let coordenadas = [];
+            
             coor.forEach((item, index) => {
                 if ((index % 3 == 0) && (index % 2 == 0) && (index % 4 == 0)) {
                     coordenadas.push([item[1],item[0]])
@@ -170,11 +146,20 @@ function calcultateSlope (){
             return {pos: pos, neg: neg, prev:item}
         }, {pos:0, neg:0, prev: altitudes[0]});
         
-        form.elements.desnivelNeg.value = values.neg.toFixed(2);
-        form.elements.desnivelPos.value = values.pos.toFixed(2);
+        neg_slope = values.neg.toFixed(2);
+        pos_slope = values.pos.toFixed(2);
         form.elements.desnivel.value = (values.pos + values.neg).toFixed(2);
-    }
+        }
+    }   
 }
+
+function putErrors (error) {
+    if (document.getElementById("error") != null) document.getElementById("error").remove();
+    let div = document.createElement("div");
+    div.id = "error";
+    let main = document.getElementsByTagName("main");
+    div.innerHTML = `${error}`;
+    main[0].append(div);
 }
 
 inputGPX.addEventListener("change", calcultateSlope);

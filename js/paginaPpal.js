@@ -25,11 +25,11 @@ function renderRaces(data) {
     races.innerHTML = "";
     
     data.filter( (_, index) => Math.trunc(index / itemsPerPage) == currentPage )
-        .forEach( ({name}) => {
+        .forEach( ({name, main_photo}) => {
         races.innerHTML += `
             <div class="cards">
                 <div class="fotoCarrera">
-                    <img src="./img/fotosLandingRandom/1Foto.jpg" alt="Foto 1">
+                    <img src="./img/races/${name}/${main_photo}" alt="Foto 1">
                 </div>
                 <div class="info">
                     <span>${name}</span>
@@ -101,16 +101,16 @@ function handleOrderChange (e) {
             dataTemporal = dataGlobal.sort((a, b) => a.name.toLowerCase() > b.name.toLowerCase());
             break;
         case "distancia":
-            dataTemporal = dataGlobal.sort((a, b) => a.distance > b.distance)
+            dataTemporal = dataGlobal.sort((a, b) => parseFloat(a.distance) > parseFloat(b.distance))
             break;
         case "desnivelTot":
-            dataTemporal = dataGlobal.sort((a, b) => a.total_slope > b.total_slope)
+            dataTemporal = dataGlobal.sort((a, b) => parseFloat(a.total_slope) > parseFloat(b.total_slope))
             break;
         case "desnivelPos":
-            dataTemporal = dataGlobal.sort((a, b) => a.positive_slope > b.positive_slope)
+            dataTemporal = dataGlobal.sort((a, b) => parseFloat(a.positive_slope) > parseFloat(b.positive_slope))
             break;
         case "desnivelNeg":
-            dataTemporal = dataGlobal.sort((a, b) => a.negative_slope > b.negative_slope)
+            dataTemporal = dataGlobal.sort((a, b) => parseFloat(a.negative_slope) > parseFloat(b.negative_slope))
             break;
         case "poblacion":
             dataTemporal = dataGlobal.sort((a, b) => a.poblation.toLowerCase() > b.poblation.toLowerCase())
@@ -154,11 +154,11 @@ function handleIconFav (e) {
                     <span style='font-size: 28px;'>Tus carreras favoritas:</span>
                 `;
                 data.sort( (a, b) => a.race_day > b.race_day)
-                    .forEach( ({name}) => {
+                    .forEach( ({name, main_photo}) => {
                         document.getElementById("favoritas").innerHTML += `
                             <div class="cards">
                             <div class="fotoCarrera">
-                                <img src="./img/fotosLandingRandom/1Foto.jpg" alt="Foto 1">
+                                <img src="./img/races/${name}/${main_photo}" alt="Foto 1">
                             </div>
                             <div class="info">
                                 <span>${name}</span>

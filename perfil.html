@@ -13,6 +13,8 @@
     <title>RaceMapp | Perfil</title>
 </head>
 <body>
+
+    <div id="tapar" class="hidden"></div>
     <div id="todo">
         <header>
             <a href="./paginaPpal.html"><img src="./img/Logotipo-removebg-preview.png" alt="Logotipo" title="Logotipo de la aplicación"  id="fotoHeader"></a>
@@ -73,8 +75,7 @@
 
                             <li>
                                 <label for="contrasena">Contraseña:</label>
-                                <input type="password" name="contrasena" id="contrasena" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
-                                <i class="fa-solid fa-eye" id="vista"></i>
+                                <input type="password" name="contrasena" id="contrasena">
                             </li>
 
                             <li>
@@ -102,6 +103,31 @@
                 <div id="divisoriaSuperior"></div>
                 <div id="divisoriaInferior"></div>
 
+            </div>
+
+            <div id="cambioContraseña" class="hidden">
+                <form action="" method="post" name="cambioContrasena">
+                    <h4>Cambiar la contraseña:</h4>
+                    <ul>
+                        <li>
+                            <label for="actual">Contraseña actual: </label>
+                            <input type="password" name="actual" id="actual">
+                            <i class="fa-solid fa-eye" id="vista"></i>
+                        </li>
+                        <li>
+                            <label for="nueva">Nueva contraseña: </label>
+                            <input type="password" name="nueva" id="nueva" disabled>
+                        </li>
+                        <li>
+                            <label for="repetida">Repita contraseña: </label>
+                            <input type="password" name="repetida" id="repetida" disabled>
+                        </li>
+                        <li>
+                            <input type="button" value="Cancelar" name="cancel" id="cancel">
+                            <input type="button" value="Cambiar" name="change" id="confirmarContraseña">
+                        </li>
+                    </ul>
+                </form>
             </div>
         </main>
 

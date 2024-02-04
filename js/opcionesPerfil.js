@@ -46,7 +46,7 @@ function renovateToken() {
 
     let restante = exp -(Math.trunc(Date.now() / 1000));
 
-    if (restante <= 305) {
+    if (restante <= 1305) {
         fetch("http://localhost/php/proyecto/api/users/token/", {
         headers: {
             Authorization: `${localStorage.getItem("token")}`
@@ -62,6 +62,24 @@ function renovateToken() {
     }
     setTimeout(renovateToken, time);
 };
+
+function expirationToken () {
+    if (document.getElementById("confirmacion") != null) document.getElementById("confirmacion").remove()
+                
+    let div = document.createElement("div");
+    div.id = "confirmacion";
+    div.innerHTML = `
+        <span style="text-align:center">La sesion ha expirado, vuelva a iniciar sesión</span>
+    `;
+    
+    let main = document.getElementsByTagName("main")
+    main[0].append(div);
+
+    setTimeout(() => {
+        localStorage.clear();
+        location.href = "./index.html";
+    }, 5000);
+}
 
 /* Poner fotos perfil */
 fetch("http://localhost/php/proyecto/api/users/main_photo/", {

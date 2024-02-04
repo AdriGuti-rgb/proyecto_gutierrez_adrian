@@ -2,8 +2,8 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 02-02-2024 a las 00:45:06
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 04-02-2024 a las 13:57:33
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -70,9 +70,9 @@ CREATE TABLE `favourites` (
 -- Volcado de datos para la tabla `favourites`
 --
 
-INSERT INTO `favourites` (`id_user`, `id_race`) VALUES
-('03u7cup02ed1', '40aaf666fcdaadc7a22d'),
-('28f23ed55a16a9066d7c', '443079dd068be778a81a');
+-- INSERT INTO `favourites` (`id_user`, `id_race`) VALUES
+-- ('68a7573d413676f09bf1', '3a50f54de468fbf6cff5'),
+-- ('68a7573d413676f09bf1', '3bef3523e01ccc811f76');
 
 -- --------------------------------------------------------
 
@@ -118,101 +118,12 @@ CREATE TABLE `older_clasifications` (
 -- Volcado de datos para la tabla `older_clasifications`
 --
 
-INSERT INTO `older_clasifications` (`id`, `winner`, `second_place`, `third_place`, `year_race`, `time_race`, `id_race`) VALUES
-('0', NULL, NULL, NULL, NULL, '00:00:00', NULL),
-('1e468615fcf97d4e5d54', 'Adrian', 'Juan', 'David', '2021', '09:09:12', '443079dd068be778a81a'),
-('b07341d3550fe6a2862c', 'Adrian', 'Juan', 'David', '0000', '09:09:12', '443079dd068be778a81a'),
-('BGQ60PLB3PS', 'Tanek Hewitt', 'James Hooper', 'Zane Meyers', '2015', '02:43:02', '443079dd068be778a81a'),
-('BNC31CLS8CI', 'Beau Goodman', 'Ezra Lee', 'Wang Lyons', '2002', '12:32:48', '9457a318f958c1f22273'),
-('BPK37EWO4IJ', 'Raja Moon', 'Malcolm Estes', 'Wayne Grant', '2006', '09:24:16', 'f434b71559b943d7f663'),
-('BVS23VSJ4RO', 'Murphy Warner', 'Cody Kaufman', 'Jescie Russell', '2024', '18:29:58', 'f434b71559b943d7f663'),
-('BXG00TBM0MH', 'Ezekiel Willis', 'Scarlet Melton', 'Garth Berry', '2012', '04:18:23', '3fcecc005ed9878ed0d6'),
-('BYO13JPK0XN', 'Wallace Mayer', 'Macaulay Golden', 'Kirestin Salazar', '2000', '08:45:50', '40aaf666fcdaadc7a22d'),
-('CEE36IJY4ES', 'Angela Mcconnell', 'Cole Lara', 'Maxwell Pierce', '2018', '10:03:58', '3fcecc005ed9878ed0d6'),
-('CUO32SVE2WU', 'Aristotle Brock', 'Donna Salas', 'Martena Dunlap', '2002', '17:00:05', '40aaf666fcdaadc7a22d'),
-('DHE84QJO2SR', 'Kyra Hays', 'Haley Mckee', 'September Macias', '2016', '22:23:25', '3fcecc005ed9878ed0d6'),
-('DIC15OOE4OM', 'Kiara Pittman', 'Mikayla Bernard', 'Christian Pugh', '2017', '23:00:00', 'f434b71559b943d7f663'),
-('DOU81OBX4EL', 'Maxwell England', 'Barrett Odom', 'Maryam Harrell', '2011', '11:15:01', '3fcecc005ed9878ed0d6'),
-('DVN73FBU4OI', 'Constance Avila', 'Jillian Monroe', 'Baxter Russell', '2015', '13:38:07', '443079dd068be778a81a'),
-('DWM90EES5SV', 'Charles Fitzgerald', 'Ariel Mullen', 'Jerome Head', '2023', '09:39:29', '443079dd068be778a81a'),
-('FFD76KTX6XP', 'Keith Blankenship', 'Maxwell Vinson', 'Ursula Bray', '2024', '01:04:52', '3fcecc005ed9878ed0d6'),
-('FFW59PDN2RR', 'Naida Davis', 'Justina Rush', 'Brandon Lopez', '2007', '02:41:01', '40aaf666fcdaadc7a22d'),
-('FIX98WTP3QH', 'Claire Thomas', 'Allen Osborn', 'Rachel Stein', '2004', '13:10:30', 'da8fd427af0bbf59ebf1'),
-('FLC67KQS6KJ', 'Holmes Sloan', 'Lillith Le', 'Charity Henry', '2021', '21:51:43', 'f434b71559b943d7f663'),
-('FQV55UMU8QM', 'Wesley Tillman', 'Lacota Parsons', 'Tyrone Adams', '2023', '22:44:13', '40aaf666fcdaadc7a22d'),
-('FTC21MOK4PY', 'Yoko Rogers', 'Kasper Wynn', 'Ivana Fernandez', '2019', '12:38:29', '443079dd068be778a81a'),
-('GQY74JXS6SL', 'Lee Jacobs', 'Allen Reed', 'Maisie Noel', '2005', '05:38:57', '5bb6af13e4c5a18ed849'),
-('GXW06DPX4VX', 'Harding Whitehead', 'Hu Ochoa', 'Eleanor Lloyd', '2014', '12:34:03', 'f434b71559b943d7f663'),
-('GYY63IUM8ZJ', 'Hashim Barron', 'Naida Andrews', 'Jordan Farmer', '2016', '01:50:46', 'da8fd427af0bbf59ebf1'),
-('HAW65JFR5QM', 'Patrick Cochran', 'Zeph Monroe', 'Calista Harding', '2019', '02:15:39', '9457a318f958c1f22273'),
-('HBY45KBP4KL', 'Nyssa Gregory', 'Yoko Miles', 'Lance Burton', '2021', '23:30:56', '5bb6af13e4c5a18ed849'),
-('HHR39WYX6FB', 'Tate Lopez', 'Jamalia Herrera', 'Rooney Clemons', '2011', '01:42:31', '443079dd068be778a81a'),
-('HJX22TCH4PV', 'Anika Ewing', 'Emma Fischer', 'Shea Cook', '2020', '14:16:32', '443079dd068be778a81a'),
-('HLL16VUF6ZV', 'Velma Gould', 'Brian Allen', 'Darrel Soto', '2021', '21:49:34', '3fcecc005ed9878ed0d6'),
-('IGP54RSO5JI', 'Lance Kennedy', 'Timothy Spence', 'Camden Turner', '2003', '23:24:36', '40aaf666fcdaadc7a22d'),
-('ILI34DJY9SJ', 'Fay Oliver', 'Frances Clayton', 'Michael Garrett', '2009', '23:44:49', '5bb6af13e4c5a18ed849'),
-('ILT54ULM9GN', 'Noah Atkinson', 'Jacqueline Franks', 'Deirdre Ramsey', '2017', '22:52:28', 'f434b71559b943d7f663'),
-('IXB08TRY5MP', 'Josiah Roach', 'Jennifer Quinn', 'Holly Harris', '2016', '19:05:38', '443079dd068be778a81a'),
-('JAF73UNJ2QO', 'Brody Travis', 'Ivy Beach', 'Walker Mercado', '2019', '17:37:45', '40aaf666fcdaadc7a22d'),
-('JXW07JRB2MX', 'Marvin Rasmussen', 'Tarik Nguyen', 'Barry Shaffer', '2009', '22:55:49', '5bb6af13e4c5a18ed849'),
-('JYJ19KQC1ND', 'Indira Finch', 'Winter Stout', 'Kevyn Solomon', '2014', '05:13:53', 'da8fd427af0bbf59ebf1'),
-('KEN77TPA9WX', 'Neil Mendoza', 'Fredericka Hurst', 'Sandra Clark', '2023', '11:19:21', '3fcecc005ed9878ed0d6'),
-('KIH56FFZ7UX', 'Addison Cline', 'Melvin Drake', 'Rinah Jimenez', '2017', '22:23:19', 'da8fd427af0bbf59ebf1'),
-('KZY35MWT5IJ', 'Raven Cooley', 'Shaine Hawkins', 'Anne Carver', '2020', '22:27:14', '5bb6af13e4c5a18ed849'),
-('LAL37GDV7YW', 'Wylie Grimes', 'Moses Hanson', 'Nerea Delaney', '2003', '20:29:35', 'da8fd427af0bbf59ebf1'),
-('LQE68HRD7KR', 'Ginger Manning', 'Maggy Marsh', 'Zane Holden', '2008', '16:38:50', '443079dd068be778a81a'),
-('LYB18SGJ1DP', 'Linda Robertson', 'Bell Hawkins', 'Nero Winters', '2005', '00:42:32', 'f434b71559b943d7f663'),
-('LYN28LEZ9CV', 'Joshua Burnett', 'Lee Barker', 'Freya York', '2016', '15:37:57', 'da8fd427af0bbf59ebf1'),
-('MFF21RAH2SI', 'Geraldine Carey', 'Bruno Cabrera', 'Kylie Parrish', '2013', '18:44:16', 'da8fd427af0bbf59ebf1'),
-('MGX47ERW5MS', 'Kermit Carter', 'Rhona Rowe', 'Brennan Sweeney', '2012', '10:48:50', '443079dd068be778a81a'),
-('MOH85NNW3WI', 'Addison Gallagher', 'Florence Chen', 'Owen Barlow', '2009', '21:44:08', '443079dd068be778a81a'),
-('MQU70WLQ3EH', 'Phillip Mack', 'Samuel Avila', 'Reese Cross', '2005', '11:35:32', '443079dd068be778a81a'),
-('MRJ49OVB6QL', 'Celeste Wiley', 'Ferdinand Hester', 'Rina Holman', '2010', '04:17:23', '5bb6af13e4c5a18ed849'),
-('MYY38DFK3RC', 'Wyoming Kaufman', 'Clarke Rodriguez', 'Sean Morris', '2016', '04:12:20', '40aaf666fcdaadc7a22d'),
-('NAR87VQJ2SX', 'Jin Barnett', 'Gary Hamilton', 'Joseph Manning', '2014', '22:12:30', '3fcecc005ed9878ed0d6'),
-('NBV35VYS7CN', 'Alika Hart', 'Alyssa Black', 'Alice Patterson', '2024', '12:49:31', '3fcecc005ed9878ed0d6'),
-('NGE02WCM6WD', 'Chantale Weaver', 'Bianca Garrison', 'John Sosa', '2014', '08:13:09', 'f434b71559b943d7f663'),
-('NHH26TPB7HT', 'Shannon Estrada', 'Driscoll Serrano', 'Marvin Price', '2024', '04:05:53', '9457a318f958c1f22273'),
-('NVK84MJC1VH', 'Nissim Hester', 'Hector Browning', 'Melinda Hartman', '2006', '12:45:46', '5bb6af13e4c5a18ed849'),
-('OBN44SBU4OV', 'Pandora Sharpe', 'Deacon Becker', 'Jade Welch', '2008', '00:30:18', '5bb6af13e4c5a18ed849'),
-('OSV54RBM9WH', 'Warren Beasley', 'Dane Huff', 'Xyla Sellers', '2017', '16:54:33', 'f434b71559b943d7f663'),
-('PAL05HOY7EI', 'Willow Dean', 'Kennan Dickson', 'Eve Baldwin', '2012', '02:19:46', '40aaf666fcdaadc7a22d'),
-('PUC12ZZB1FY', 'David Garrison', 'Dalton Rich', 'Vincent James', '2008', '01:13:45', '40aaf666fcdaadc7a22d'),
-('PVF24SGL6GV', 'Mechelle Oliver', 'Nyssa Harris', 'Kylee Stewart', '2006', '11:01:09', 'f434b71559b943d7f663'),
-('PVH41QTM4DH', 'Jade Mercer', 'Haviva Gibbs', 'Lani Meyer', '2015', '17:07:40', '5bb6af13e4c5a18ed849'),
-('PWA81ZSC6GG', 'Donovan Odonnell', 'Lenore Wallace', 'Ezekiel Dejesus', '2019', '05:46:57', '443079dd068be778a81a'),
-('PYK62NPP3SB', 'Alice Vasquez', 'Elvis Whitney', 'Rhonda Hoover', '2001', '17:37:05', '443079dd068be778a81a'),
-('QIK33VKD7WI', 'Keegan Franks', 'Nita Michael', 'Adam Cline', '2003', '19:50:07', '40aaf666fcdaadc7a22d'),
-('QKK66NNJ5MO', 'Colorado Frederick', 'Vivien Yates', 'Skyler Paul', '2004', '03:43:42', '443079dd068be778a81a'),
-('QXB35ENG3JT', 'Demetrius Elliott', 'Janna Glass', 'Ella Rasmussen', '2018', '17:29:56', 'da8fd427af0bbf59ebf1'),
-('QXT15JRR1ND', 'Caleb Mccarty', 'Ulla Howard', 'Gary Lawrence', '2013', '09:02:56', 'da8fd427af0bbf59ebf1'),
-('RDL82WUU4TF', 'Scott Gray', 'Burton Castro', 'Nelle Booth', '2014', '16:38:14', '40aaf666fcdaadc7a22d'),
-('RHG31ANI1WK', 'Porter Hurst', 'Colton Sosa', 'Noelle Miles', '2023', '21:19:06', '5bb6af13e4c5a18ed849'),
-('RSR36OQF2PW', 'Kennedy Blackwell', 'Shea Wong', 'Carissa Hewitt', '2020', '00:04:06', '3fcecc005ed9878ed0d6'),
-('RZP99IGJ4LX', 'Abigail Conner', 'Uta Brooks', 'Minerva Bright', '2004', '11:33:18', '9457a318f958c1f22273'),
-('SIK86VLR9XI', 'Brody Hayes', 'Anne Holden', 'Zorita Thompson', '2015', '17:23:25', '40aaf666fcdaadc7a22d'),
-('STN81FNE2QE', 'Hannah Clarke', 'Aileen Juarez', 'Zenia Miller', '2014', '17:18:55', '3fcecc005ed9878ed0d6'),
-('SZX23LAW5QK', 'Maite Mcmahon', 'Thaddeus Montoya', 'Joel Wagner', '2022', '04:59:26', '40aaf666fcdaadc7a22d'),
-('TKS21FUS0CH', 'Alika Porter', 'Drake Shepherd', 'Quynn Turner', '2007', '17:38:54', '9457a318f958c1f22273'),
-('TUL55BPQ0KK', 'Nathaniel Rivas', 'Devin Garner', 'Edan Ayers', '2009', '05:55:57', '40aaf666fcdaadc7a22d'),
-('TWR25PBD8BU', 'Preston Moore', 'Kai Avila', 'Hanae Foster', '2018', '21:44:49', '9457a318f958c1f22273'),
-('UBD54CVZ7OL', 'Emerson Romero', 'Quynn Byrd', 'Cheyenne Poole', '2006', '10:38:42', 'da8fd427af0bbf59ebf1'),
-('UCZ76KQX2PL', 'Sybill Knight', 'Victoria Hensley', 'Meredith Irwin', '2021', '20:38:31', '3fcecc005ed9878ed0d6'),
-('VFN32QFC1KQ', 'Reuben Roach', 'Deirdre Duncan', 'Elvis Franklin', '2002', '20:45:55', '40aaf666fcdaadc7a22d'),
-('VIY41HJG3RB', 'Calista Combs', 'Gillian Ratliff', 'Hamilton Herrera', '2000', '07:35:26', 'f434b71559b943d7f663'),
-('VQS38GBR8BI', 'Chase Henry', 'Gil Sloan', 'Brittany Bass', '2024', '05:39:28', '5bb6af13e4c5a18ed849'),
-('VQS60BAE5TR', 'Giacomo Black', 'Vernon Osborn', 'Kasper Bell', '2010', '16:33:23', '5bb6af13e4c5a18ed849'),
-('VYM85LCQ5XV', 'Cynthia Harper', 'Venus Mullen', 'Latifah Espinoza', '2009', '19:52:00', '5bb6af13e4c5a18ed849'),
-('WAI72HCO4UC', 'Barclay Wood', 'Emma Mcfarland', 'Ella Holder', '2007', '14:15:46', '3fcecc005ed9878ed0d6'),
-('WDN64MDI6VL', 'Elizabeth Knapp', 'Ursula Keith', 'Zenia Mcknight', '2012', '11:03:01', '40aaf666fcdaadc7a22d'),
-('WPR80LHM4VQ', 'Cleo Landry', 'Ria Sims', 'Lewis Rocha', '2022', '02:08:20', '5bb6af13e4c5a18ed849'),
-('WST92FWD2YS', 'Veda Cain', 'Kaye French', 'Maryam Franklin', '2023', '04:40:20', '443079dd068be778a81a'),
-('XBM63GJO6RW', 'Edan Richardson', 'Mallory Mcdonald', 'John Chang', '2011', '15:15:28', '9457a318f958c1f22273'),
-('XSN15GXM1FS', 'Ivor Mcconnell', 'Sarah Velazquez', 'Larissa Rocha', '2011', '00:26:48', '5bb6af13e4c5a18ed849'),
-('YJV58CHD5VY', 'Jesse Chandler', 'Daria Rivas', 'Roth Hardin', '2003', '01:38:41', 'f434b71559b943d7f663'),
-('YRL18NKO2RV', 'Jane Perkins', 'TaShya Klein', 'Dylan Bradford', '2018', '18:07:58', '3fcecc005ed9878ed0d6'),
-('ZGY21VOU3VE', 'Irene Hendricks', 'Macon Baldwin', 'Brennan Kent', '2000', '23:36:05', '3fcecc005ed9878ed0d6'),
-('ZLE23TLC5RH', 'Dawn Gordon', 'Jana Hernandez', 'Helen West', '2020', '01:49:00', '3fcecc005ed9878ed0d6');
+-- INSERT INTO `older_clasifications` (`id`, `winner`, `second_place`, `third_place`, `year_race`, `time_race`, `id_race`) VALUES
+-- ('0', NULL, NULL, NULL, NULL, '00:00:00', NULL),
+-- ('315af475892841e002d0', 'a', 'D', 'H', '2023', '10:10:10', 'bad96e6b499f87ae0b8a'),
+-- ('d48bde2963a3c73516f7', 'Adrian', 'Juan', 'David', '2023', '10:09:12', '3a50f54de468fbf6cff5'),
+-- ('e5390b0fce486c0021f0', 'Tu', 'El', 'Aquel', '2021', '02:10:32', '3a50f54de468fbf6cff5'),
+-- ('fe0015e699d8140e9a40', 'Paco', 'Paca', 'Paquito', '2023', '11:09:12', '3a50f54de468fbf6cff5');
 
 -- --------------------------------------------------------
 
@@ -230,22 +141,16 @@ CREATE TABLE `older_photos` (
 -- Volcado de datos para la tabla `older_photos`
 --
 
-INSERT INTO `older_photos` (`id`, `url`, `id_race`) VALUES
-('1c6e298488adc38f9e04', '2a2e7f0f60b750dfb36c15c268d0118d.jpg', '40aaf666fcdaadc7a22d'),
-('26a2034bdd75d19801c6', 'Captura de pantalla 2024-01-14 203935.png', '9457a318f958c1f22273'),
-('4b869d46337794dfbc4c', 'Captura de pantalla 2023-11-22 164654.png', '443079dd068be778a81a'),
-('4d1c81c1d6e06906cfb7', 'Captura de pantalla 2023-11-15 145241.png', '443079dd068be778a81a'),
-('5243675f92f803554ea9', 'Sin título.png', '40aaf666fcdaadc7a22d'),
-('57c6b6318450112fd4ae', 'Captura de pantalla 2023-11-15 144224.png', '443079dd068be778a81a'),
-('6c54db3f4374307910f9', 'Captura de pantalla 2023-11-15 195328.png', '443079dd068be778a81a'),
-('6dac67fe4c59ec67d181', 'Sin título.png', '3fcecc005ed9878ed0d6'),
-('8e29bbb06fe7a4ab11d9', 'Captura de pantalla 2024-01-13 131104.png', '9457a318f958c1f22273'),
-('943de3e8698aa827611a', '2a2e7f0f60b750dfb36c15c268d0118d.jpg', '3fcecc005ed9878ed0d6'),
-('9e222f233f442ad1f091', 'Captura de pantalla 2023-11-08 190312.png', 'da8fd427af0bbf59ebf1'),
-('a4c26ba235030b6318b7', 'Captura de pantalla 2023-10-10 002722.png', '5bb6af13e4c5a18ed849'),
-('b51b26beddc6f7884582', 'Captura de pantalla 2023-11-10 135118.png', '443079dd068be778a81a'),
-('d06be94e8a617abdd99d', 'Captura de pantalla 2023-11-08 234526.png', 'da8fd427af0bbf59ebf1'),
-('d3b4b24c75151c890571', 'images.jpeg', '3fcecc005ed9878ed0d6');
+-- INSERT INTO `older_photos` (`id`, `url`, `id_race`) VALUES
+-- -- ('14e1bd2eaa9c9f16c1b9', 'coor1.png', 'bad96e6b499f87ae0b8a'),
+-- -- ('2232bc1c37238d944ab3', 'prueba 13.png', '3a50f54de468fbf6cff5'),
+-- -- ('2d0ef19ae4c42614be01', 'prueba 21.png', '3bef3523e01ccc811f76'),
+-- -- ('378a296ab04f5030d1bf', 'prueba 11.png', '3a50f54de468fbf6cff5'),
+-- -- ('775242637ac4dd75fc72', 'prueba 12.png', '3a50f54de468fbf6cff5'),
+-- -- ('86d7c61d6777274368b6', 'prueba 20.png', '3bef3523e01ccc811f76'),
+-- -- ('b22e5fa73cb3aa78bf16', 'coor2.png', 'bad96e6b499f87ae0b8a'),
+-- -- ('d6d1a3cf2fdafeeb08ff', 'coor0.png', 'bad96e6b499f87ae0b8a'),
+-- -- ('f77209cf7b86c2eeee9d', 'prueba 10.png', '3a50f54de468fbf6cff5');
 
 -- --------------------------------------------------------
 
@@ -255,7 +160,7 @@ INSERT INTO `older_photos` (`id`, `url`, `id_race`) VALUES
 
 CREATE TABLE `organizers` (
   `id_user` varchar(20) NOT NULL,
-  `phone` float DEFAULT NULL,
+  `phone` int(9) DEFAULT NULL,
   `club` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -264,19 +169,8 @@ CREATE TABLE `organizers` (
 --
 
 INSERT INTO `organizers` (`id_user`, `phone`, `club`) VALUES
-('03u7cup02ed1', 332042000, 'Yakitri'),
-('11r4evu52mf4', 506613000, 'Quinu'),
-('20a6zua96se1', 421779000, 'Skidoo'),
-('28f23ed55a16a9066d7c', 123313000, 'IES'),
-('33c8ozw26lm4', 319017000, 'Twitterlist'),
-('41g0ayn92yv8', 280330000, 'Livetube'),
-('46u2bmo31ae9', 27814400, 'Blognation'),
-('52v2uph05kw9', 391938000, 'Eare'),
-('64r6qgh43bv4', 459286000, 'Trudeo'),
-('78m3mda58mq5', 593565000, 'Livefish'),
-('98q3igw21je1', 574537000, 'Aimbo'),
-('ae7ee01987ccfa1e1f1c', 123321000, 'Nignuna'),
-('bec17643d6ebc256cec0', 987544000, 'Nose');
+('68a7573d413676f09bf1', 184293002, 'IES San Andres');
+
 
 -- --------------------------------------------------------
 
@@ -294,23 +188,16 @@ CREATE TABLE `races` (
   `distance` float DEFAULT NULL,
   `poblation` varchar(50) DEFAULT NULL,
   `main_photo` varchar(100) DEFAULT NULL,
+  `regulation` varchar(100) NOT NULL,
+  `webRef` varchar(50) NOT NULL,
+  `coor` longtext NOT NULL,
   `id_category` varchar(20) DEFAULT NULL,
-  `id_modality` varchar(20) DEFAULT NULL
+  `id_modality` varchar(20) DEFAULT NULL,
+  `id_organizer` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `races`
---
-
-INSERT INTO `races` (`id`, `name`, `race_day`, `positive_slope`, `negative_slope`, `total_slope`, `distance`, `poblation`, `main_photo`, `id_category`, `id_modality`) VALUES
-('3fcecc005ed9878ed0d6', 'Transcandmia', '2024-02-09', 2104.3, 1485.8, 3590.1, 21, 'Madrid', 'C:fakepath2a2e7f0f60b750dfb36c15c268d0118d.jpg', '62r1uem02dl2', '43o0aja32wa6'),
-('40aaf666fcdaadc7a22d', 'Sabra Dios', '2024-03-02', 475.6, 476.8, 952.4, 23, 'madrid', 'C:fakepathCaptura de pantalla 2023-11-08 234526.png', '41e1khc20eh1', '43o0aja32wa6'),
-('443079dd068be778a81a', 'Prueba 3', '2024-05-17', 1661, 1630.4, 3291.4, 32, 'Donosti', 'C:fakepathCaptura de pantalla 2023-10-10 002722.png', '63b1rvo95yo8', '99r4osm75ys5'),
-('5bb6af13e4c5a18ed849', 'Dindongs', '2024-02-01', 1506.3, 1506.7, 3013, 120, 'Leon', 'C:fakepathCaptura de pantalla 2023-11-15 144224.png', '02f8wll37kw4', '00p9ajk35ew0'),
-('9457a318f958c1f22273', 'Ultima', '2024-03-22', 1499.21, 1506.7, 3005.91, 15, 'España', 'C:fakepathCaptura de pantalla 2023-11-11 151603.png', '41e1khc20eh1', '43o0aja32wa6'),
-('da8fd427af0bbf59ebf1', 'Ningun', '2024-06-14', 1353.6, 1364.4, 2718, 30, 'Leon', 'C:fakepathCaptura de pantalla 2023-11-15 145241.png', '76d0jcz21ba6', '01j5gic48lj6'),
-('f434b71559b943d7f663', 'Segunda Prueba', '2024-01-25', 1041, 1036.6, 2077.6, 23, 'Leon', 'C:fakepath2a2e7f0f60b750dfb36c15c268d0118d.jpg', '41e1khc20eh1', '43o0aja32wa6');
-
 -- --------------------------------------------------------
 
 --
@@ -326,22 +213,14 @@ CREATE TABLE `races_services` (
 -- Volcado de datos para la tabla `races_services`
 --
 
-INSERT INTO `races_services` (`id_race`, `id_service`) VALUES
-('3fcecc005ed9878ed0d6', '12b6hah53jc9'),
-('3fcecc005ed9878ed0d6', '14n1hrj58qz8'),
-('3fcecc005ed9878ed0d6', '61c0bcg91ac2'),
-('3fcecc005ed9878ed0d6', '64s5stg45yh4'),
-('40aaf666fcdaadc7a22d', '12b6hah53jc9'),
-('40aaf666fcdaadc7a22d', '89p0gjq46ll5'),
-('443079dd068be778a81a', '12b6hah53jc9'),
-('443079dd068be778a81a', '14n1hrj58qz8'),
-('5bb6af13e4c5a18ed849', '61c0bcg91ac2'),
-('9457a318f958c1f22273', '55h1ngq99rc1'),
-('9457a318f958c1f22273', '61c0bcg91ac2'),
-('9457a318f958c1f22273', '64s5stg45yh4'),
-('da8fd427af0bbf59ebf1', '61c0bcg91ac2'),
-('da8fd427af0bbf59ebf1', '64s5stg45yh4'),
-('f434b71559b943d7f663', '55h1ngq99rc1');
+-- INSERT INTO `races_services` (`id_race`, `id_service`) VALUES
+-- ('3a50f54de468fbf6cff5', '12b6hah53jc9'),
+-- ('3a50f54de468fbf6cff5', '55h1ngq99rc1'),
+-- ('3a50f54de468fbf6cff5', '89p0gjq46ll5'),
+-- ('3bef3523e01ccc811f76', '55h1ngq99rc1'),
+-- ('3bef3523e01ccc811f76', '64s5stg45yh4'),
+-- ('bad96e6b499f87ae0b8a', '12b6hah53jc9'),
+-- ('bad96e6b499f87ae0b8a', '89p0gjq46ll5');
 
 -- --------------------------------------------------------
 
@@ -377,7 +256,7 @@ CREATE TABLE `users` (
   `name` varchar(50) DEFAULT NULL,
   `username` varchar(30) DEFAULT NULL,
   `mail` varchar(100) DEFAULT NULL,
-  `pass` varchar(16) DEFAULT NULL,
+  `pass` varchar(255) DEFAULT NULL,
   `city` varchar(40) DEFAULT NULL,
   `photo` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -387,76 +266,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `username`, `mail`, `pass`, `city`, `photo`) VALUES
-('00m2ydk04bw9', 'Johannah Mendenhall', 'jmendenhall18', 'jmendenhall18@nyu.edu', 'tM1)+~uT', 'Bautista', 'OdioCondimentum.doc'),
-('01k3bcp67tw0', 'Barbette Crackel', 'bcrackelt', 'bcrackelt@archive.org', 'kV8)HwR', 'Kompóti', 'Sodales.mov'),
-('01u1hhj50ya7', 'Tyne Scimonelli', 'tscimonellib', 'tscimonellib@epa.gov', 'fF2/<C7k.F.ZV3a', 'Okinawa Número Uno', 'AugueLuctus.xls'),
-('02z0msn65mm6', 'Sax Records', 'srecords16', 'srecords16@newyorker.com', 'xW3+Mq5Y', 'Mlonggo', 'Commodo.mpeg'),
-('03u7cup02ed1', 'Jaclyn Sevin', 'jsevino', 'jsevino@sphinn.com', 'sY2~UEE1g%V/', 'Cabog', 'Gravida.mp3'),
-('05v5pue19ri3', 'Dorie Brookbank', 'dbrookbank19', 'dbrookbank19@merriam-webster.com', 'lV6$I$1Y.', 'Ichnya', 'AmetCursusId.xls'),
-('08k0uxn29kd5', 'Ad Kingscote', 'akingscoten', 'akingscoten@surveymonkey.com', 'zE4>%oo?(w', 'Cluses', 'Euismod.txt'),
-('10l9szo17cl2', 'Enrique Greave', 'egreave8', 'egreave8@ameblo.jp', 'pF7./~f?', 'Norrköping', 'Duis.mp3'),
-('11r4evu52mf4', 'Alphonso Bulteel', 'abulteel1c', 'abulteel1c@sun.com', 'oE8$*y2wzSWx$=8@', 'Fort Portal', 'Enim.doc'),
-('16t6mqi26fm5', 'Chuck Chippin', 'cchippins', 'cchippins@newyorker.com', 'tA0@i>9pA', 'Sulengwaseng', 'NecDui.avi'),
-('18a71aab51648a6e470f', 'prueba', 'prueba', 'prueba', 'prueba', 'Granada', 'prueba.png'),
-('19d9yaz40qn3', 'Elwira Blundell', 'eblundellv', 'eblundellv@kickstarter.com', 'cE0,*b)8+L<\"ZM|', 'Jamban', 'VariusInteger.xls'),
-('1b0ac68dc4b185f6aaa9', '', '', '', '', '', '.png'),
-('20a6zua96se1', 'Paulette Eastway', 'peastwayr', 'peastwayr@bloomberg.com', 'uA9,bvFu', 'Kudusan', 'NonInterdum.mp3'),
-('21f9mlp90pp7', 'Abba Dyneley', 'adyneley1k', 'adyneley1k@forbes.com', 'gI3?DgP/_w+u', 'Hupalivka', 'Suspendisse.xls'),
-('25e5ugr60sh7', 'Hadley MacKeeg', 'hmackeeg11', 'hmackeeg11@examiner.com', 'dC5.S9nOp}KK9', 'Ingenio', 'Metus.ppt'),
-('27c2vmc10aj8', 'Florence Stanning', 'fstanning1', 'fstanning1@toplist.cz', 'iT5*c+(.3c=', 'Yangping', 'SodalesScelerisque.ppt'),
-('27l5rfe75ug3', 'Sunny Dumsday', 'sdumsdayd', 'sdumsdayd@discovery.com', 'kN0,mgsucyP', 'Ciudad Nueva', 'Phasellus.gif'),
-('28f23ed55a16a9066d7c', 'Adrian Gutierrez Usoz', 'adriGuti', 'adr@mail.com', '1aS\"nfajn1', 'Barcelona', 'adriGuti.png'),
-('28s7fcv53io5', 'Leonhard Ranger', 'lrangeru', 'lrangeru@wp.com', 'gG1_4Y~Ir.y.WzB', 'Asahikawa', 'Semper.xls'),
-('30b2kjh47zx1', 'Konstantine McElmurray', 'kmcelmurraye', 'kmcelmurraye@about.me', 'mW3<>T9=mZQJmIa', 'Luoshanchuan', 'Luctus.ppt'),
-('33c8ozw26lm4', 'Yasmin Ridgway', 'yridgway2', 'yridgway2@earthlink.net', 'mG4{h*XX)bR,g#VL', 'Piru', 'Sem.ppt'),
-('34u9nrz02jm9', 'Amitie Ivakhin', 'aivakhin0', 'aivakhin0@unesco.org', 'uA8~qbeXEH9c_N', 'Agpangi', 'CubiliaCurae.doc'),
-('38a6kvs39nm9', 'Mallissa Swaden', 'mswadeny', 'mswadeny@cmu.edu', 'fM4*.eYI%x&xZG', 'Maumbawa', 'Molestie.mp3'),
-('38k1ysu20vs9', 'Linus Pudden', 'lpudden1j', 'lpudden1j@ox.ac.uk', 'uV4`J`l>XkakIrS', 'Armanāz', 'AnteVivamusTortor.tiff'),
-('38l8cmo24jw8', 'Dillie Lebourn', 'dlebournh', 'dlebournh@canalblog.com', 'lP0<y0vBOcDpO6', 'Yelwa', 'VestibulumSitAmet.avi'),
-('40r1vby21ca7', 'Nicolle Gason', 'ngasonc', 'ngasonc@cloudflare.com', 'tO6,4\"sw.$eP#', 'Qinglin', 'Diam.mp3'),
-('41g0ayn92yv8', 'Lauren Crush', 'lcrush1l', 'lcrush1l@businessweek.com', 'lC6}Srev<ig', 'Cayungnan', 'UtTellusNulla.mp3'),
-('43f1cvn19wt5', 'Dillon Downer', 'ddowner7', 'ddowner7@sun.com', 'bD2=vdCm}j<+V', 'Heichengzi', 'NamDuiProin.ppt'),
-('43k2ukv87om2', 'Russ Jessel', 'rjesself', 'rjesself@xinhuanet.com', 'pI2&NJY9D8)M', 'Taupo', 'Fusce.xls'),
-('45x5mzz92bu9', 'Dniren Ambrodi', 'dambrodi4', 'dambrodi4@bing.com', 'qF4{w?_\n9Y`txHJ', 'Iset’', 'MassaId.xls'),
-('46j8acx76ib2', 'Tamqrah Eich', 'teichm', 'teichm@sourceforge.net', 'aL7}ahL_=hRbV,6', 'Tuanalepe', 'CongueElementum.tiff'),
-('46u2bmo31ae9', 'Jayme McKea', 'jmckeap', 'jmckeap@berkeley.edu', 'kA7}B@3&jso', 'Rushankou', 'EgetSemperRutrum.png'),
-('47a8ogv64xq9', 'Fan Beckley', 'fbeckley10', 'fbeckley10@cnbc.com', 'dX0\0T3mH', 'Luohuang', 'Eu.tiff'),
-('48f2nwy13wi6', 'Merilee Williscroft', 'mwilliscroft14', 'mwilliscroft14@hubpages.com', 'dT0.}9rR', 'Lebak Timur', 'Nascetur.xls'),
-('50f8auj98du5', 'Baxy Lesek', 'blesek5', 'blesek5@reuters.com', 'eA8<?NSp', 'Toledo', 'AliquamQuisTurpis.tiff'),
-('51k2hrk92uf2', 'Nyssa Le feuvre', 'nle1n', 'nle1n@virginia.edu', 'xH3.gP}GS!TS1', 'Mendenrejo', 'Dolor.avi'),
-('52v2uph05kw9', 'Ronni Osgar', 'rosgar12', 'rosgar12@php.net', 'lX7@dow\"\"KnzaV', 'Bryukhovetskaya', 'PedeUllamcorperAugue.tiff'),
-('54o1jnk44qq6', 'Tamas Terne', 'tternei', 'tternei@boston.com', 'sH1,5tr,&OBX', 'Jiuzhou', 'PharetraMagna.mov'),
-('55y8ynp48av0', 'Rickie Sylett', 'rsylett1f', 'rsylett1f@yahoo.com', 'dV1)Ie*{@', 'Capitán Bermúdez', 'Nibh.ppt'),
-('5ba2a3cef5fc60cc8cfe', 'prueba', 'prueba2', 'prueba@mail.com', 'prueba2', 'Granada', 'prueba.png'),
-('60b7djg91ix8', 'Dionne Ballendine', 'dballendinex', 'dballendinex@salon.com', 'oW4}YobK=u', 'Chengcun', 'Ullamcorper.xls'),
-('61z6lqu58gh2', 'Anatole Filippyev', 'afilippyev1g', 'afilippyev1g@ted.com', 'fT7}epZ!g', 'Canomoy', 'ElementumNullam.mp3'),
-('62z4wij91uu5', 'Ursula Danilyuk', 'udanilyukk', 'udanilyukk@archive.org', 'uB5?vfgO', 'Windsor', 'TempusVel.avi'),
-('63d8iew33xv3', 'Dougie Maliffe', 'dmaliffeg', 'dmaliffeg@abc.net.au', 'rG0!zTH8w', 'Sérvia', 'HabitassePlateaDictumst.gif'),
-('64r6qgh43bv4', 'Margaux McClurg', 'mmcclurgq', 'mmcclurgq@wix.com', 'iQ0Hn=Ag', 'Wangi', 'Vivamus.doc'),
-('68e3cdb297b6681761be', 'Astucia', 'astucia', 'asdasd@fwe.com', '123456789', 'Burgos', 'Astucia'),
-('72c2xlb32zs1', 'Aurlie Volleth', 'avolleth1d', 'avolleth1d@sciencedirect.com', 'gK4@yzEaQY#Gdn', 'Sucha', 'VelEnimSit.xls'),
-('72z7tbf49ix6', 'Roselia Kempshall', 'rkempshall1m', 'rkempshall1m@miibeian.gov.cn', 'hS2=Wyr~|RClVi', 'Disina', 'ProinEu.gif'),
-('74b6tho53sb6', 'Elisabet Woodcroft', 'ewoodcroft1i', 'ewoodcroft1i@taobao.com', 'fL7\rtt!3qxa_jq', 'Vallenar', 'EstQuam.gif'),
-('74w6wut98le6', 'Horatio Sang', 'hsangj', 'hsangj@xrea.com', 'nN5_!3DD,', 'Boca Suno', 'OrciEgetOrci.mp3'),
-('75k8qfv99ug9', 'Rowland Pimblott', 'rpimblott1e', 'rpimblott1e@edublogs.org', 'eP7)4w_uIyrdMoH', 'Umunede', 'Accumsan.ppt'),
-('75o4mgj05di0', 'Ardelis Ubank', 'aubank13', 'aubank13@independent.co.uk', 'lI8(!gD#8_isw@8w', 'Sandia', 'AliquamSitAmet.doc'),
-('76i3jwb46fi7', 'Bess Fellowes', 'bfellowesw', 'bfellowesw@google.nl', 'zG3*?0O&rlKx!wX8', 'Pingshan', 'OrciNullamMolestie.mp3'),
-('77h7unt30sz6', 'Morganne Burkhill', 'mburkhill17', 'mburkhill17@ed.gov', 'nZ2+dliG|awS!rJ', 'Hedong', 'Ultrices.xls'),
-('78m3mda58mq5', 'Karoly Di Filippo', 'kdi1a', 'kdi1a@delicious.com', 'pU5,7sar?weN', 'Carcassonne', 'Justo.xls'),
-('79z4mem64zn8', 'Terrence Maffin', 'tmaffina', 'tmaffina@ox.ac.uk', 'pB3<H2Jmrsdstu<C', 'Parque Industrial', 'ConvallisNullaNeque.mp3'),
-('7bb63783b7b08b54f5a4', 'Juan', 'juanin', 'juan@mail.com', 'juan', 'Guadalajara', 'juanin.png'),
-('80a4fhh44ht7', 'Marys Tapin', 'mtapinl', 'mtapinl@aol.com', 'uD7}cd#IEN', 'Sala', 'OrciNullamMolestie.mp3'),
-('81m5tmf28qw1', 'Tisha Coultard', 'tcoultard6', 'tcoultard6@meetup.com', 'tN9kP8Pl3yt<U$', 'Winong', 'LigulaPellentesque.txt'),
-('86z3rey98ev1', 'Chanda Schimann', 'cschimann15', 'cschimann15@jugem.jp', 'eF4|Rk#ADxj', 'Shatian', 'IdMauris.mov'),
-('94h6fek22jo8', 'Nahum Densumbe', 'ndensumbe3', 'ndensumbe3@nih.gov', 'dB2}(Lz>(2', 'Pavlodar', 'VitaeNisl.png'),
-('97l8pkq38ua6', 'Crysta Colvin', 'ccolvin9', 'ccolvin9@samsung.com', 'iX9}@Wl.', 'Rikitgaib', 'AeneanLectus.mp3'),
-('98c8dzl95nm6', 'Marianna Aingel', 'maingelz', 'maingelz@addtoany.com', 'mH3!t#S<#V8<&NVy', 'Niba', 'ConvallisEgetEleifend.avi'),
-('98f1cch86ro4', 'Spike Philip', 'sphilip1h', 'sphilip1h@shareasale.com', 'kV3#8}ZK', 'Ternopil’', 'AugueAliquamErat.mpeg'),
-('98q3igw21je1', 'Edita Pea', 'epea1b', 'epea1b@nba.com', 'nY2?g{\"V3', 'Antipino', 'OrciLuctusEt.ppt'),
-('ae7ee01987ccfa1e1f1c', 'Pruebas algunas', 'prueba3', 'prueba3@mail.com', '123098', 'Gipuzkoa', 'prueba3.png'),
-('bcfee61916a9271d976e', 'zanahiria', 'zannol', 'asdfc@gde.c', '198273', 'Cantabria', 'zanahiria.png'),
-('bec17643d6ebc256cec0', 'adrian', 'adriGutie', 'adri@mail.com', 'am!2Ajd1', 'Ciudad Real', 'adriGutie.png'),
-('fa6b9b24af807cd344d4', 'Alegrias Facundo', 'alegria', 'asd@fwe.com', '123456', 'Cantabria', 'Alegrias Facundo');
+('68a7573d413676f09bf1', 'Adrian Gutierrez Usoz', 'adriGuti', 'adri.@mail.com', '$2y$10$ujKWbFwtyMGMBXg7Vegeqe.hbWtpq0QXTes1elAlKS4hzM8iOZ4G.', 'Gipuzkoa', 'adriGuti.png');
 
 --
 -- Índices para tablas volcadas
@@ -508,7 +318,8 @@ ALTER TABLE `races`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `name` (`name`),
   ADD KEY `id_category` (`id_category`),
-  ADD KEY `id_modality` (`id_modality`);
+  ADD KEY `id_modality` (`id_modality`),
+  ADD KEY `id_organizer` (`id_organizer`);
 
 --
 -- Indices de la tabla `races_services`
@@ -566,7 +377,8 @@ ALTER TABLE `organizers`
 --
 ALTER TABLE `races`
   ADD CONSTRAINT `races_ibfk_1` FOREIGN KEY (`id_category`) REFERENCES `categories` (`id`),
-  ADD CONSTRAINT `races_ibfk_2` FOREIGN KEY (`id_modality`) REFERENCES `modalities` (`id`);
+  ADD CONSTRAINT `races_ibfk_2` FOREIGN KEY (`id_modality`) REFERENCES `modalities` (`id`),
+  ADD CONSTRAINT `races_ibfk_2` FOREIGN KEY (`id_organizer`) REFERENCES `organizers` (`id`);
 
 --
 -- Filtros para la tabla `races_services`

@@ -20,9 +20,8 @@ if ($_SERVER["REQUEST_METHOD"] === "OPTIONS") {
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
-header('Content-Type: application/json');
 
-if ($_SERVER["REQUEST_METHOD"] === "PUT") {
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
     try {        
         if (isset($_SESSION["key"])) {
             $key = $_SESSION["key"];
@@ -33,29 +32,50 @@ if ($_SERVER["REQUEST_METHOD"] === "PUT") {
 
             $username = $decoded->username;
             $id = $decoded->user_id;
+            $userNameJWT = $decoded->username;
 
-            $json_data = file_get_contents("php://input");
-            $data = json_decode($json_data, true);
-    
-            $name = $data["nombreUsuario"];
-            $username = $data["nombreMostrado"];
-            $mail = $data["correo"];
-            $photo = $data["fotoPerfil"];
-            $mail = $data["correo"];
-            $city = $data["localidad"];
-            $pass = $data["contrasena"];
-    
-            $sqlNormal = "
-                    UPDATE users
-                    SET name = '$name', username = '$username', mail = '$mail', pass = '$pass', city = '$city', photo = '$photo'
-                    WHERE id = '$id';
-                ";
+            $name = $_POST["name"];
+            $username = $_POST["username"];
+            $mail = $_POST["mail"];
+            $city = $_POST["city"];
+            $pass = $_POST["pass"];
+
+            echo $pass;
+            $hashPass = password_hash($pass, PASSWORD_BCRYPT);
+            echo $hashPass;
+            $con->autocommit(false);  
+            
+            if (isset($_FILES["file"])) {
+                if (file_exists('../../../img/userPhotos/'.strtolower($userNameJWT).".png")) {
+                    unlink('../../../img/userPhotos/'.strtolower($userNameJWT).".png");
+                }
+                $photo = $_FILES["file"];
+                $rutaDestino = '../../../img/userPhotos/';
+                if (!file_exists($rutaDestino)) {
+                    mkdir($rutaDestino, 0777, true);
+                }
+                move_uploaded_file($_FILES['file']['tmp_name'], '../../../img/userPhotos/'.strtolower($username).".png");
+                
+                $sqlNormal = "
+                        UPDATE users
+                        SET name = '$name', username = '$username', mail = '$mail', city = '$city', photo = '$username.png'
+                        WHERE id = '$id';
+                    ";
+                    
+            } else {
+                $sqlNormal = "
+                        UPDATE users
+                        SET name = '$name', username = '$username', mail = '$mail', city = '$city'
+                        WHERE id = '$id';
+                    ";
+            }
+
             
             $con->query($sqlNormal);
                 
-            if (isset($data['phone']) && isset($data['club'])) {
-                $phone = $data['phone'];
-                $club = $data['club'];
+            if (isset($_POST['phone']) && isset($_POST['club'])) {
+                $phone = $_POST['phone'];
+                $club = $_POST['club'];
                     
                 $sqlOrganizer = "
                     UPDATE organizers
@@ -65,6 +85,7 @@ if ($_SERVER["REQUEST_METHOD"] === "PUT") {
                 $con->query($sqlOrganizer);
             }
     
+            $con->commit();
             header("HTTP/1.1 200 OK");
         }
     } catch (mysqli_sql_exception $e) {

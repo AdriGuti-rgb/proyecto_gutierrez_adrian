@@ -22,7 +22,10 @@
                 "total_slope" => $races[0]["total_slope"], 
                 "distance" => $races[0]["distance"], 
                 "poblation" => $races[0]["poblation"], 
-                "main_photo" => $races[0]["main_photo"]
+                "main_photo" => $races[0]["main_photo"],
+                "pdf" => $races[0]["regulation"],
+                "webRef" => $races[0]["webRef"],
+                "coor" => $races[0]["coor"]
             );
 
 
@@ -65,9 +68,9 @@
             $datosTotales[] = $categoriesData;
             $datosTotales[] = $modalitiesData;
 
+            header("HTTP/1.1 200 OK");            
             echo json_encode($datosTotales);
 
-            header("HTTP/1.1 200 OK");            
         } catch (mysqli_sql_exception $e) {
             echo json_encode($e->getMessage());
             header("HTTP/1.1 404 Not found");
