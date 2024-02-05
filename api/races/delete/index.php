@@ -33,6 +33,28 @@
             $resultado = $con->query($sqlDelete);
 
             $con->commit();
+
+            function eliminarContenidoCarpeta($carpeta, $name) {
+                $archivos = glob($carpeta . '/*');
+                foreach ($archivos as $archivo) {
+                    if (is_file($archivo)) {
+                        unlink($archivo);
+                    } elseif (is_dir($archivo)) {
+                        eliminarContenidoCarpeta($archivo);
+                        rmdir($archivo);
+                    }
+                }
+                if (file_exists("../../../img/races/$name")) {
+                    rmdir("../../../img/races/$name");
+                }
+            }
+            $carpetaAEliminar = '../../../img/races/' . $raceName;
+            
+            eliminarContenidoCarpeta($carpetaAEliminar, $raceName);
+            
+
+
+
             header("HTTP/1.1 203 Deleted");
         } catch (mysqli_sql_exception $e) {
             echo json_encode($e->getMessage());

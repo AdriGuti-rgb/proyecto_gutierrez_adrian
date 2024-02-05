@@ -32,6 +32,7 @@
             $id_race = $races[0]["id"];
             $id_category = $races[0]["id_category"];
             $id_modality = $races[0]["id_modality"];
+
             
             $sql = "SELECT winner, second_place, third_place, year_race, time_race FROM older_clasifications WHERE id_race = '$id_race'
                             ORDER BY year_race DESC";
@@ -61,12 +62,23 @@
                 "third_prize" => $modalities[0]["third_prize"]
             );
 
+            $sql = "SELECT url FROM older_photos WHERE id_race = '$id_race'";
+            $resultado = $con->query($sql);
+            $olderPhotos = $resultado->fetch_all(MYSQLI_ASSOC);
+
             
+            $totalOlderPhotos = array();
+            
+            foreach ($olderPhotos as $key => $value) {
+                $totalOlderPhotos[] = $value["url"];
+            }
+
             $datosTotales[] = $raceData;
             $datosTotales[] = $clasifications;
             $datosTotales[] = $services;
             $datosTotales[] = $categoriesData;
             $datosTotales[] = $modalitiesData;
+            $datosTotales[] = $totalOlderPhotos;
 
             header("HTTP/1.1 200 OK");            
             echo json_encode($datosTotales);

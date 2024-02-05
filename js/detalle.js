@@ -13,7 +13,7 @@ let date = new Date();
 let currentYear = date.getFullYear()
 
 let currentPage = 0;
-let itemsPerPage = 10;
+let itemsPerPage = 6;
 let totalPages;
 let globalClasifications;
 let coor;
@@ -60,7 +60,7 @@ fetch("http://localhost/php/proyecto/api/races/oneRace/", {
         let raceServices = data[2];
         let category = data[3].type
         let modality = data[4]
-
+        let older_photos = data[5];
         coor = JSON.parse(raceData.coor)
 
         globalClasifications = olderClasifications
@@ -71,8 +71,23 @@ fetch("http://localhost/php/proyecto/api/races/oneRace/", {
         renderOptions(raceData)
         renderDetails(raceData, modality, category, raceServices)
         renderClasifications(olderClasifications)
+        renderOlderPhotos(older_photos)
     }
 })
+
+function renderOlderPhotos (older_photos) {
+    let anterior = document.querySelector("#anteriorCarousel");
+    let posterior = document.querySelector("#posteriorCarousel");
+    let img = document.getElementById("fotosAnteriores");
+    let nivel = (Math.random() * older_photos.length - 1).toFixed();
+    if (nivel < 0 || nivel == -0) nivel = 0
+    img.src = `./img/races/${localStorage.getItem("raceName")}/olderPhotos/${older_photos[nivel]}`;
+    anterior.addEventListener("click", e => console.log(e.target));
+    anterior.addEventListener("click", () => { if (nivel > 0) img.src = `./img/races/${localStorage.getItem("raceName")}/olderPhotos/${older_photos[--nivel]}` });
+    posterior.addEventListener("click", e =>  console.log(e.target));
+    posterior.addEventListener("click", () => { if (nivel < older_photos.length - 1) img.src = `./img/races/${localStorage.getItem("raceName")}/olderPhotos/${older_photos[++nivel]}` });
+
+}
 
 function renderDetails (raceData, modality, category, services) {
     document.getElementById("nombreRaceInfo").textContent = raceData.name
@@ -126,7 +141,6 @@ function renderClasifications (olderClasifications) {
     }
     olderClasifications.filter( (_, index) => Math.trunc(index / itemsPerPage) == currentPage )
         .forEach( item => {
-            console.log(showOptions);
             if (showOptions) table.innerHTML += `
                 <tr>
                     <td>${item.time_race}</td>
@@ -134,7 +148,10 @@ function renderClasifications (olderClasifications) {
                     <td>${item.second_place}</td>
                     <td>${item.third_place}</td>
                     <td>${item.year_race}</td>
-                    <td class="optionsClasification">${item.year_race}</td>
+                    <td class="optionsClasification">
+                        <div id="borrarClasi" class="tablaEliminar">Eliminar</div>
+                        <div id="editarClasi" class="tablaModificar">Modificar</div>
+                    </td>
                 </tr>`;
             else table.innerHTML += `
             <tr>
@@ -144,6 +161,9 @@ function renderClasifications (olderClasifications) {
                 <td>${item.third_place}</td>
                 <td>${item.year_race}</td>
             </tr>`;
+
+            if (document.getElementById("borrarClasi")) document.getElementById("borrarClasi").addEventListener("click", e => console.log(e))
+            if (document.getElementById("editarClasi")) document.getElementById("editarClasi").addEventListener("click", e => console.log(e))
     });
 }
 
@@ -301,32 +321,38 @@ function addClasifications () {
     let year = formClasi.elements.año.value
     let time = formClasi.elements.tiempo.value
 
-    let clasifications = {
-        "winner": winner,
-        "second_place": second_place,
-        "third_place": third_place,
-        "year": year,
-        "time": time,
-        "raceName": localStorage.getItem("raceName")
-    }
+    if (formClasi && winner && second_place
+            && third_place && year && time) {
 
-    fetch("http://localhost/php/proyecto/api/races/olderClasifications/", {
-        method: "POST",
-        body: JSON.stringify(clasifications)
-    })
-    .then( response => {
-        if (response.status === 201) location.reload()
-            else if (response.status === 404) alert(response.statusText)
-            else console.log("Todo mal");
-    })
-    .then( data => {
-        if (data) console.log(data);
-    })
+        let clasifications = {
+            "winner": winner,
+            "second_place": second_place,
+            "third_place": third_place,
+            "year": year,
+            "time": time,
+            "raceName": localStorage.getItem("raceName")
+        }
+    
+        fetch("http://localhost/php/proyecto/api/races/olderClasifications/", {
+            method: "POST",
+            body: JSON.stringify(clasifications)
+        })
+        .then( response => {
+            if (response.status === 201) window.location.reload()
+                else if (response.status === 404) alert(response.statusText)
+                else console.log("Todo mal");
+        })
+        .then( data => {
+            if (data) console.log(data);
+        })
+    } else putErrors("Rellene todos los campos")
+
 }
 
 function handleModalClasi () {
     document.getElementById("clasificacionesAntiguas").classList.toggle("hidden")
     document.getElementById("tapar").classList.toggle("hidden")
+    if (document.getElementById("error")) document.getElementById("error").remove()
 }
 
 function handleModalEliminar () {
@@ -467,6 +493,15 @@ function loadMap () {
         
         L.polyline(coor , {color: "blue", weight: 3}).addTo(map);
     // }
+}
+
+function putErrors (error) {
+    if (document.getElementById("error") != null) document.getElementById("error").remove();
+    let div = document.createElement("div");
+    div.id = "error";
+    let main = document.getElementById("main");
+    div.innerHTML = `${error}`;
+    main.append(div);
 }
 
 form.elements.send.addEventListener("click", handleOptionsRace);

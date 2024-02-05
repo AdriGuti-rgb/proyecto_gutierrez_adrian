@@ -68,7 +68,7 @@ session_start();
                 }
                 
                 $finalNames = strtolower($raceName);
-                $contador = 1;
+                $contador = 0;
 
                 foreach ($older_photos['tmp_name'] as $key => $tmpName) {
                     move_uploaded_file($tmpName, '../../../img/races/' . $raceName . '/olderPhotos/' . $finalNames ."$contador.png");
