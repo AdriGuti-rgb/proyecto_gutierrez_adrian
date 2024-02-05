@@ -332,8 +332,15 @@ input[type="file"] {
 }
 
 #confirmarContraseña:hover,
-#cancel:hover {
-    transform: scale(1.01);
+#cancel:hover,
+#confirmacion input[type="submit"]:hover {
+    transform: scale(1.07);
+}
+
+#confirmarContraseña:active,
+#cancel:active
+#confirmacion input[type="submit"]:active {
+    transform: scale(0.95);
 }
 
 #confirmarContraseña {

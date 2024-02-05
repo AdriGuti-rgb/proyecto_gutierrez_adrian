@@ -7,6 +7,7 @@ if (localStorage.getItem("rol") == "User") {
 let form = document.forms.login;
 let formConfirm = document.forms.cambioContrasena
 let regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+let canSubmitPass = false
 
 /* Recojo las localidades para mostrarlas en el select */
 function anadirLocalidades (e) {
@@ -129,7 +130,6 @@ function getParams (e) {
         } else if (response.status === 401) expirationToken()
           else if (response.status === 404) alert(response.statusText)
           else console.log("Todo mal");
-        // if (response.status === 200) return response.json()
     })
     .then( data => {
         if (data) console.log(data);
@@ -324,7 +324,7 @@ function sendData () {
             })
             .then( data => {
             })
-    }
+    } else putErrors("Introduzca una contraseña válida")
 }
 
 

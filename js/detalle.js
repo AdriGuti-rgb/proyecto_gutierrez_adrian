@@ -17,6 +17,7 @@ let itemsPerPage = 10;
 let totalPages;
 let globalClasifications;
 let coor;
+let showOptions = false;
 
 /* Carreras favoritas del usuario */
 if (localStorage.getItem("rol") == "Organizer") {
@@ -31,7 +32,7 @@ if (localStorage.getItem("rol") == "Organizer") {
         if (response.status !== 200) {
             document.getElementById("contenedorOrganizador").style.visibility = "hidden"
             document.getElementById("tipoOrganizador").style.visibility = "hidden"
-        }
+        } else showOptions = true
     })
     .then( data => {
         if (data) {
@@ -101,7 +102,16 @@ function renderDetails (raceData, modality, category, services) {
 function renderClasifications (olderClasifications) {
     totalPages = Math.ceil((olderClasifications.length / itemsPerPage) - 1);
     let table = document.getElementById('tabla');
-    table.innerHTML = `
+    if (showOptions) table.innerHTML = `
+        <tr>
+            <th></th>
+            <th>1ª Posición</th>
+            <th>2ª Posición</th>
+            <th>3ª Posición</th>
+            <th>Año realizacion</th>
+            <th class="optionsClasification">Opciones</th>
+        </tr>`;
+        else table.innerHTML = `
         <tr>
             <th></th>
             <th>1ª Posición</th>
@@ -116,7 +126,17 @@ function renderClasifications (olderClasifications) {
     }
     olderClasifications.filter( (_, index) => Math.trunc(index / itemsPerPage) == currentPage )
         .forEach( item => {
-        table.innerHTML += `
+            console.log(showOptions);
+            if (showOptions) table.innerHTML += `
+                <tr>
+                    <td>${item.time_race}</td>
+                    <td>${item.winner}</td>
+                    <td>${item.second_place}</td>
+                    <td>${item.third_place}</td>
+                    <td>${item.year_race}</td>
+                    <td class="optionsClasification">${item.year_race}</td>
+                </tr>`;
+            else table.innerHTML += `
             <tr>
                 <td>${item.time_race}</td>
                 <td>${item.winner}</td>
@@ -208,7 +228,6 @@ function handleTipeClick (e) {
     document.querySelectorAll("#general .marcado")[0].classList.add("hidden");
     document.querySelectorAll("#general .marcado")[0].classList.remove("marcado");
     let contenedor;
-    console.log(e.target.id);
     switch (e.target.id) {
         case "tipoDetalle":
             contenedor = "contenedorDetalles";
@@ -237,8 +256,6 @@ function handleTipeClick (e) {
             break;
     }
 
-    console.log(contenedor);
-    console.log(document.getElementById(contenedor))
     document.getElementById(contenedor).classList.add("marcado");
     document.getElementById(contenedor).classList.remove("hidden");
 }
@@ -321,11 +338,17 @@ function loadMap () {
     // if (!map) {
 
         let map = L.map("map").setView(coor[0], 11)
-        L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", 
-                    {
-                        maxZoom: 19,
-                        attribution: "© OpenStreetMap"
-                    }).addTo(map)
+        // L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", 
+        //             {
+        //                 maxZoom: 19,
+        //                 attribution: "© OpenStreetMap"
+        //             }).addTo(map)
+
+        L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', 
+        {
+            maxZoom: 19,
+            attribution: "© OpenStreetMap"
+        }).addTo(map)
         L.control.scale().addTo(map);
         
         let sosArr = Math.trunc(coor.length / 90);
