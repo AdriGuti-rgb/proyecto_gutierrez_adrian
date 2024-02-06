@@ -315,6 +315,7 @@ main {
 
 #iconoFav {
     cursor: pointer;
+    z-index: 5;
 }
 
 #contenedorMapa {

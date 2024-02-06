@@ -135,7 +135,7 @@ i {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
-    gap: 45px 157px;
+    gap: 42px 157px;
     overflow-y: scroll;
     padding-left: 80px;
     padding-right: 80px;
@@ -143,11 +143,6 @@ i {
     scrollbar-width: thin; 
     scrollbar-color: var(--tercero) var(--blanco);
 }
-
-/* Estilo personalizado para la barra de desplazamiento del navegador WebKit (Chrome, Safari) */
-/* body::-webkit-scrollbar, body::-moz-scrollbar {
-    display: none;
-} */
 
 #carreras:hover, #favoritas:hover {
     scrollbar-color: var(--segundo) var(--blanco);
@@ -260,7 +255,8 @@ i {
 
 .marcado {
     background-color: #F2BF8B;
-    border: 2px solid var(--octavo);
+    /* border: 2px solid var(--octavo); */
+    box-shadow: 2px 2px 4px var(--sexto);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -463,6 +459,10 @@ select {
     width: 100%;
     height: 90%;
     border: 1px solid black;
+}
+
+#segundoLi i{
+    cursor: pointer;
 }
 
 .hidden {

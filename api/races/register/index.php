@@ -118,7 +118,6 @@ session_start();
                         ";
                     $con->query($sqlNormal);
 
-                    print_r ($totalServices);
 
                     foreach ($totalServices as $value) {
                         $sqlServicesInsert = "

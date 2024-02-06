@@ -66,12 +66,10 @@
                         <div id="relleno"></div>
                         <span id="spanBusqueda">Búsqueda:</span>
                         <div id="opcionesBusqueda1">
-                            <!-- <label for="nombreCarrera" class="colocado">Nombre carrera</label> -->
                             <input type="text" name="nombreCarrera" id="nombreCarrera" class="busqueda" placeholder="Nombre de la carrera">
                             <i class="fa-solid fa-magnifying-glass icono" id="busquedaNombre" title="Busqueda de la carrera"></i>
                         </div>
                         <div id="opcionesBusqueda2">
-                            <!-- <label for="provincia" class="colocado">Provincia</label> -->
                             <input type="text" name="provincia" id="provincia" class="busqueda" placeholder="Nombre de la provincia">
                             <i class="fa-solid fa-magnifying-glass icono" id="busquedaProvincia" title="Busqueda de la provincia"></i>
                         </div>
@@ -81,19 +79,18 @@
                         <span id="filtro">Filtro:</span>   
                         <div class="campos">
                             <div class="subCampos">
-                                <div class="check marcado" id="primeraOpcion">
-                                    <i class="fa-solid fa-xmark"></i>
+                                <div class="check" id="primeraOpcion">
                                 </div>
                                 <div>
-                                    <select name="distancia" id="primerValor" class="valor marcado">
+                                    <select name="distancia" id="primerValor" class="valor">
                                         <option value="" disabled selected>Distancia</option><hr>
-                                        <option value="5" class="noMarcado">> 5</option><hr>
-                                        <option value="15" class="noMarcado">> 15</option><hr>
-                                        <option value="25" class="noMarcado">> 25</option><hr>
-                                        <option value="35" class="noMarcado">> 35</option><hr>
-                                        <option value="45" class="noMarcado">> 45</option><hr>
-                                        <option value="55" class="noMarcado">> 55</option><hr>
-                                        <option value="65" class="noMarcado">> 65</option>
+                                        <option value="5" class="noMarcado distanceOptions">> 5</option><hr>
+                                        <option value="15" class="noMarcado distanceOptions">> 15</option><hr>
+                                        <option value="25" class="noMarcado distanceOptions">> 25</option><hr>
+                                        <option value="35" class="noMarcado distanceOptions">> 35</option><hr>
+                                        <option value="45" class="noMarcado distanceOptions">> 45</option><hr>
+                                        <option value="55" class="noMarcado distanceOptions">> 55</option><hr>
+                                        <option value="65" class="noMarcado distanceOptions">> 65</option>
                                     </select>
                                 </div>
                             </div>
@@ -103,12 +100,12 @@
                                 <div>
                                     <select name="desnivel" id="segundoValor" class="valor">
                                         <option value="" disabled selected>Desnivel</option><hr>
-                                        <option value="500" class="noMarcado">> 5</option><hr>
-                                        <option value="1000" class="noMarcado">> 15</option><hr>
-                                        <option value="1500" class="noMarcado">> 25</option><hr>
-                                        <option value="2000" class="noMarcado">> 35</option><hr>
-                                        <option value="2500" class="noMarcado">> 45</option><hr>
-                                        <option value="3500" class="noMarcado">> 55</option>
+                                        <option value="500" class="noMarcado  totalSlopeOptions">> 500</option><hr>
+                                        <option value="1000" class="noMarcado totalSlopeOptions">> 1000</option><hr>
+                                        <option value="1500" class="noMarcado totalSlopeOptions">> 1500</option><hr>
+                                        <option value="2000" class="noMarcado totalSlopeOptions">> 2000</option><hr>
+                                        <option value="2500" class="noMarcado totalSlopeOptions">> 2500</option><hr>
+                                        <option value="3500" class="noMarcado totalSlopeOptions">> 3500</option>
                                     </select>
                                 </div>
                             </div>
@@ -118,27 +115,7 @@
                                 <div>
                                     <select name="tipo" id="tercerValor" class="valor">
                                         <option value="" disabled selected>Tipo</option><hr>
-                                        <option value="500" class="noMarcado">> 5</option><hr>
-                                        <option value="1000" class="noMarcado">> 15</option><hr>
-                                        <option value="1500" class="noMarcado">> 25</option><hr>
-                                        <option value="2000" class="noMarcado">> 35</option><hr>
-                                        <option value="2500" class="noMarcado">> 45</option><hr>
-                                        <option value="3500" class="noMarcado">> 55</option>
                                     </select>
-                                </div>
-                            </div>
-
-                            <div class="subCampos">
-                                <div class="check"></div>
-                                <div class="valor">
-                                    <span>Comida</span>
-                                </div>
-                            </div>
-
-                            <div class="subCampos">
-                                <div class="check"></div>
-                                <div class="valor">
-                                    <span>Bebida</span>
                                 </div>
                             </div>
 
@@ -153,8 +130,39 @@
 
                             <div class="subCampos">
                                 <div class="check"></div>
-                                <div class="valor">
-                                    <span>Otros servicios</span>
+                                <div class="valor" id="desnivelPos">
+                                    <select name="desnivelPos" id="quintoValor" class="valor">
+                                        <option value="" disabled selected>Desnivel positivo</option><hr>
+                                        <option value="500" class="noMarcado  posSlopeOptions">> 500</option><hr>
+                                        <option value="1000" class="noMarcado posSlopeOptions">> 1000</option><hr>
+                                        <option value="1500" class="noMarcado posSlopeOptions">> 1500</option><hr>
+                                        <option value="2000" class="noMarcado posSlopeOptions">> 2000</option><hr>
+                                        <option value="2500" class="noMarcado posSlopeOptions">> 2500</option><hr>
+                                        <option value="3500" class="noMarcado posSlopeOptions">> 3500</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="subCampos">
+                                <div class="check"></div>
+                                <div class="valor" id="bebida">
+                                    <select name="desnivelNeg" id="sextoValor" class="valor">
+                                        <option value="" disabled selected>Desnivel negativo</option><hr>
+                                        <option value="500" class="noMarcado  negSlopeOptions">> 500</option><hr>
+                                        <option value="1000" class="noMarcado negSlopeOptions">> 1000</option><hr>
+                                        <option value="1500" class="noMarcado negSlopeOptions">> 1500</option><hr>
+                                        <option value="2000" class="noMarcado negSlopeOptions">> 2000</option><hr>
+                                        <option value="2500" class="noMarcado negSlopeOptions">> 2500</option><hr>
+                                        <option value="3500" class="noMarcado negSlopeOptions">> 3500</option>
+                                    </select>
+                                </div>
+                            </div>
+
+
+                            <div class="subCampos">
+                                <div class="check" id="checkTerminadas"></div>
+                                <div class="valor" id="terminadas">
+                                    <span>Terminadas</span>
                                 </div>
                             </div>
                         </div>

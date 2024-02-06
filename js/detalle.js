@@ -9,6 +9,10 @@ let form = document.forms.edit;
 let race = {
     "name": localStorage.getItem("raceName")
 }
+let formData = new FormData();
+
+formData.append("name", localStorage.getItem("raceName"))
+
 let date = new Date();
 let currentYear = date.getFullYear()
 
@@ -82,9 +86,7 @@ function renderOlderPhotos (older_photos) {
     let nivel = (Math.random() * older_photos.length - 1).toFixed();
     if (nivel < 0 || nivel == -0) nivel = 0
     img.src = `./img/races/${localStorage.getItem("raceName")}/olderPhotos/${older_photos[nivel]}`;
-    anterior.addEventListener("click", e => console.log(e.target));
     anterior.addEventListener("click", () => { if (nivel > 0) img.src = `./img/races/${localStorage.getItem("raceName")}/olderPhotos/${older_photos[--nivel]}` });
-    posterior.addEventListener("click", e =>  console.log(e.target));
     posterior.addEventListener("click", () => { if (nivel < older_photos.length - 1) img.src = `./img/races/${localStorage.getItem("raceName")}/olderPhotos/${older_photos[++nivel]}` });
 
 }
@@ -162,8 +164,8 @@ function renderClasifications (olderClasifications) {
                 <td>${item.year_race}</td>
             </tr>`;
 
-            if (document.getElementById("borrarClasi")) document.getElementById("borrarClasi").addEventListener("click", e => console.log(e))
-            if (document.getElementById("editarClasi")) document.getElementById("editarClasi").addEventListener("click", e => console.log(e))
+            // if (document.getElementById("borrarClasi")) document.getElementById("borrarClasi").addEventListener("click", e => console.log(e))
+            // if (document.getElementById("editarClasi")) document.getElementById("editarClasi").addEventListener("click", e => console.log(e))
     });
 }
 
@@ -280,28 +282,56 @@ function handleTipeClick (e) {
     document.getElementById(contenedor).classList.remove("hidden");
 }
 
+// function handleOptionsRace (e) {
+//     e.preventDefault();
+//     let method = e.target.id == "delete" ? "DELETE" : "UPDATE";
+
+//     if (method === "UPDATE") {
+//         race.secondName = form.elements.nombreCarrera.value
+//         race.poblation = form.elements.poblacion.value
+//         race.race_day = form.elements.fechaRealizacion.value
+//         race.distance = form.elements.distancia.value
+//         if (form.elements.fotoPrincipal.files.length > 0) race.main_photo = form.elements.fotoPrincipal.value 
+//         if (form.elements.fotosAnteriores.files.length > 0) {
+//             let arrayOldPhotos = [];
+//             Array.from(form.elements.fotosAnteriores.files)
+//                 .forEach( item => arrayOldPhotos.push(item.name));
+//             race.older_photos = arrayOldPhotos
+//         }
+//     }
+
+//     fetch(`http://localhost/php/proyecto/api/races/delete/`, {
+//         method: method,
+//         mode: "cors",
+//         body: JSON.stringify(race)
+//     }).then( response => {
+//         if (response.status == 203) location.href = "./paginaPpal.html"
+//             else if (response.status === 200) location.href = "./paginaPpal.html"
+//             else if (response.status === 404) alert(response.statusText)
+//             else console.log("Todo mal");
+//     })
+//     .then( data => {
+//         if (data) console.log(data);
+//     });
+// }
+
 function handleOptionsRace (e) {
     e.preventDefault();
-    let method = e.target.id == "delete" ? "DELETE" : "UPDATE";
-
-    if (method === "UPDATE") {
-        race.secondName = form.elements.nombreCarrera.value
-        race.poblation = form.elements.poblacion.value
-        race.race_day = form.elements.fechaRealizacion.value
-        race.distance = form.elements.distancia.value
-        if (form.elements.fotoPrincipal.files.length > 0) race.main_photo = form.elements.fotoPrincipal.value 
-        if (form.elements.fotosAnteriores.files.length > 0) {
-            let arrayOldPhotos = [];
-            Array.from(form.elements.fotosAnteriores.files)
-                .forEach( item => arrayOldPhotos.push(item.name));
-            race.older_photos = arrayOldPhotos
-        }
+    let method = e.target.id == "delete" ? "DELETE" : "POST";
+    
+    if (method === "POST") {
+        formData.append("secondName", form.elements.nombreCarrera.value)
+        formData.append("poblation", form.elements.poblacion.value)
+        formData.append("race_day", form.elements.fechaRealizacion.value)
+        formData.append("distance", form.elements.distancia.value)
+        if (form.elements.fotoPrincipal.files.length > 0) formData.append("main_photo", form.elements.fotoPrincipal.files[0]) 
+        if (form.elements.fotosAnteriores.files.length > 0) Array.from(form.elements.fotosAnteriores.files).forEach( item => formData.append("older_photos[]", item))
     }
 
     fetch(`http://localhost/php/proyecto/api/races/delete/`, {
         method: method,
         mode: "cors",
-        body: JSON.stringify(race)
+        body: formData
     }).then( response => {
         if (response.status == 203) location.href = "./paginaPpal.html"
             else if (response.status === 200) location.href = "./paginaPpal.html"
@@ -363,7 +393,7 @@ function handleModalEliminar () {
 function loadMap () {
     // if (!map) {
 
-        let map = L.map("map").setView(coor[0], 11)
+        let map = L.map("map").setView(coor[0], 13)
         // L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", 
         //             {
         //                 maxZoom: 19,
@@ -385,9 +415,6 @@ function loadMap () {
         let interTime2Arr = Math.trunc(coor.length / 3);
         let interTime3Arr = Math.trunc(coor.length / 2);
         let park = coor[50]
-        
-        
-        
         
         let startMarker = L.marker(coor[0], {
             icon: L.divIcon({
@@ -429,7 +456,7 @@ function loadMap () {
         title: "Punto intermedio 3"
         }).addTo(map);
         
-        let finalTime = L.marker(coor[coor.length - 100], {
+        let finalTime = L.marker(coor[coor.length - 10], {
         icon: L.divIcon({
             className: 'leaflet-div-icon',
             html: '<i class="fa-solid fa-stopwatch"></i>',
