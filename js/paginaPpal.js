@@ -2,6 +2,7 @@ let currentPage = 0;
 let itemsPerPage = 12;
 let totalPages = 0;
 let dataGlobal;
+let point = [];
 
 fetch("http://localhost/php/proyecto/api/races/totalRaces/", )
     .then( response => {
@@ -12,6 +13,9 @@ fetch("http://localhost/php/proyecto/api/races/totalRaces/", )
     .then( data => {
         if (data) {
             dataGlobal = data;
+            data.forEach((item) => point.push(JSON.parse(item.coor)))
+            // data.forEach((item) => console.log(item.coor[0]))
+            // console.log(point);
             document.getElementById("cantidad").textContent = `Mostrando ${itemsPerPage < data.length ? itemsPerPage : data.length} de ${data.length}`
             renderRaces(dataGlobal);
         }
@@ -181,6 +185,29 @@ function getName (e) {
     location.href = "./detalle.html";
 }
 
+function loadMap () {
+    document.getElementById("containerMap").classList.remove("hidden")
+    document.getElementById("tapar").classList.remove("hidden")
+    document.getElementById("iconoFav").style.zIndex = 0;
+    document.getElementById("iconoMapa").style.zIndex = 0;
+
+    let map = L.map("map").setView([40.41, -3.70], 6)
+
+    L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', 
+    {
+        maxZoom: 19,
+        attribution: "© OpenStreetMap"
+    }).addTo(map)
+    L.control.scale().addTo(map);
+    
+
+    point.forEach(item => {
+        console.log(item[0]);
+        L.marker(item[0]).addTo(map);
+    })
+    
+}
+
 localStorage.removeItem('raceName');
 
 document.getElementById("iconoFav").addEventListener("click", handleIconFav)
@@ -194,3 +221,8 @@ document.getElementById("nombreCarrera").addEventListener("input", handleNameSea
 document.getElementById("busquedaProvincia").addEventListener("click", handleProvinceSearchClick);
 document.getElementById("provincia").addEventListener("input", handleProvinceSearchClick);
 document.getElementById("ordenar").addEventListener("change", handleOrderChange);
+document.getElementById("iconoMapa").addEventListener("click", loadMap);
+document.getElementById("closeMap").addEventListener("click", e => {
+    e.target.parentNode.classList.add("hidden")
+    document.getElementById("tapar").classList.add("hidden")
+});
