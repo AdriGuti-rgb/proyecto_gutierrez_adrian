@@ -119,16 +119,7 @@ function renderDetails (raceData, modality, category, services) {
 function renderClasifications (olderClasifications) {
     totalPages = Math.ceil((olderClasifications.length / itemsPerPage) - 1);
     let table = document.getElementById('tabla');
-    if (showOptions) table.innerHTML = `
-        <tr>
-            <th></th>
-            <th>1ª Posición</th>
-            <th>2ª Posición</th>
-            <th>3ª Posición</th>
-            <th>Año realizacion</th>
-            <th class="optionsClasification">Opciones</th>
-        </tr>`;
-        else table.innerHTML = `
+    table.innerHTML = `
         <tr>
             <th></th>
             <th>1ª Posición</th>
@@ -136,26 +127,51 @@ function renderClasifications (olderClasifications) {
             <th>3ª Posición</th>
             <th>Año realizacion</th>
         </tr>`;
+    // if (showOptions) table.innerHTML = `
+    //     <tr>
+    //         <th></th>
+    //         <th>1ª Posición</th>
+    //         <th>2ª Posición</th>
+    //         <th>3ª Posición</th>
+    //         <th>Año realizacion</th>
+    //         <th class="optionsClasification">Opciones</th>
+    //     </tr>`;
+    //     else table.innerHTML = `
+    //     <tr>
+    //         <th></th>
+    //         <th>1ª Posición</th>
+    //         <th>2ª Posición</th>
+    //         <th>3ª Posición</th>
+    //         <th>Año realizacion</th>
+    //     </tr>`;
     if (olderClasifications.length == 0) document.getElementById("contenedorClasificaciones").innerHTML = "<h2>Todavia no hay clasificaciones disponibles</h2>"
-    if (olderClasifications.length <= 10) {
+    if (olderClasifications.length <= 6) {
         if (document.getElementById("anterior")) document.getElementById("anterior").classList.add("hidden")
         if (document.getElementById("siguiente")) document.getElementById("siguiente").classList.add("hidden")
     }
     olderClasifications.filter( (_, index) => Math.trunc(index / itemsPerPage) == currentPage )
         .forEach( item => {
-            if (showOptions) table.innerHTML += `
-                <tr>
-                    <td>${item.time_race}</td>
-                    <td>${item.winner}</td>
-                    <td>${item.second_place}</td>
-                    <td>${item.third_place}</td>
-                    <td>${item.year_race}</td>
-                    <td class="optionsClasification">
-                        <div id="borrarClasi" class="tablaEliminar">Eliminar</div>
-                        <div id="editarClasi" class="tablaModificar">Modificar</div>
-                    </td>
-                </tr>`;
-            else table.innerHTML += `
+            // if (showOptions) table.innerHTML += `
+            //     <tr>
+            //         <td>${item.time_race}</td>
+            //         <td>${item.winner}</td>
+            //         <td>${item.second_place}</td>
+            //         <td>${item.third_place}</td>
+            //         <td>${item.year_race}</td>
+            //         <td class="optionsClasification">
+            //             <div id="borrarClasi" class="tablaEliminar">Eliminar</div>
+            //             <div id="editarClasi" class="tablaModificar">Modificar</div>
+            //         </td>
+            //     </tr>`;
+            // else table.innerHTML += `
+            // <tr>
+            //     <td>${item.time_race}</td>
+            //     <td>${item.winner}</td>
+            //     <td>${item.second_place}</td>
+            //     <td>${item.third_place}</td>
+            //     <td>${item.year_race}</td>
+            // </tr>`;
+            table.innerHTML += `
             <tr>
                 <td>${item.time_race}</td>
                 <td>${item.winner}</td>
@@ -163,9 +179,6 @@ function renderClasifications (olderClasifications) {
                 <td>${item.third_place}</td>
                 <td>${item.year_race}</td>
             </tr>`;
-
-            // if (document.getElementById("borrarClasi")) document.getElementById("borrarClasi").addEventListener("click", e => console.log(e))
-            // if (document.getElementById("editarClasi")) document.getElementById("editarClasi").addEventListener("click", e => console.log(e))
     });
 }
 
@@ -282,43 +295,11 @@ function handleTipeClick (e) {
     document.getElementById(contenedor).classList.remove("hidden");
 }
 
-// function handleOptionsRace (e) {
-//     e.preventDefault();
-//     let method = e.target.id == "delete" ? "DELETE" : "UPDATE";
-
-//     if (method === "UPDATE") {
-//         race.secondName = form.elements.nombreCarrera.value
-//         race.poblation = form.elements.poblacion.value
-//         race.race_day = form.elements.fechaRealizacion.value
-//         race.distance = form.elements.distancia.value
-//         if (form.elements.fotoPrincipal.files.length > 0) race.main_photo = form.elements.fotoPrincipal.value 
-//         if (form.elements.fotosAnteriores.files.length > 0) {
-//             let arrayOldPhotos = [];
-//             Array.from(form.elements.fotosAnteriores.files)
-//                 .forEach( item => arrayOldPhotos.push(item.name));
-//             race.older_photos = arrayOldPhotos
-//         }
-//     }
-
-//     fetch(`http://localhost/php/proyecto/api/races/delete/`, {
-//         method: method,
-//         mode: "cors",
-//         body: JSON.stringify(race)
-//     }).then( response => {
-//         if (response.status == 203) location.href = "./paginaPpal.html"
-//             else if (response.status === 200) location.href = "./paginaPpal.html"
-//             else if (response.status === 404) alert(response.statusText)
-//             else console.log("Todo mal");
-//     })
-//     .then( data => {
-//         if (data) console.log(data);
-//     });
-// }
-
 function handleOptionsRace (e) {
     e.preventDefault();
-    let method = e.target.id == "delete" ? "DELETE" : "POST";
-    
+    let method = e.target.id == "delete" ? "DELETE" : "POST"
+    let data = JSON.stringify(race)
+
     if (method === "POST") {
         formData.append("secondName", form.elements.nombreCarrera.value)
         formData.append("poblation", form.elements.poblacion.value)
@@ -328,10 +309,12 @@ function handleOptionsRace (e) {
         if (form.elements.fotosAnteriores.files.length > 0) Array.from(form.elements.fotosAnteriores.files).forEach( item => formData.append("older_photos[]", item))
     }
 
+    if (method == "POST") data = formData
+
     fetch(`http://localhost/php/proyecto/api/races/delete/`, {
         method: method,
         mode: "cors",
-        body: formData
+        body: data
     }).then( response => {
         if (response.status == 203) location.href = "./paginaPpal.html"
             else if (response.status === 200) location.href = "./paginaPpal.html"

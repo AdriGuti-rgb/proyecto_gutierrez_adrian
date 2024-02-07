@@ -98,7 +98,7 @@
                     if (is_file($archivo)) {
                         unlink($archivo);
                     } elseif (is_dir($archivo)) {
-                        eliminarContenidoCarpeta($archivo, $raceName);
+                        eliminarContenidoCarpeta($archivo, $name);
                         rmdir($archivo);
                     }
                 }

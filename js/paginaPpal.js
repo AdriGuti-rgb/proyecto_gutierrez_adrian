@@ -10,6 +10,7 @@ let valuePosSlope = null
 let filterEndedCheck = false
 let valueCategory = null;
 let valueSlope = null
+let map = false
 
 fetch("http://localhost/php/proyecto/api/races/totalRaces/", )
     .then( response => {
@@ -20,7 +21,6 @@ fetch("http://localhost/php/proyecto/api/races/totalRaces/", )
     .then( data => {
         if (data) {
             dataGlobal = data;
-            data.forEach((item) => point.push(JSON.parse(item.coor)))
             renderRaces(dataGlobal);
         }
     })
@@ -113,9 +113,10 @@ function renderRaces(data) {
     let paginas = document.getElementById("numerosPagina");
     totalPages = Math.ceil((data.length / itemsPerPage) - 1);
     races.innerHTML = "";
+    point = []
     document.getElementById("cantidad").textContent = `Mostrando ${itemsPerPage < data.length ? itemsPerPage : data.length} de ${data.length}`
     data.filter( (_, index) => Math.trunc(index / itemsPerPage) == currentPage )
-        .forEach( ({name, main_photo}) => {
+        .forEach( ({name, main_photo, coor}) => {
         races.innerHTML += `
             <div class="cards">
                 <div class="fotoCarrera">
@@ -129,12 +130,15 @@ function renderRaces(data) {
                 </div>
             </div>
             `;
-    });
-
+            
+            point.push(JSON.parse(coor))
+    })
     Array.from(document.getElementsByClassName("detalles")).forEach(item => item.addEventListener("click", getName));
     paginas.innerHTML = `
             Página ${currentPage +1} de ${totalPages + 1}
         `;
+    if (data.length == 0) document.getElementById("paginacion").classList.add("hidden")
+        else document.getElementById("paginacion").classList.remove("hidden")
 }
 
 function handleFistClick () {
@@ -286,24 +290,33 @@ function getName (e) {
 }
 
 function loadMap () {
+    if (map) map.remove()
+    document.getElementById("containerMap").innerHTML = `
+        <i class="fa-regular fa-circle-xmark" id="closeMap"></i>
+        <div id="map"></div>
+    `
+    document.getElementById("closeMap").addEventListener("click", e => {
+        e.target.parentNode.classList.add("hidden")
+        document.getElementById("iconoFav").style.zIndex = 5;
+        document.getElementById("tapar").classList.add("hidden")
+    });
+
     document.getElementById("containerMap").classList.remove("hidden")
     document.getElementById("tapar").classList.remove("hidden")
     document.getElementById("iconoFav").style.zIndex = 0;
     document.getElementById("iconoMapa").style.zIndex = 0;
 
-    let map = L.map("map").setView([40.41, -3.70], 6)
+    map = L.map("map").setView([40.41, -3.70], 6)
 
     L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', 
     {
         maxZoom: 19,
         attribution: "© OpenTopoMap"
     }).addTo(map)
-    L.control.scale().addTo(map);
-    
 
-    point.forEach(item => {
-        L.marker(item[0]).addTo(map);
-    })
+    L.control.scale().addTo(map);
+
+    point.forEach(item => L.marker(item[0]).addTo(map))
     
 }
 
