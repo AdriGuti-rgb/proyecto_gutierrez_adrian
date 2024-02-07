@@ -69,7 +69,7 @@ fetch("http://localhost/php/proyecto/api/users/profile/", {
             pass = data.pass;
             let passLength = pass.length;
             let passPlaceholder = "*";
-
+console.log(data);
             for (let k = 0; k < passLength - 1; k++) {
                 passPlaceholder += "*";
             }

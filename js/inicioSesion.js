@@ -3,6 +3,7 @@ let send;
 let canSubmitPass = false
 localStorage.clear();
 
+
 /* Modal inicio de sesión */
 document.getElementById("abrirModal").addEventListener("click", openModal);
 
