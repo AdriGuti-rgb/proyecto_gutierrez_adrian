@@ -162,6 +162,7 @@ function putErrors (error) {
     div.id = "error";
     let main = document.getElementsByTagName("main");
     div.innerHTML = `${error}`;
+    div.style.boxShadow = "0px 0px 20px black"
     main[0].append(div);
 }
 

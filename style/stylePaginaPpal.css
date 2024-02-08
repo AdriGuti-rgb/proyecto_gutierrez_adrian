@@ -134,7 +134,7 @@ i {
 #carreras {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr calc(20.7vh - 110px);
     gap: 42px 157px;
     overflow-y: scroll;
     padding-left: 80px;

@@ -287,6 +287,7 @@ function putErrors (error) {
     div.id = "error";
     let cambioContraseña = document.getElementById("cambioContraseña");
     div.innerHTML = `${error}`;
+    div.style.boxShadow = "0px 0px 20px black"
     cambioContraseña.append(div);
 }
 

@@ -4,13 +4,17 @@ let form;
 let send; 
 let canSubmitEmail = false
 let canSubmitPass = false
+let canSubmitUserExists = false
 let canSubmitUser = false
+let canSubmitUserName = false
 
 form = document.forms.login;
 send = form.elements.send;
-form.elements.nombreMostrado.addEventListener("blur", checkUsername)
+form.elements.nombreMostrado.addEventListener("blur", checkUsernameExists)
+form.elements.nombreMostrado.addEventListener("blur", checkUserName)
 form.elements.contrasena.addEventListener("blur", checkPass)
 form.elements.correo.addEventListener("blur", checkMail)
+form.elements.nombre.addEventListener("blur", checkUser)
 
 if (document.getElementById("checkNormal") != null) document.getElementById("checkNormal").addEventListener("click", handleMarc);
 if (document.getElementById("checkOrganizador") != null) document.getElementById("checkOrganizador").addEventListener("click", handleMarc);
@@ -20,6 +24,7 @@ function handleMarc (e) {
     let main = document.getElementsByTagName("main")
     contenedor.id = "contenedorRegistro";
     contenedor.innerHTML = "";
+    if (document.getElementById("error")) document.getElementById("error").remove()
 
     if (!(e.target.classList.contains("marcado")) && e.target.id == "checkOrganizador") {
         document.getElementById("contenedorRegistro").remove();
@@ -47,34 +52,34 @@ function handleMarc (e) {
                                 <div id="camposOrganizador">
                                 <li>
                                     <label for="nombre">Nombre completo:</label>
-                                    <input type="text" name="nombre" id="nombre" required>
+                                    <input type="text" name="nombre" id="nombre" placeholder="Juan Hernandez Segundo">
                                 </li>
                                 <li>
                                     <label for="nombreMostrado">Nombre que se mostrará:</label>
-                                    <input type="text" name="nombreMostrado" id="nombreMostrado" required>
+                                    <input type="text" name="nombreMostrado" id="nombreMostrado" placeholder="nombreMostrado">
                                 </li>
                                 <li>
                                 <label for="correo">Correo electrónico:</label>
-                                <input type="text" name="correo" id="correo" pattern="[a-zA-Z0-9\.]+@[a-zA-Z0-9\.]+\.[a-zA-Z]+" required>
+                                <input type="text" name="correo" id="correo" placeholder="mail@mail.com">
                             </li>
                             <li>
                                 <label for="contrasena">Contraseña:</label>
-                                <input type="password" name="contrasena" id="contrasena" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
+                                <input type="password" name="contrasena" id="contrasena" placeholder="********">
                                 <i class="fa-solid fa-eye" id="vista"></i>
                             </li>
                                 <li>
                                     <label for="fotoPerfil">Imagen de perfil:</label>
-                                    <input type="file" name="fotoPerfil" id="fotoPerfil" required>
+                                    <input type="file" name="fotoPerfil" id="fotoPerfil">
                                 </li>
                                 <li>
                                     <label for="localidad">Localidad:</label>
-                                    <select name="localidad" id="localidadOrganizador" required>
+                                    <select name="localidad" id="localidadOrganizador">
                                         <option value="">Seleccione una localidad</option>
                                     </select>
                                 </li>
                                 <li>
                                     <label for="telefono">Numero de teléfono:</label>
-                                    <input type="tel" name="telefono" id="telefono" required>
+                                    <input type="tel" name="telefono" id="telefono" placeholer="987653127">
                                 </li>
                                 <li>
                                     <label for="entidad">Entidad organizador:</label>
@@ -89,9 +94,11 @@ function handleMarc (e) {
             main[0].append(contenedor);
             form = document.forms.login;
             send = form.elements.send;
-            form.elements.nombreMostrado.addEventListener("blur", checkUsername)
+            form.elements.nombreMostrado.addEventListener("blur", checkUsernameExists)
+            form.elements.nombreMostrado.addEventListener("blur", checkUserName)
             form.elements.contrasena.addEventListener("blur", checkPass)
             form.elements.correo.addEventListener("blur", checkMail)
+            form.elements.nombre.addEventListener("blur", checkUser)
             send.addEventListener("click", getParams);
             document.getElementById("vista").addEventListener("click", mostrarContrasena);
     }
@@ -123,28 +130,28 @@ function handleMarc (e) {
                             <div id="camposNormal">
                             <li>
                                 <label for="nombre">Nombre de usuario:</label>
-                                <input type="text" name="nombre" id="nombre" required>
+                                <input type="text" name="nombre" id="nombre" placeholder="Juan Hernandez Segundo">
                             </li>
                             <li>
                                 <label for="nombreMostrado">Nombre que se mostrará:</label>
-                                <input type="text" name="nombreMostrado" id="nombreMostrado" required>
+                                <input type="text" name="nombreMostrado" id="nombreMostrado" placeholder="nombreMostrado">
                             </li>
                             <li>
                                 <label for="correo">Correo electrónico:</label>
-                                <input type="text" name="correo" id="correo" pattern="[a-zA-Z0-9\.]+@[a-zA-Z0-9\.]+\.[a-zA-Z]+" required>
+                                <input type="text" name="correo" id="correo" placeholder="mail@mail.com">
                             </li>
                             <li>
                                 <label for="contrasena">Contraseña:</label>
-                                <input type="password" name="contrasena" id="contrasena" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
+                                <input type="password" name="contrasena" id="contrasena" placeholder="********">
                                 <i class="fa-solid fa-eye" id="vista"></i>
                             </li>
                             <li>
                                 <label for="fotoPerfil">Imagen de perfil:</label>
-                                <input type="file" name="fotoPerfil" id="fotoPerfil" required>
+                                <input type="file" name="fotoPerfil" id="fotoPerfil">
                             </li>
                             <li>
                                 <label for="localidad">Localidad:</label>
-                                <select name="localidad" id="localidadNormal" required>
+                                <select name="localidad" id="localidadNormal">
                                     <option value="">Seleccione una localidad</option>
                                 </select>
                             </li>
@@ -159,9 +166,11 @@ function handleMarc (e) {
             main[0].append(contenedor);
             form = document.forms.login;
             send = form.elements.send;
-            form.elements.nombreMostrado.addEventListener("blur", checkUsername)
+            form.elements.nombreMostrado.addEventListener("blur", checkUsernameExists)
+            form.elements.nombreMostrado.addEventListener("blur", checkUserName)
             form.elements.contrasena.addEventListener("blur", checkPass)
             form.elements.correo.addEventListener("blur", checkMail)
+            form.elements.nombre.addEventListener("blur", checkUser)
             send.addEventListener("click", getParams);
             document.getElementById("vista").addEventListener("click", mostrarContrasena);
     }
@@ -192,7 +201,7 @@ function anadirLocalidades (e) {
     e.target.removeEventListener("click", anadirLocalidades)
 }
 
-function checkUsername (e) {
+function checkUsernameExists (e) {
     fetch("http://localhost/php/proyecto/api/users/login/")
         .then( response => {
             if (response.status === 200) return response.json()
@@ -200,16 +209,17 @@ function checkUsername (e) {
                 else console.log("Todo mal");
         }).then( data => {
             console.log(data);
-            if (data.length == 0) canSubmitUser = true
+            if (data.length == 0) canSubmitUserExists = true
             if (e.target.value.trim() != "") {
                 try {
                     data.forEach( ({username}) => {
                         if (e.target.value == username) {
                             e.target.style.borderColor = "red"
-                            throw new Error("Usuario inválido. Seleccione otro") 
+                            e.target.style.backgroundColor = "rgb(255, 204, 204)"
+                            throw new Error("Usuario ya registrado. Seleccione otro") 
                         } else {
                             e.target.style.borderColor = "white"
-                            canSubmitUser = true
+                            canSubmitUserExists = true
                         }
                     });
                 } catch (error) {
@@ -226,6 +236,7 @@ function checkPass (e) {
     if (!contrasena.match(regex)) {
         putErrors("La contraseña no cumple con los requisitos")
         e.target.style.borderColor = "red"
+        e.target.style.backgroundColor = "rgb(255, 204, 204)"
     } else {
         if (document.getElementById("error")) document.getElementById("error").remove()
         e.target.style.borderColor = "white"
@@ -240,10 +251,41 @@ function checkMail (e) {
     if (!mail.match(regex)) {
         putErrors("El correo no cumple con los requisitos")
         e.target.style.borderColor = "red"
+        e.target.style.backgroundColor = "rgb(255, 204, 204)"
     } else {
         if (document.getElementById("error")) document.getElementById("error").remove()
         e.target.style.borderColor = "white"
         canSubmitEmail = true
+    }
+}
+
+function checkUser (e) {
+    let user = e.target.value;
+    let regex = /^[A-Z][a-z]+(?:\s[A-Z][a-z]+){0,2}$/;
+
+    if (!user.match(regex)) {
+        putErrors("No se ajusta al formato (Aaaa Aaaa Aaaa)")
+        e.target.style.borderColor = "red"
+        e.target.style.backgroundColor = "rgb(255, 204, 204)"
+
+    } else {
+        if (document.getElementById("error")) document.getElementById("error").remove()
+        e.target.style.borderColor = "white"
+        canSubmitUser = true
+    }
+}
+
+function checkUserName (e) {
+    let user = e.target.value;
+    let regex = /^[A-Za-z]+(?:\s[A-Za-z]+){0,2}$/;
+
+    if (!user.match(regex)) {
+        putErrors("Solo puede contener letras")
+        e.target.style.borderColor = "red"
+        e.target.style.backgroundColor = "rgb(255, 204, 204)"
+    } else {
+        if (document.getElementById("error")) document.getElementById("error").remove()
+        canSubmitUser = true
     }
 }
 
@@ -308,14 +350,17 @@ function putErrors (error) {
     div.id = "error";
     let main = document.getElementsByTagName("main");
     div.innerHTML = `${error}`;
+    div.style.boxShadow = "0px 0px 20px black"
     main[0].append(div);
 }
 
 function checkSubmit () {
     console.log(canSubmitEmail);
     console.log(canSubmitPass);
+    console.log(canSubmitUserExists);
+    console.log(canSubmitUserName);
     console.log(canSubmitUser);
-    return canSubmit = canSubmitEmail && canSubmitPass && canSubmitUser;
+    return canSubmit = canSubmitEmail && canSubmitPass && canSubmitUserExists && canSubmitUserName && canSubmitUser;
 }
 
 document.getElementById("vista").addEventListener("click", mostrarContrasena);
