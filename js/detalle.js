@@ -45,7 +45,25 @@ if (localStorage.getItem("rol") == "Organizer") {
 }
 
 /* Comprobar si es organizador de esa carrera */
-
+fetch("http://localhost/php/proyecto/api/races/favourites/", {
+    headers: {
+        Authorization: `${localStorage.getItem("token")}`
+    }
+})
+.then( response => {
+    if (response.status === 200) return response.json()
+        else if (response.status === 404) alert(response.statusText)
+        else console.log("Todo mal");
+})
+.then( data => {
+    if (data) {
+        let carrera = data.find( ({name}) => name == localStorage.getItem("raceName"));
+        if (carrera) {
+            document.getElementById("iconoFav").classList.toggle("fa-regular")
+            document.getElementById("iconoFav").classList.toggle("fa-solid")
+        }
+    }
+})
 
 /* Datos de la carrera seleccionada */
 fetch("http://localhost/php/proyecto/api/races/oneRace/", {
