@@ -1,5 +1,5 @@
 let currentPage = 0;
-let itemsPerPage = 12;
+let itemsPerPage = 6;
 let totalPages = 0;
 let dataGlobal;
 let point = [];
@@ -114,25 +114,25 @@ function renderRaces(data) {
     totalPages = Math.ceil((data.length / itemsPerPage) - 1);
     races.innerHTML = "";
     point = []
-    document.getElementById("cantidad").textContent = `Mostrando ${itemsPerPage < data.length ? itemsPerPage : data.length} de ${data.length}`
-    data.filter( (_, index) => Math.trunc(index / itemsPerPage) == currentPage )
-        .forEach( ({name, main_photo, coor}) => {
+    countData = data.filter( (_, index) => Math.trunc(index / itemsPerPage) == currentPage )
+    countData.forEach( ({name, main_photo, coor}) => {
         races.innerHTML += `
-            <div class="cards">
-                <div class="fotoCarrera">
-                    <img src="./img/races/${name}/${main_photo}" alt="Foto 1">
-                </div>
-                <div class="info">
-                    <span>${name}</span>
-                    <div class="detalles" id="botonDetalle">
-                        <span>Detalles</span>
-                    </div>
-                </div>
-            </div>
-            `;
-            
-            point.push(JSON.parse(coor))
+        <div class="cards">
+        <div class="fotoCarrera">
+        <img src="./img/races/${name}/${main_photo}" alt="Foto principal">
+        </div>
+        <div class="info">
+        <span>${name}</span>
+        <div class="detalles" id="botonDetalle">
+        <span>Detalles</span>
+        </div>
+        </div>
+        </div>
+        `;
+        
+        point.push(JSON.parse(coor))
     })
+    document.getElementById("cantidad").textContent = `Mostrando ${itemsPerPage < countData.length ? itemsPerPage : countData.length} de ${data.length}`
     Array.from(document.getElementsByClassName("detalles")).forEach(item => item.addEventListener("click", getName));
     paginas.innerHTML = `
             Página ${currentPage +1} de ${totalPages + 1}

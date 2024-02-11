@@ -219,6 +219,8 @@ function checkUsernameExists (e) {
                             throw new Error("Usuario ya registrado. Seleccione otro") 
                         } else {
                             e.target.style.borderColor = "white"
+                            e.target.style.backgroundColor = "lightgreen"
+                            e.target.style.borderColor = "green"
                             canSubmitUserExists = true
                         }
                     });
@@ -240,6 +242,8 @@ function checkPass (e) {
     } else {
         if (document.getElementById("error")) document.getElementById("error").remove()
         e.target.style.borderColor = "white"
+        e.target.style.backgroundColor = "lightgreen"
+        e.target.style.borderColor = "green"
         canSubmitPass = true
     }
 }
@@ -255,6 +259,8 @@ function checkMail (e) {
     } else {
         if (document.getElementById("error")) document.getElementById("error").remove()
         e.target.style.borderColor = "white"
+        e.target.style.backgroundColor = "lightgreen"
+        e.target.style.borderColor = "green"
         canSubmitEmail = true
     }
 }
@@ -271,6 +277,8 @@ function checkUser (e) {
     } else {
         if (document.getElementById("error")) document.getElementById("error").remove()
         e.target.style.borderColor = "white"
+        e.target.style.backgroundColor = "lightgreen"
+        e.target.style.borderColor = "green"
         canSubmitUser = true
     }
 }
@@ -285,7 +293,9 @@ function checkUserName (e) {
         e.target.style.backgroundColor = "rgb(255, 204, 204)"
     } else {
         if (document.getElementById("error")) document.getElementById("error").remove()
-        canSubmitUser = true
+        e.target.style.backgroundColor = "lightgreen"
+        e.target.style.borderColor = "green"
+        canSubmitUserName = true
     }
 }
 
