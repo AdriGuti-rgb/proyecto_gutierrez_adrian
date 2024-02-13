@@ -13,7 +13,7 @@
 
 #todo {
     display: grid;
-    grid-template-rows: 110px 79.3vh 80px;
+    grid-template-rows: 110px 79.3vh calc(20.7vh - 110px);
 }
 
 body {
@@ -134,7 +134,7 @@ i {
 #carreras {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr calc(20.7vh - 110px);
+    grid-template-rows: 1fr 1fr 1fr;
     gap: 42px 157px;
     overflow-y: scroll;
     padding-left: 80px;

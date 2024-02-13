@@ -113,6 +113,10 @@ function renderRaces(data) {
     let paginas = document.getElementById("numerosPagina");
     totalPages = Math.ceil((data.length / itemsPerPage) - 1);
     races.innerHTML = "";
+    console.log(currentPage);
+    if (data.length < 6) currentPage = 0
+    console.log(currentPage);
+
     point = []
     countData = data.filter( (_, index) => Math.trunc(index / itemsPerPage) == currentPage )
     countData.forEach( ({name, main_photo, coor}) => {
