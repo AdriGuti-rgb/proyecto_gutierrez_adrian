@@ -27,10 +27,6 @@ function toggleMenu() {
     }
 }
 
-document.getElementById('perfil').addEventListener('click', toggleMenu);
-
-
-
 /* Mando el token cuando queden poco tiempo para crear uno nuevo */
 let time = 3300;
 setTimeout(renovateToken, time);
@@ -95,3 +91,5 @@ fetch("http://localhost/php/proyecto/api/users/main_photo/", {
         document.getElementById("imgPerfilSuperior").src = `./img/userPhotos/${data.photo}`
         if (document.getElementById("fotoPerfilGrande")) document.getElementById("fotoPerfilGrande").src = `./img/userPhotos/${data.photo}`
     })
+
+document.getElementById('perfil').addEventListener('click', toggleMenu);

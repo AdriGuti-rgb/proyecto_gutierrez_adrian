@@ -13,6 +13,8 @@
     <title>RaceMapp</title>
 </head>
 <body>
+
+    <div id="tapar" class="hidden"></div>
     
     <header>
         <a href="./index.html"><img src="./img/Logotipo-removebg-preview.png" alt="Logotipo" title="Logotipo de la aplicación" id="fotoHeader"></a>
@@ -88,6 +90,26 @@
             </a>
         </div>
         
+        <div id="introducirCorreo" class="hidden">
+            <form action="" method="post" name="introducirCorreo">
+                <h4>Restablecer la contraseña:</h4>
+                <ul>
+                    <li>
+                        <label for="actual">Correo actual: </label>
+                        <input type="email" name="actual" id="actual">
+                    </li>
+                    <li>
+                        <label for="repetido">Repita correo: </label>
+                        <input type="email" name="repetido" id="repetido" disabled>
+                    </li>
+                    <li>
+                        <input type="button" value="Cancelar" name="cancel" id="cancel">
+                        <input type="button" value="Enviar" name="change" id="confirmarCorreo">
+                    </li>
+                </ul>
+            </form>
+        </div>
+
     </main>
 
     <footer>

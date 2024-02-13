@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style/styleRecuperacion.css">
+    <script src="https://kit.fontawesome.com/a1e1584c46.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inknut+Antiqua:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="./img/Logotipo.jpeg" type="image/x-icon">
+    <title>Recuperacion de contraseña</title>
+</head>
+<body>
+    <main>
+        <div id="nuevaContrasena">
+            <form action="" method="post" name="nuevaContrasena">
+                <h4>Restablecer la contraseña:</h4>
+                <ul>
+                    <li>
+                        <label for="actual">Nueva contraseña: </label>
+                        <input type="password" name="actual" id="actual">
+                    </li>
+                    <li>
+                        <label for="repetido">Repita contraseña: </label>
+                        <input type="password" name="repetido" id="repetido" disabled>
+                    </li>
+                    <li>
+                        <input type="button" value="Cancelar" name="cancel" id="cancel">
+                        <input type="button" value="Cambiar" name="change" id="confirmarContrasena">
+                    </li>
+                </ul>
+            </form>
+        </div>
+    </main>
+    <script src="./js/recuperacion.js"></script>
+</body>
+</html>

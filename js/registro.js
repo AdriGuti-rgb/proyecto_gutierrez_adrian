@@ -365,11 +365,6 @@ function putErrors (error) {
 }
 
 function checkSubmit () {
-    console.log(canSubmitEmail);
-    console.log(canSubmitPass);
-    console.log(canSubmitUserExists);
-    console.log(canSubmitUserName);
-    console.log(canSubmitUser);
     return canSubmit = canSubmitEmail && canSubmitPass && canSubmitUserExists && canSubmitUserName && canSubmitUser;
 }
 

@@ -1,12 +1,24 @@
 let form;
 let send; 
 let canSubmitPass = false
+let canSendMail = false
+let mail;
+let formMail = document.forms.introducirCorreo;
 localStorage.clear();
 
 
-/* Modal inicio de sesión */
-document.getElementById("abrirModal").addEventListener("click", openModal);
 
+/*  Botones pasar foto */  
+let anterior = document.querySelector("#anterior");
+let posterior = document.querySelector("#posterior");
+let img = document.getElementById("fotosLandingRandom");
+let nivel = (Math.random() * 15).toFixed();
+if (nivel == 0) nivel = 1;
+img.src = `./img/fotosLandingRandom/${nivel}Foto.jpg`;
+anterior.addEventListener("click", () => { if (nivel > 1) img.src = `./img/fotosLandingRandom/${--nivel}Foto.jpg` });
+posterior.addEventListener("click", () => { if (nivel < 15) img.src = `./img/fotosLandingRandom/${++nivel}Foto.jpg` });
+
+/* Modal inicio de sesión */
 function openModal (e) {
     let photos = document.getElementById("photos");
     
@@ -40,9 +52,8 @@ function openModal (e) {
             </form>
         </div>
     
-        <div id="oAuth">
-            <img src="./img/iconoGoogle.jpg" width="23" height="23">
-            <span>Continúa con Google</span>
+        <div id="reset">
+            <span>Se me olvidó la contraseña</span>
         </div>
         
         <div id="divisoriaInferior"></div>            
@@ -56,23 +67,13 @@ function openModal (e) {
     form.elements.contrasena.addEventListener("blur", checkPass);
     document.getElementById("vista").addEventListener("click", mostrarContrasena);
     document.getElementById("anonimo").addEventListener("click", () => localStorage.setItem("rol", "Anonimous"));
+    document.getElementById("reset").addEventListener("click", handleModalEmail)
 
     if (document.getElementById("cerrar") != null) document.getElementById("cerrar").addEventListener("click", () => {
             inicioSesion.remove()
             document.getElementById("error").remove();
         });
 }
-
-/*  Botones pasar foto */  
-let anterior = document.querySelector("#anterior");
-let posterior = document.querySelector("#posterior");
-let img = document.getElementById("fotosLandingRandom");
-let nivel = (Math.random() * 15).toFixed();
-if (nivel == 0) nivel = 1;
-img.src = `./img/fotosLandingRandom/${nivel}Foto.jpg`;
-anterior.addEventListener("click", () => { if (nivel > 1) img.src = `./img/fotosLandingRandom/${--nivel}Foto.jpg` });
-posterior.addEventListener("click", () => { if (nivel < 15) img.src = `./img/fotosLandingRandom/${++nivel}Foto.jpg` });
-
 
 /* Pasar foto aleatorio */
 let interval = setInterval(updateTime, 10000);
@@ -156,6 +157,105 @@ function getParams(e) {
 
 }
 
+function handleModalEmail(e) {
+    if (document.getElementById("error2")) document.getElementById("error2").remove()
+    if (document.getElementById("error")) document.getElementById("error").remove()
+    if (document.getElementById("change")) document.getElementById("change").remove()
+    document.getElementById("tapar").classList.toggle("hidden")
+    document.getElementById("introducirCorreo").classList.toggle("hidden")
+    formMail.elements.actual.value = ""
+    formMail.elements.actual.style.borderColor = "white"
+    formMail.elements.actual.style.backgroundColor = "white"
+    formMail.elements.repetido.value = ""
+    formMail.elements.repetido.style.borderColor = "white"
+    formMail.elements.repetido.style.backgroundColor = "white"
+    formMail.elements.repetido.disabled = true
+}
+
+function sendMail (e) {
+    if (canSendMail) {
+        let formData = new FormData()
+        formData.append("mail", mail)
+        
+        fetch("http://localhost/php/proyecto/api/users/sendMail/", {
+            method: "POST",
+            mode: "cors",
+            body: formData
+        })
+        .then( response => {
+            if (response.status === 200) {
+                confirmChange("Correo enviado, compruebe sus correos")
+                e.target.style.backgroundColor = "lightgreen"
+                e.target.style.borderColor = "green"
+            } else if (response.status === 401) {
+                putErrors2("Correo no encontrado")
+                e.target.style.borderColor = "red"
+                e.target.style.backgroundColor = "rgb(255, 204, 204)"
+            } else console.log("Todo mal");
+        })
+        .then( data => {
+            if (data) {
+                
+            }
+        })
+    } else putErrors2("Rellene los campos correctamente")
+}
+
+function checkMail (e) {
+    mail = e.target.value;
+    let regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+    if (!mail.match(regex)) {
+        putErrors2("El correo no cumple con los requisitos")
+        e.target.style.borderColor = "red"
+        e.target.style.backgroundColor = "rgb(255, 204, 204)"
+    } else {
+        if (document.getElementById("error2")) document.getElementById("error2").remove()
+
+        let formData = new FormData()
+        formData.append("mail", `${mail}`)
+
+        fetch("http://localhost/php/proyecto/api/users/checkEmail/", {
+            method: "POST",
+            mode: "cors",
+            body: formData
+        })
+        .then( response => {
+            if (response.status === 200) {
+                formMail.elements.repetido.disabled = false
+                e.target.style.backgroundColor = "lightgreen"
+                e.target.style.borderColor = "green"
+            } else if (response.status === 401) {
+                putErrors2("Correo no encontrado")
+                e.target.style.borderColor = "red"
+                e.target.style.backgroundColor = "rgb(255, 204, 204)"
+            } else console.log("Todo mal");
+        })
+        .then( data => {
+            if (data) {
+                
+            }
+        })
+
+    }
+}
+
+function checkMailTwice (e) {
+    let mailTwice = e.target.value;
+
+    if (mail != mailTwice) {
+        putErrors2("Los correos no coinciden")
+        e.target.style.borderColor = "red"
+        e.target.style.backgroundColor = "rgb(255, 204, 204)"
+        canSendMail = false
+    } else {
+        if (document.getElementById("error2")) document.getElementById("error2").remove()
+        e.target.style.backgroundColor = "lightgreen"
+        e.target.style.borderColor = "green"
+        canSendMail = true
+    }
+}
+
 function putErrors (error) {
     if (document.getElementById("error") != null) document.getElementById("error").remove();
     let div = document.createElement("div");
@@ -164,3 +264,27 @@ function putErrors (error) {
     div.innerHTML = `${error}`;
     main[0].append(div);
 }
+
+function putErrors2 (error) {
+    if (document.getElementById("error2") != null) document.getElementById("error").remove();
+    let div = document.createElement("div");
+    div.id = "error2";
+    let main = document.getElementsByTagName("main");
+    div.innerHTML = `${error}`;
+    main[0].append(div);
+}
+
+function confirmChange (change) {
+    if (document.getElementById("change") != null) document.getElementById("change").remove();
+    let div = document.createElement("div");
+    div.id = "change";
+    let main = document.getElementsByTagName("main");
+    div.innerHTML = `${change}`;
+    main[0].append(div);
+}
+
+document.getElementById("abrirModal").addEventListener("click", openModal);
+formMail.elements.actual.addEventListener("blur", checkMail)
+formMail.elements.repetido.addEventListener("blur", checkMailTwice)
+formMail.elements.change.addEventListener("click", sendMail)
+formMail.elements.cancel.addEventListener("click", handleModalEmail)
