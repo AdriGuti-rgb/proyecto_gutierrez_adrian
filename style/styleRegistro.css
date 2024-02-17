@@ -207,7 +207,7 @@ input,select {
 }
 
 #formularioNormal input[type="submit"] {
-    width: 172¡4px;
+    width: 172px;
     height: 40px;
     background-color: var(--primero);
     box-shadow: none;
@@ -218,7 +218,7 @@ input,select {
 }
 
 #formularioOrganizador input[type="submit"] {
-    width: 172¡4px;
+    width: 172px;
     height: 40px;
     background-color: var(--primero);
     box-shadow: none;
